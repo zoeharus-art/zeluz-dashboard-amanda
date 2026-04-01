@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Amanda — Zêluz</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --z-blue:#234D67;--z-blue-hover:#1A3A4F;--z-blue-06:rgba(35,77,103,.06);--z-blue-08:rgba(35,77,103,.08);--z-blue-15:rgba(35,77,103,.15);
+  --z-gold:#DEB428;--z-gold-hover:#C9A220;--z-gold-10:rgba(222,180,40,.10);--z-gold-15:rgba(222,180,40,.15);
+  --z-cream:#FFFDF6;--z-white:#FFFFFF;--z-black:#1D1E1C;
+  --z-green:#27AE60;--z-red:#C0392B;--z-gray:#6B7280;--z-lgray:#F3F4F6;
+  --z-spa:#B8A9C9;--z-emporio:#5E9B6B;--z-vetcare:#2E7D8A;--z-daycare:#D4875A;--z-hosp:#5AABB5;
+  --font:'Poppins',system-ui,sans-serif;--font-accent:'Cormorant Garamond',Georgia,serif;
+  --r:12px;--shadow:0 2px 12px rgba(35,77,103,.06);--shadow-md:0 4px 20px rgba(35,77,103,.10)
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--z-cream);color:var(--z-blue);line-height:1.5;font-size:14px}
+.page{max-width:800px;margin:0 auto;padding:16px}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--z-blue) 0%,#1A3A4F 100%);border-radius:var(--r);padding:24px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(222,180,40,.08) 0%,transparent 70%);border-radius:50%}
+.header .logo{font-family:var(--font-accent);font-size:14px;color:var(--z-gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;position:relative}
+.header h1{font-family:var(--font);font-size:22px;font-weight:700;color:var(--z-white);letter-spacing:-.3px;position:relative}
+.header .sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;position:relative}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:1;min-width:80px;text-align:center;padding:10px 8px;border-radius:var(--r) var(--r) 0 0;font-size:12px;font-weight:600;cursor:pointer;transition:all 150ms ease;border:2px solid transparent;border-bottom:none;background:var(--z-white);color:var(--z-gray);box-shadow:var(--shadow)}
+.tab.active{background:var(--z-blue);color:var(--z-white);border-color:var(--z-blue)}
+.tab.active .mes-num{color:var(--z-gold)}
+.tab:hover:not(.active){background:var(--z-gold-10);color:var(--z-blue)}
+.tab .mes-num{font-size:18px;font-weight:900;display:block;line-height:1}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* SECTIONS */
+h2{font-size:15px;color:var(--z-blue);margin:24px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--z-gold);font-weight:700;display:flex;align-items:center;gap:8px}
+h3{font-size:13px;color:var(--z-blue);margin:12px 0 8px;font-weight:700}
+.card{background:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow);transition:box-shadow 150ms ease}
+.card:hover{box-shadow:var(--shadow-md)}
+.nota{background:var(--z-gold-10);border-left:4px solid var(--z-gold);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;font-size:12px;margin:10px 0}
+.badge{display:inline-block;font-size:9px;background:var(--z-gold);color:var(--z-white);padding:2px 8px;border-radius:10px;font-weight:700;margin-left:6px}
+.badge-blue{background:var(--z-blue)}
+.badge-green{background:var(--z-green)}
+
+/* META BOXES */
+.meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+@media(max-width:500px){.meta-grid{grid-template-columns:1fr}}
+.meta-box{border-radius:var(--r);padding:14px;text-align:center;border:2px solid;transition:transform 150ms ease}
+.meta-box:hover{transform:translateY(-2px)}
+.meta-box .nivel{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
+.meta-box .alvo{font-size:22px;font-weight:900;margin:4px 0;font-family:var(--font)}
+.meta-box .ref{font-size:10px;color:var(--z-gray)}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+th{background:var(--z-blue);color:var(--z-white);padding:8px 6px;text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+th:first-child{text-align:left;border-radius:6px 0 0 0}
+th:last-child{border-radius:0 6px 0 0}
+td{padding:7px 6px;text-align:right;border-bottom:1px solid var(--z-lgray)}
+td:first-child{text-align:left;font-weight:600}
+tr.tot td{font-weight:700;background:var(--z-gold-10);border-top:2px solid var(--z-gold)}
+
+/* PESSOA CARDS */
+.pessoa{background:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow);border-left:4px solid var(--z-gold);transition:all 150ms ease}
+.pessoa:hover{box-shadow:var(--shadow-md)}
+.pessoa h3{margin:0 0 4px;font-size:14px}
+.pessoa .info{font-size:11px;color:var(--z-gray);margin-bottom:8px}
+
+/* SCENARIO SELECTOR */
+.scenario-selector{display:flex;gap:8px;margin-bottom:16px}
+.scenario-btn{flex:1;padding:14px;border-radius:var(--r);border:2px solid var(--z-blue-15);background:var(--z-white);cursor:pointer;text-align:center;transition:all 200ms ease;font-family:var(--font)}
+.scenario-btn:hover{border-color:var(--z-gold);box-shadow:var(--shadow)}
+.scenario-btn.selected{border-color:var(--z-gold);background:var(--z-gold-10);box-shadow:0 0 0 3px var(--z-gold-15)}
+.scenario-btn .stitle{font-weight:700;font-size:13px;color:var(--z-blue)}
+.scenario-btn .sdesc{font-size:10px;color:var(--z-gray);margin-top:2px}
+.scenario{display:none}.scenario.active{display:block}
+.escolher-btn{display:block;width:100%;padding:12px;border:none;border-radius:var(--r);background:var(--z-green);color:var(--z-white);font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;margin-top:12px;transition:all 150ms ease}
+.escolher-btn:hover{filter:brightness(.9);transform:translateY(-1px)}
+.lock-msg{text-align:center;padding:16px;background:var(--z-green);color:var(--z-white);border-radius:var(--r);font-weight:600;margin-bottom:12px;display:none}
+
+/* DIA CARDS */
+.dia-card{background:var(--z-white);border-radius:var(--r);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 4px rgba(35,77,103,.04);transition:all 150ms ease}
+.dia-card:hover{box-shadow:var(--shadow);transform:translateX(4px)}
+.dia-card .dia{font-weight:800;font-size:13px;min-width:40px;color:var(--z-blue)}
+.dia-card .acao{flex:1;font-size:12px}
+.dia-card .tempo{font-size:10px;color:var(--z-gold);font-weight:700;white-space:nowrap}
+
+/* JOGOS */
+.jogo{background:linear-gradient(135deg,var(--z-blue),#2a5580);color:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:10px;transition:transform 150ms ease}
+.jogo:hover{transform:translateY(-2px)}
+.jogo h3{color:var(--z-gold);margin:0 0 6px;font-size:14px}
+.jogo .como{font-size:12px;line-height:1.7}
+.jogo .premio-lbl{background:rgba(222,180,40,.15);border-radius:8px;padding:6px;margin-top:8px;text-align:center;color:var(--z-gold);font-weight:700;font-size:13px}
+
+/* EM CONSTRUÇÃO */
+.em-construcao{background:var(--z-white);border:2px dashed var(--z-gold);border-radius:var(--r);padding:24px;text-align:center;margin-bottom:12px}
+.em-construcao .icon{font-size:28px;margin-bottom:8px}
+.em-construcao .msg{font-size:13px;color:var(--z-gray);font-weight:500}
+.em-construcao .sub{font-size:11px;color:var(--z-blue-15);margin-top:4px}
+
+/* EDITABLE SECTION */
+.editable-area{background:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.editable-area .items{margin-bottom:12px}
+.editable-item{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--z-lgray);font-size:12px}
+.editable-item:last-child{border:none}
+.editable-item .bullet{color:var(--z-gold);font-weight:700;flex-shrink:0}
+.editable-item .text{flex:1;color:var(--z-blue)}
+.editable-item .del-btn{background:none;border:none;color:var(--z-red);cursor:pointer;font-size:14px;padding:0 4px;opacity:.5}
+.editable-item .del-btn:hover{opacity:1}
+.add-row{display:flex;gap:8px;margin-top:8px}
+.add-row input{flex:1;border:1.5px solid var(--z-blue-15);border-radius:8px;padding:8px 12px;font-family:var(--font);font-size:12px}
+.add-row input:focus{outline:none;border-color:var(--z-gold)}
+.add-btn{background:var(--z-gold);color:var(--z-blue);border:none;width:36px;height:36px;border-radius:50%;font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 150ms ease;flex-shrink:0}
+.add-btn:hover{background:var(--z-gold-hover);transform:scale(1.1)}
+
+/* PASSO */
+.passo{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--z-lgray)}
+.passo:last-child{border:none}
+.passo .num{background:var(--z-gold);color:var(--z-white);min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0}
+.passo .txt{flex:1}
+.passo .titulo{font-weight:700;font-size:13px}
+.passo .detalhe{font-size:12px;color:var(--z-gray);margin-top:2px}
+.passo .fala{background:var(--z-gold-10);border-radius:6px;padding:6px 10px;margin-top:4px;font-size:12px;font-style:italic}
+
+/* DESTAQUE BOX */
+.destaque{background:var(--z-blue);color:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.destaque h3{color:var(--z-gold);margin:0 0 8px}
+
+/* BUDGET */
+.budget-box{background:linear-gradient(135deg,var(--z-green),#1a8a4a);color:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px;text-align:center;box-shadow:var(--shadow)}
+.budget-box .valor{font-size:28px;font-weight:900}
+.budget-box .desc{font-size:11px;opacity:.8}
+
+/* TRACKER */
+.tracker{background:var(--z-white);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.tracker h3{margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.tracker-grid{display:grid;grid-template-columns:90px repeat(5,1fr) 70px;gap:2px;font-size:11px;margin-bottom:12px}
+.tracker-grid .hd{background:var(--z-blue);color:var(--z-white);padding:6px 4px;text-align:center;font-weight:600;font-size:9px;text-transform:uppercase}
+.tracker-grid .lbl{background:var(--z-blue);color:var(--z-gold);padding:6px 4px;font-weight:700;font-size:10px;display:flex;align-items:center}
+.tracker-grid input{width:100%;border:1.5px solid var(--z-lgray);padding:6px 4px;text-align:center;font-size:11px;border-radius:4px;font-family:var(--font)}
+.tracker-grid input:focus{outline:none;border-color:var(--z-gold)}
+.tracker-grid .total-cell{background:var(--z-gold-10);padding:6px 4px;text-align:center;font-weight:700;font-size:11px;border-radius:4px;display:flex;align-items:center;justify-content:center}
+
+/* BARS */
+.bar-container{margin:8px 0}
+.bar-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.bar-label .pct{font-weight:700;color:var(--z-green)}
+.bar-bg{background:var(--z-lgray);border-radius:6px;height:22px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:6px;transition:width .5s ease;min-width:2px}
+.bar-fill.gold{background:linear-gradient(90deg,var(--z-gold),#E5C353)}
+.bar-fill.spa{background:linear-gradient(90deg,var(--z-spa),#CFC0DB)}
+.bar-fill.emporio{background:linear-gradient(90deg,var(--z-emporio),#7BB38A)}
+.bar-fill.vetcare{background:linear-gradient(90deg,var(--z-vetcare),#4A9DAA)}
+.bar-fill.daycare{background:linear-gradient(90deg,var(--z-daycare),#E0A070)}
+.bar-fill.hosp{background:linear-gradient(90deg,var(--z-hosp),#7CC0C8)}
+.bar-markers{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.bar-marker{position:absolute;top:0;height:100%;width:2px;background:rgba(0,0,0,.25)}
+.bar-marker span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--z-gray);white-space:nowrap}
+
+/* SUMMARY TABLE (dark) */
+.sum-card{background:var(--z-blue);color:var(--z-white);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);margin-bottom:12px}
+.sum-card h3{color:var(--z-gold);margin:0 0 10px}
+.sum-card table th{background:rgba(255,255,255,.08)}
+.sum-card td{color:var(--z-white);border-bottom:1px solid rgba(255,255,255,.06)}
+.sum-card td:first-child{color:var(--z-gold)}
+
+/* BUTTONS */
+.btn{background:var(--z-blue);color:var(--z-white);border:none;padding:10px 20px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin:4px;font-family:var(--font);transition:all 150ms ease}
+.btn:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-gold{background:var(--z-gold);color:var(--z-blue)}
+.btn-green{background:var(--z-green)}
+.btn-red{background:var(--z-red)}
+
+.footer{text-align:center;padding:16px;color:var(--z-gray);font-size:10px;margin-top:20px;border-top:1px solid var(--z-lgray)}
+@media(max-width:600px){
+  .tracker-grid{grid-template-columns:65px repeat(5,1fr) 55px;font-size:10px}
+  .scenario-selector{flex-direction:column}
+  table{font-size:11px}
+  .header h1{font-size:18px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <svg viewBox="200 385 680 310" style="width:220px;height:auto;margin:0 auto 8px;display:block;position:relative" xmlns="http://www.w3.org/2000/svg"><g><path fill="#DEB428" d="M349.98,579.79c1.55.6,2.66,1.61,3.34,3.08.69,1.46.73,2.98.14,4.53-2.33,6.45-7.84,11.99-16.59,16.69-7.2,3.9-16.21,7.01-27.1,9.39-5.97,1.16-12.2,2.1-18.59,2.75-6.42.69-12.74,1.03-18.94,1.03-4.47,0-8.72-.19-12.81-.61-4.08-.37-8.04-.86-11.93-1.42-8.73-1.38-15.93-3.83-21.54-7.34-4.47-2.71-7.4-5.56-8.76-8.49-1.32-2.91-2.01-5.54-2.01-7.88,0-5.89,1.6-12.73,4.8-20.64,3.19-7.91,7.36-16.35,12.52-25.32,5.14-8.98,10.92-18.29,17.3-27.94,6.44-9.66,12.72-19.18,18.91-28.53,3.89-5.84,7.7-11.47,11.39-16.84,3.7-5.36,6.9-10.29,9.63-14.78,3.07-5.08,5.13-8.79,6.1-11.1.98-2.36,1.54-3.9,1.75-4.69-.39-.41-2.01-1-4.8-1.76-2.81-.79-8.02-.79-15.59,0-2.89.39-5.67.75-8.28,1.16-2.62.4-5.01.78-7.16,1.18-2.32.56-4.65,1.06-6.97,1.46-1.54.38-3.03.19-4.37-.61-1.37-.76-2.23-1.93-2.62-3.48-.38-1.57-.18-3.02.59-4.42.77-1.35,1.94-2.24,3.48-2.62.39-.19,2.95-.79,7.71-1.76,4.77-.97,10.25-1.76,16.45-2.35,7.19-.77,13.3-.77,18.35,0,7.57,1.19,12.41,4.3,14.57,9.39.75,1.94.75,4.28,0,7.01-.77,2.74-2.39,6.29-4.84,10.68-2.41,4.38-5.7,9.81-9.88,16.24-4.16,6.45-9.47,14.32-15.88,23.71-5.43,8-11.15,16.57-17.16,25.75-6.03,9.18-11.61,18.15-16.73,26.91-5.16,8.8-9.39,17-12.68,24.6-3.32,7.61-4.96,13.85-4.96,18.75,0,2.72,2.06,5.1,6.15,7.15,4.06,2.06,9.61,3.75,16.57,5.14,9.33,1.54,19.12,2.09,29.43,1.6,10.27-.5,19.87-1.72,28.79-3.68,8.94-1.93,16.61-4.52,23.01-7.75,6.37-3.2,10.28-6.78,11.65-10.68.57-1.57,1.62-2.69,3.06-3.35,1.43-.68,2.96-.74,4.51-.17"/><polygon fill="#DEB428" points="418.47 393.67 414.21 393.67 406.06 404.54 409.9 404.54 416.31 399.04 422.76 404.54 426.59 404.54 418.47 393.67"/><path fill="#DEB428" d="M459.45,600.87c1.37-.99,2.79-1.32,4.36-1.02,1.54.29,2.81,1.11,3.79,2.48.97,1.36,1.32,2.77,1.05,4.23-.32,1.49-1.14,2.7-2.5,3.68-5.07,3.49-12.21,5.75-21.57,6.73-1.15.19-2.3.36-3.49.45-1.16.08-2.31.13-3.48.13-3.49,0-6.88-.22-10.18-.72-3.32-.51-6.6-1.25-9.91-2.19-7.36-2.17-13.68-5.33-18.93-9.51-5.23-4.19-9.13-9.41-11.63-15.64-3.17-7.2-5.86-16.4-8.04-27.6-2.19-11.2-3.79-23.53-4.76-36.99-.21-.17-.3-.66-.3-1.44v-3.52c-.97-14.4-1.13-28.23-.46-41.48.7-13.26,2.14-24.85,4.34-34.77.8-3.89,3.46-7.23,8.05-9.94,7.18-4.5,20.08-6.9,38.74-7.31h9.32c3.09,0,5.92.1,8.44.29,2.48.19,4.71.33,6.53.41,1.83.13,3.05.25,3.66.44,1.54.4,2.69,1.28,3.49,2.73.76,1.4.95,2.89.59,4.42-.39,1.52-1.27,2.66-2.61,3.42-1.37.79-2.85.98-4.39.6-.57,0-1.9-.11-3.94-.3-2.04-.19-4.53-.39-7.57-.57-2.98-.2-6.34-.22-10.04-.14-3.68.1-7.38.23-11.04.42-10.48.6-17.66,1.77-21.57,3.53-3.85,1.74-5.93,3.21-6.1,4.38-1.92,9.36-3.25,20.29-3.95,32.77-.69,12.48-.67,25.57.14,39.24h24.76c7.18-.21,13.01-.5,17.47-.9,4.48-.37,7.97-.8,10.5-1.32,2.53-.48,4.66-1.1,6.37-1.88,1.38-.99,2.85-1.38,4.39-1.2,1.55.21,2.81,1.02,3.78,2.36.98,1.38,1.36,2.85,1.19,4.4-.21,1.57-.97,2.82-2.37,3.81-.96.58-2.21,1.23-3.78,1.9-1.55.7-3.87,1.31-6.98,1.89-3.1.58-7.08,1.12-11.94,1.61-4.84.48-10.97.85-18.35,1.03h-24.15c.98,11.72,2.42,22.26,4.38,31.63,1.92,9.35,4.17,17.14,6.69,23.38,2.51,5.66,6.07,9.9,10.61,12.72,4.56,2.86,8.79,4.85,12.68,6.02,3.67,1,7.45,1.6,11.34,1.92,3.89.28,7.56.28,11.07,0,3.49-.31,6.66-.84,9.46-1.64,2.81-.74,5.1-1.74,6.85-2.9"/><path fill="#DEB428" d="M591.05,592.38c1.36,1,2.24,2.25,2.63,3.79.38,1.57.08,3.05-.89,4.4-1.74,2.73-4.31,5.08-7.71,7.03-3.37,1.93-7.25,3.66-11.51,5.11-4.24,1.47-8.81,2.57-13.67,3.23-4.86.68-9.58,1.03-14.27,1.03h-2.62c-.77,0-1.66-.11-2.61-.32-20-1.16-33.01-7.77-39.04-19.89-3.54-7.01-6.52-17.59-8.87-31.75-2.41-14.12-3.99-30.38-4.79-48.71-.98-18.36-.84-35.14.47-50.36,1.25-15.22,3.29-27.4,6.08-36.58.39-1.56,1.34-2.7,2.87-3.36,1.45-.67,3.01-.83,4.56-.46,1.54.61,2.65,1.59,3.33,2.94.7,1.38.85,2.84.43,4.4-2.7,8.39-4.59,19.94-5.68,34.68-1.08,14.74-1.22,30.77-.4,48.15.38,8.59.97,16.76,1.71,24.57.78,7.8,1.72,14.98,2.77,21.52,1.11,6.55,2.26,12.34,3.65,17.4,1.36,5.08,2.8,9.15,4.38,12.31,4.06,7.99,13.75,12.49,29.08,13.44,9.55.58,18.57-.26,27.11-2.62,4.45-1.37,7.86-2.78,10.2-4.25,2.3-1.46,3.84-2.76,4.64-3.95.99-1.37,2.22-2.24,3.79-2.62,1.52-.4,2.99-.11,4.35.86"/><path fill="#DEB428" d="M692.97,436.69c-.42,12.87,0,27.44,1.14,43.75,1.18,16.29,2.54,32.92,4.09,49.88.78,9.57,1.55,18.69,2.35,27.39.73,8.68,1.38,16.75,1.87,24.29.49,7.52.67,14.28.59,20.33-.1,6.06-.47,11.15-1.04,15.22-.6,3.34-2.5,4.97-5.81,4.97h-.88c-1.55-.38-2.81-1.24-3.8-2.47-.95-1.26-1.34-2.68-1.13-4.26.55-3.7.85-8.54.85-14.49s-.21-12.63-.59-20.05c-.37-7.41-.92-15.34-1.58-23.85-.69-8.48-1.43-17.21-2.18-26.19l-.88-10.24c-.17,0-.28.11-.28.28-3.49,26.74-8.07,47.84-13.69,63.22-3.12,9.39-6.8,16.81-11.07,22.27-5.22,6.4-11.17,9.64-17.75,9.64-2.55,0-5.27-.53-8.13-1.62-2.92-1.05-5.89-2.92-8.89-5.55-3.04-2.65-5.97-6.35-8.9-11.13-2.92-4.79-5.52-10.88-7.85-18.3-3.12-9.35-5.43-19.93-6.96-31.76-1.57-11.79-2.25-23.94-2.07-36.42,0-9.36.54-18.25,1.6-26.63,1.08-8.38,2.48-15.72,4.21-21.96,1.18-3.69,2.38-6.92,3.66-9.65,1.25-2.72,2.67-5.07,4.21-7.01,2.34-3.33,4.76-5.46,7.28-6.44,2.54-.98,4.67-1.47,6.41-1.47,1.54,0,2.93.57,4.09,1.74,1.16,1.17,1.72,2.55,1.72,4.11s-.55,2.93-1.72,4.07c-1.16,1.19-2.55,1.76-4.09,1.76-1.37,0-2.95,1.18-4.82,3.5-1.82,2.36-3.62,6.55-5.37,12.61-1.75,5.67-3.1,12.44-4.09,20.34-.95,7.89-1.44,16.25-1.44,25.02-.2,11.91.49,23.46,2.04,34.67,1.56,11.24,3.7,21.24,6.42,30.02.77,2.71,1.82,5.71,3.21,8.93,1.33,3.21,2.97,6.24,4.79,9.07,1.86,2.83,4.03,5.27,6.58,7.31,2.49,2.04,5.2,3.09,8.13,3.09h.31c6.18,0,12.12-8.02,17.73-24.03,2.53-7.4,4.91-16.19,7.17-26.31,2.21-10.15,4.19-21.66,5.95-34.54,1.14-8.8,2.13-17.42,2.89-25.9.78-8.5,1.45-16.44,2.06-23.86.56-7.43,1.03-14.05,1.3-19.91.32-5.84.53-10.52.73-14.04,0-.98.02-2.01.15-3.08.12-1.05.14-2.1.14-3.07.37-3.7,2.31-5.55,5.83-5.55h.26c1.58,0,2.89.58,3.95,1.75,1.07,1.16,1.6,2.54,1.6,4.1v1.75c0,.6-.06,1.26-.14,2.04-.07.8-.14,1.66-.14,2.64"/><path fill="#DEB428" d="M857.19,579.79c1.53.6,2.65,1.61,3.34,3.08.7,1.46.7,2.98.14,4.53-2.33,6.45-7.86,11.99-16.59,16.69-7.18,3.9-16.19,7.01-27.06,9.39-6.03,1.16-12.25,2.1-18.64,2.75-6.41.69-12.72,1.03-18.93,1.03-4.46,0-8.7-.19-12.83-.61-4.06-.36-8.03-.86-11.94-1.42-8.7-1.38-15.91-3.83-21.53-7.34-4.49-2.71-7.38-5.56-8.74-8.49-1.35-2.91-2.04-5.54-2.04-7.88,0-5.89,1.6-12.73,4.81-20.64,3.24-7.91,7.39-16.35,12.52-25.32,5.14-8.98,10.93-18.29,17.34-27.94,6.38-9.66,12.69-19.18,18.94-28.53,3.87-5.84,7.67-11.47,11.33-16.84,3.66-5.36,6.88-10.29,9.63-14.78,3.07-5.08,5.12-8.79,6.1-11.1.97-2.36,1.54-3.9,1.73-4.69-.38-.41-1.99-1-4.8-1.76-2.81-.79-7.99-.79-15.56,0-2.91.39-5.7.75-8.3,1.16-2.61.4-5.02.78-7.15,1.18-2.33.56-4.67,1.06-6.99,1.46-1.51.38-3,.19-4.37-.61-1.33-.76-2.21-1.93-2.59-3.48-.43-1.57-.21-3.02.57-4.42.78-1.35,1.93-2.25,3.51-2.62.38-.19,2.94-.79,7.71-1.76,4.77-.97,10.24-1.76,16.44-2.35,7.18-.77,13.3-.77,18.35,0,7.6,1.19,12.46,4.3,14.55,9.39.8,1.94.8,4.27,0,7.01-.75,2.74-2.36,6.29-4.79,10.68-2.44,4.38-5.72,9.81-9.91,16.24-4.15,6.45-9.44,14.32-15.87,23.71-5.45,8-11.15,16.57-17.16,25.75-6.04,9.18-11.62,18.15-16.74,26.91-5.14,8.8-9.38,17-12.66,24.6-3.32,7.61-4.96,13.85-4.96,18.75,0,2.72,2.04,5.1,6.1,7.15,4.08,2.06,9.65,3.75,16.62,5.14,9.32,1.54,19.14,2.09,29.41,1.6,10.28-.5,19.9-1.72,28.85-3.68,8.89-1.94,16.57-4.52,23-7.75,6.39-3.2,10.29-6.78,11.64-10.68.58-1.57,1.58-2.69,3.08-3.35,1.43-.68,2.93-.74,4.5-.17"/></g></svg>
+  <h1>Dashboard Amanda</h1>
+  <div class="sub">Supervisora Zêluz — Metas e Acompanhamento</div>
+</div>
+
+<!-- TABS MESES -->
+<div class="tabs">
+  <div class="tab active" onclick="switchMonth('abr')"><span class="mes-num">ABR</span>Abril</div>
+  <div class="tab" onclick="switchMonth('mai')"><span class="mes-num">MAI</span>Maio</div>
+  <div class="tab" onclick="switchMonth('jun')"><span class="mes-num">JUN</span>Junho</div>
+  <div class="tab" onclick="switchMonth('jul')"><span class="mes-num">JUL</span>Julho</div>
+</div>
+
+<!-- ABRIL -->
+<div class="tab-content active" id="month-abr">
+
+<!-- 1. METAS -->
+<h2>1. Metas de Abril</h2>
+
+<div class="card">
+<p style="font-size:13px">Três níveis de meta. Cada um paga mais. As premiações são <strong>cumulativas</strong> — se bater mais de uma área, ganha todas.</p>
+<div class="meta-grid">
+  <div class="meta-box" style="border-color:var(--z-gold)"><div class="nivel" style="color:var(--z-gold)">Base</div><div class="alvo">Nível 1</div><div class="ref">O mínimo para nos mantermos</div></div>
+  <div class="meta-box" style="border-color:var(--z-blue)"><div class="nivel" style="color:var(--z-blue)">Alvo</div><div class="alvo">Nível 2</div><div class="ref">O mínimo que precisamos</div></div>
+  <div class="meta-box" style="border-color:var(--z-green)"><div class="nivel" style="color:var(--z-green)">Ouro</div><div class="alvo">Nível 3</div><div class="ref">Onde realmente precisamos estar!<br>TODOS ganham. O encanto ocorre!</div></div>
+</div>
+</div>
+
+<div class="card">
+<table>
+  <tr><th style="text-align:left">Área</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Extras SPA</td><td>R$ 9.557</td><td>R$ 10.426</td><td>R$ 11.294</td></tr>
+  <tr><td>Banho SPA</td><td>R$ 45.475</td><td>R$ 49.609</td><td>R$ 53.743</td></tr>
+  <tr><td>Empório</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
+  <tr><td>Veterinária</td><td>R$ 12.018</td><td>R$ 13.110</td><td>R$ 14.203</td></tr>
+  <tr style="font-weight:700;background:var(--z-gold-10)"><td>Ecossistema (SPA+Emp+Vet)</td><td>R$ 107.188</td><td>R$ 116.933</td><td>R$ 126.677</td></tr>
+  <tr><td style="color:var(--z-gray)">Hospedagem</td><td style="color:var(--z-gray)">R$ 32.599</td><td style="color:var(--z-gray)">R$ 35.562</td><td style="color:var(--z-gray)">R$ 38.526</td></tr>
+  <tr><td style="color:var(--z-gray)">Daycare</td><td style="color:var(--z-gray)">R$ 46.103</td><td style="color:var(--z-gray)">R$ 50.294</td><td style="color:var(--z-gray)">R$ 54.486</td></tr>
+  <tr class="tot"><td>Total Zêluz</td><td>R$ 185.890</td><td>R$ 202.789</td><td>R$ 219.688</td></tr>
+</table>
+<div class="nota"><strong>Ecossistema</strong> = SPA (banho + extras) + Empório + Veterinária — meta do time.<br><strong>Hospedagem e Daycare</strong> = fazem parte do Total Zêluz. O time todo ganha se o total bater.</div>
+</div>
+
+<!-- 2. PREMIAÇÃO — SELETOR DE CENÁRIO -->
+<h2>2. Premiação — Quanto cada pessoa ganha</h2>
+
+<div class="lock-msg" id="lock-msg"></div>
+
+<div id="scenario-area">
+<p style="font-size:12px;color:var(--z-gray);margin-bottom:12px">Escolha o modelo de distribuição. Clique em <strong>"Escolher este"</strong> para confirmar — o outro desaparece.</p>
+
+<div class="scenario-selector">
+  <div class="scenario-btn selected" onclick="selectScenario('B')">
+    <div class="stitle">Cenário B — Igual</div>
+    <div class="sdesc">Consultoras 25% / 25%</div>
+  </div>
+  <div class="scenario-btn" onclick="selectScenario('A')">
+    <div class="stitle">Cenário A — Diferenciado</div>
+    <div class="sdesc">Cons1 20% / Cons2 30%</div>
+  </div>
+</div>
+
+<!-- CENÁRIO B -->
+<div class="scenario active" id="scenario-B">
+
+<div class="pessoa" style="border-left-color:var(--z-blue)">
+<h3>Supervisora (Amanda) <span class="badge-blue badge">40% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-spa)">
+<h3>Fernanda — SPA <span class="badge">25% do pool</span></h3>
+<div class="info">Gatilhos: 15% Extras + 25% Banho + 40% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Extras SPA</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr><td>Banho SPA</td><td>R$ 200</td><td>R$ 250</td><td>R$ 350</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-emporio)">
+<h3>Consultora 2 — Empório <span class="badge">25% do pool</span></h3>
+<div class="info">Gatilhos: 50% Empório + 30% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Empório</td><td>R$ 350</td><td>R$ 500</td><td>R$ 700</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-vetcare)">
+<h3>Veterinária <span class="badge">10% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 200</td><td>R$ 300</td><td>R$ 400</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
+</table>
+</div>
+
+<button class="escolher-btn" onclick="lockScenario('B')">Escolher Cenário B — Consultoras Iguais (25/25)</button>
+</div>
+
+<!-- CENÁRIO A -->
+<div class="scenario" id="scenario-A">
+
+<div class="pessoa" style="border-left-color:var(--z-blue)">
+<h3>Supervisora (Amanda) <span class="badge-blue badge">40% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-spa)">
+<h3>Fernanda — SPA <span class="badge">20% do pool</span></h3>
+<div class="info">Gatilhos: 15% Extras + 25% Banho + 40% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Extras SPA</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr><td>Banho SPA</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 200</td><td>R$ 250</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 600</td><td>R$ 900</td><td>R$ 1.200</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-emporio)">
+<h3>Consultora 2 — Empório <span class="badge">30% do pool</span></h3>
+<div class="info">Gatilhos: 50% Empório + 30% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Empório</td><td>R$ 450</td><td>R$ 650</td><td>R$ 900</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 300</td><td>R$ 400</td><td>R$ 550</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 200</td><td>R$ 250</td><td>R$ 350</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 950</td><td>R$ 1.300</td><td>R$ 1.800</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-vetcare)">
+<h3>Veterinária <span class="badge">10% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Base</th><th>Alvo</th><th>Ouro</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 200</td><td>R$ 300</td><td>R$ 400</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
+</table>
+</div>
+
+<button class="escolher-btn" onclick="lockScenario('A')">Escolher Cenário A — Diferenciado (20/30)</button>
+</div>
+</div>
+
+<!-- 3. REMUNERAÇÃO -->
+<h2>3. Remuneração Total por Cenário</h2>
+
+<div class="card">
+<p style="font-size:12px;color:var(--z-gray);margin-bottom:10px"><strong>Composição:</strong> Salário + R$ 300 (assiduidade) + R$ 380 (alimentação) + Premiação = Total</p>
+<table>
+  <tr><th style="text-align:left">Pessoa</th><th>Sem meta</th><th>+ Base</th><th>+ Alvo</th><th>+ Ouro</th></tr>
+  <tr><td>Supervisora</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.880</td><td>Sal. + R$ 2.430</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 3.030</td></tr>
+  <tr><td>Fernanda</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
+  <tr><td>Consultora 2</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
+  <tr><td>Veterinária</td><td>Sal. + R$ 680</td><td>Sal. + R$ 980</td><td>Sal. + R$ 1.130</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 1.280</td></tr>
+</table>
+<div class="nota"><strong>Pagamento da premiação:</strong> apurada dia 1 do mês seguinte, paga até o 5º dia útil.</div>
+</div>
+
+<!-- 4. ORÇAMENTO -->
+<h2>4. Orçamento para Estratégias</h2>
+
+<div class="budget-box">
+  <div class="desc">Supervisora recebe por mês</div>
+  <div class="valor">R$ 200</div>
+  <div class="desc">R$ 50/semana para prêmios e estratégias com o time</div>
+</div>
+
+<!-- 5. ROTINA DIÁRIA -->
+<h2>5. O que fazer cada dia</h2>
+
+<div class="dia-card" style="border-left:4px solid var(--z-gold)"><div class="dia">SEG</div><div class="acao"><strong>Reunião de Meta</strong> — resultado da semana + progresso + lançar jogo</div><div class="tempo">15 min</div></div>
+<div class="dia-card"><div class="dia">TER</div><div class="acao"><strong>Bom Dia Gerente</strong> — anotar números de segunda no tracker</div><div class="tempo">10 min</div></div>
+<div class="dia-card" style="border-left:4px solid var(--z-blue)"><div class="dia">QUA</div><div class="acao"><strong>Banquinho</strong> — conversa individual com cada uma (10 min cada)</div><div class="tempo">30 min</div></div>
+<div class="dia-card"><div class="dia">QUI</div><div class="acao"><strong>Bom Dia Gerente</strong> — anotar números + dar energia</div><div class="tempo">10 min</div></div>
+<div class="dia-card" style="border-left:4px solid var(--z-green)"><div class="dia">SEX</div><div class="acao"><strong>Análise da Semana</strong> — revisar tudo + preparar reunião de segunda</div><div class="tempo">20 min</div></div>
+<div class="dia-card"><div class="dia">SÁB</div><div class="acao"><strong>Encerrar o Jogo</strong> — resultado, prêmio, comemorar</div><div class="tempo">10 min</div></div>
+
+<div class="nota"><strong>Se não fez a reunião de segunda, a semana já começou errada.</strong> Consistência > perfeição.</div>
+
+<!-- 6. REUNIÃO DE SEGUNDA -->
+<h2>6. Reunião de Segunda — passo a passo</h2>
+<div class="card">
+<p style="font-size:12px;color:var(--z-gray);margin-bottom:10px"><strong>15 minutos. De pé. Rápida.</strong></p>
+<div class="passo"><div class="num">1</div><div class="txt"><div class="titulo">Boa Notícia (2 min)</div><div class="fala">"Quem tem uma boa notícia pra contar?"</div></div></div>
+<div class="passo"><div class="num">2</div><div class="txt"><div class="titulo">Resultado da semana (3 min)</div><div class="fala">"Semana passada o Empório fez R$ X. A meta Base é R$ 40.139. Estamos em Z%."</div></div></div>
+<div class="passo"><div class="num">3</div><div class="txt"><div class="titulo">Progresso do mês (2 min)</div><div class="fala">"No Ecossistema já estamos em R$ X de R$ 107.188. Faltam R$ Y."</div></div></div>
+<div class="passo"><div class="num">4</div><div class="txt"><div class="titulo">Meta da semana (2 min)</div><div class="detalhe">Dar número DIÁRIO para cada uma.</div></div></div>
+<div class="passo"><div class="num">5</div><div class="txt"><div class="titulo">Jogo da semana (3 min)</div><div class="fala">"Essa semana o jogo é..."</div></div></div>
+<div class="passo"><div class="num">6</div><div class="txt"><div class="titulo">Dica + Energia (3 min)</div><div class="fala">"Bora, time!"</div></div></div>
+</div>
+
+<!-- 7. BANQUINHO -->
+<h2>7. Banquinho de Quarta</h2>
+<div class="destaque">
+<h3>10 minutos com cada pessoa. Sozinhas.</h3>
+<div class="passo" style="border-color:rgba(255,255,255,.1)"><div class="num">1</div><div class="txt"><div class="titulo" style="color:var(--z-gold)">Elogio real (1 min)</div></div></div>
+<div class="passo" style="border-color:rgba(255,255,255,.1)"><div class="num">2</div><div class="txt"><div class="titulo" style="color:var(--z-gold)">Números (2 min)</div></div></div>
+<div class="passo" style="border-color:rgba(255,255,255,.1)"><div class="num">3</div><div class="txt"><div class="titulo" style="color:var(--z-gold)">Perguntar e OUVIR (3 min)</div></div></div>
+<div class="passo" style="border-color:rgba(255,255,255,.1)"><div class="num">4</div><div class="txt"><div class="titulo" style="color:var(--z-gold)">Combinar 1 ação (2 min)</div></div></div>
+<div class="passo" style="border:none"><div class="num">5</div><div class="txt"><div class="titulo" style="color:var(--z-gold)">Confiança (1 min)</div></div></div>
+</div>
+<div class="nota"><strong>NUNCA</strong> na frente dos outros. <strong>NUNCA</strong> comparar com colega.</div>
+
+<!-- 8. JOGOS -->
+<h2>8. Jogos de Vendas — Abril</h2>
+<div class="nota" style="margin-bottom:10px"><strong>Orçamento:</strong> R$ 200/mês = R$ 50/semana</div>
+
+<div class="jogo"><h3>Semana 1 (01-05/abr) — VINTÃO</h3><div class="como">Nota de R$ 20 circula. Quem fizer a <strong>maior venda do dia</strong>, fica com a nota. Se alguém superar, a nota muda de mão. Sábado: quem tiver, ganha.</div><div class="premio-lbl">R$ 20</div></div>
+
+<div class="jogo"><h3>Semana 2 (06-12/abr) — DESAFIO BOB'S</h3><div class="como">Quem bater a meta diária (Fernanda: X extras | Consultora 2: R$ X no Empório) ganha sanduíche do Bob's. Simples: bateu = ganhou.</div><div class="premio-lbl">Sanduíche Bob's (até R$ 25)</div></div>
+
+<div class="jogo"><h3>Semana 3 (13-19/abr) — A definir com a supervisora</h3><div class="como em-construcao" style="border:none;padding:8px;text-align:left;color:rgba(255,255,255,.6)">Sugestões: Corrida de Pontos, Baleia (giro de estoque), Desafio de Ticket... A supervisora escolhe o jogo e insere abaixo.</div><div class="premio-lbl">Até R$ 25</div></div>
+
+<div class="jogo"><h3>Semana 4 (20-30/abr) — A definir com a supervisora</h3><div class="como em-construcao" style="border:none;padding:8px;text-align:left;color:rgba(255,255,255,.6)">Adaptar ao que funcionou nas semanas anteriores. A supervisora preenche.</div><div class="premio-lbl">Até R$ 25</div></div>
+
+<!-- 9. ESTRATÉGIAS -->
+<h2>9. Estratégias do Mês</h2>
+<div class="em-construcao">
+  <div class="icon">🔧</div>
+  <div class="msg">Em construção</div>
+  <div class="sub">Adriana e Amanda vão definir juntas. Use o + abaixo para adicionar.</div>
+</div>
+
+<!-- EDITABLE: Scripts e Estratégias -->
+<div class="editable-area">
+<h3>Scripts e Estratégias Prontos <span class="badge-green badge">Editável</span></h3>
+<p style="font-size:11px;color:var(--z-gray);margin-bottom:8px">Adicione scripts de venda, estratégias de reativação, ideias que já funcionaram. Ficam salvos aqui.</p>
+<div class="items" id="scripts-list"></div>
+<div class="add-row">
+  <input type="text" id="script-input" placeholder="Adicionar script ou estratégia..." onkeydown="if(event.key==='Enter')addScript()">
+  <button class="add-btn" onclick="addScript()">+</button>
+</div>
+</div>
+
+<!-- 10. IDEIAS -->
+<h2>10. Ideias para Vender Mais</h2>
+<div class="em-construcao">
+  <div class="icon">💡</div>
+  <div class="msg">Em construção</div>
+  <div class="sub">Ideias do Banco Amanda Simões serão adicionadas aqui após revisão.</div>
+</div>
+
+<!-- 11. REATIVAÇÃO -->
+<h2>11. Reativação de Tutores</h2>
+<div class="card">
+<p style="font-size:12px;margin-bottom:10px"><strong>Quem manda:</strong> Fernanda + Consultora 2 (todas enviam). Supervisora coordena.</p>
+<table>
+  <tr><th style="text-align:left">Faixa</th><th>Ação</th><th>Quem</th></tr>
+  <tr><td>15-30 dias sem vir</td><td style="text-align:left">"Estamos sentindo falta do [nome]. Vamos agendar?"</td><td>Todas</td></tr>
+  <tr><td>45-90 dias</td><td style="text-align:left">"Separamos um presente pro [nome]" + opções de dia</td><td>Todas</td></tr>
+  <tr><td>90+ dias</td><td style="text-align:left">Não gastar energia — foco nos ativos</td><td>—</td></tr>
+</table>
+</div>
+
+<div class="editable-area">
+<h3>Scripts de Reativação <span class="badge-green badge">Editável</span></h3>
+<p style="font-size:11px;color:var(--z-gray);margin-bottom:8px">Adicione scripts que já funcionaram com tutores reais.</p>
+<div class="items" id="reativacao-list"></div>
+<div class="add-row">
+  <input type="text" id="reativacao-input" placeholder="Adicionar script de reativação..." onkeydown="if(event.key==='Enter')addReativacao()">
+  <button class="add-btn" onclick="addReativacao()">+</button>
+</div>
+</div>
+
+<!-- 12. ACOMPANHAMENTO SEMANAL -->
+<h2>12. Acompanhamento Semanal</h2>
+<p style="font-size:12px;color:var(--z-gray);margin-bottom:12px">Preencha os números. Gráficos atualizam automaticamente. Dados salvos no navegador.</p>
+
+<!-- EXTRAS SPA -->
+<div class="tracker"><h3>Extras SPA <span class="badge">Meta Base: R$ 9.557</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="extras" data-sem="1" oninput="calc()"><input data-area="extras" data-sem="2" oninput="calc()"><input data-area="extras" data-sem="3" oninput="calc()"><input data-area="extras" data-sem="4" oninput="calc()"><input data-area="extras" data-sem="5" oninput="calc()"><div class="total-cell" id="total-extras">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-extras">0%</span></div><div class="bar-bg"><div class="bar-fill gold" id="bar-extras" style="width:0%"></div></div></div></div>
+
+<!-- BANHO SPA -->
+<div class="tracker"><h3>Banho SPA <span class="badge">Meta Base: R$ 45.475</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="banho" data-sem="1" oninput="calc()"><input data-area="banho" data-sem="2" oninput="calc()"><input data-area="banho" data-sem="3" oninput="calc()"><input data-area="banho" data-sem="4" oninput="calc()"><input data-area="banho" data-sem="5" oninput="calc()"><div class="total-cell" id="total-banho">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-banho">0%</span></div><div class="bar-bg"><div class="bar-fill spa" id="bar-banho" style="width:0%"></div></div></div></div>
+
+<!-- EMPÓRIO -->
+<div class="tracker"><h3>Empório <span class="badge">Meta Base: R$ 40.139</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="emporio" data-sem="1" oninput="calc()"><input data-area="emporio" data-sem="2" oninput="calc()"><input data-area="emporio" data-sem="3" oninput="calc()"><input data-area="emporio" data-sem="4" oninput="calc()"><input data-area="emporio" data-sem="5" oninput="calc()"><div class="total-cell" id="total-emporio">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-emporio">0%</span></div><div class="bar-bg"><div class="bar-fill emporio" id="bar-emporio" style="width:0%"></div></div></div></div>
+
+<!-- VETERINÁRIA -->
+<div class="tracker"><h3>Veterinária <span class="badge">Meta Base: R$ 12.018</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="vet" data-sem="1" oninput="calc()"><input data-area="vet" data-sem="2" oninput="calc()"><input data-area="vet" data-sem="3" oninput="calc()"><input data-area="vet" data-sem="4" oninput="calc()"><input data-area="vet" data-sem="5" oninput="calc()"><div class="total-cell" id="total-vet">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-vet">0%</span></div><div class="bar-bg"><div class="bar-fill vetcare" id="bar-vet" style="width:0%"></div></div></div></div>
+
+<!-- HOSPEDAGEM -->
+<div class="tracker"><h3>Hospedagem <span class="badge">Meta Base: R$ 32.599</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="hosp" data-sem="1" oninput="calc()"><input data-area="hosp" data-sem="2" oninput="calc()"><input data-area="hosp" data-sem="3" oninput="calc()"><input data-area="hosp" data-sem="4" oninput="calc()"><input data-area="hosp" data-sem="5" oninput="calc()"><div class="total-cell" id="total-hosp">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-hosp">0%</span></div><div class="bar-bg"><div class="bar-fill hosp" id="bar-hosp" style="width:0%"></div></div></div></div>
+
+<!-- DAYCARE -->
+<div class="tracker"><h3>Daycare <span class="badge">Meta Base: R$ 46.103</span></h3>
+<div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
+<div class="lbl">R$ vendido</div><input data-area="daycare" data-sem="1" oninput="calc()"><input data-area="daycare" data-sem="2" oninput="calc()"><input data-area="daycare" data-sem="3" oninput="calc()"><input data-area="daycare" data-sem="4" oninput="calc()"><input data-area="daycare" data-sem="5" oninput="calc()"><div class="total-cell" id="total-daycare">R$ 0</div></div>
+<div class="bar-container"><div class="bar-label"><span>Progresso</span><span class="pct" id="pct-daycare">0%</span></div><div class="bar-bg"><div class="bar-fill daycare" id="bar-daycare" style="width:0%"></div></div></div></div>
+
+<!-- RESUMO -->
+<div class="sum-card">
+<h3>Resumo Acumulado</h3>
+<table>
+  <tr><th style="text-align:left">Área</th><th>Acumulado</th><th>Meta Base</th><th>%</th></tr>
+  <tr><td>Extras SPA</td><td id="sum-extras">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-gold)">0%</td></tr>
+  <tr><td>Banho SPA</td><td id="sum-banho">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 45.475</td><td id="sumpct-banho" style="color:var(--z-gold)">0%</td></tr>
+  <tr><td>Empório</td><td id="sum-emporio">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 40.139</td><td id="sumpct-emporio" style="color:var(--z-gold)">0%</td></tr>
+  <tr><td>Veterinária</td><td id="sum-vet">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 12.018</td><td id="sumpct-vet" style="color:var(--z-gold)">0%</td></tr>
+  <tr><td>Hospedagem</td><td id="sum-hosp">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 32.599</td><td id="sumpct-hosp" style="color:var(--z-gold)">0%</td></tr>
+  <tr><td>Daycare</td><td id="sum-daycare">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 46.103</td><td id="sumpct-daycare" style="color:var(--z-gold)">0%</td></tr>
+  <tr style="border-top:2px solid var(--z-gold)"><td style="font-weight:700">Ecossistema</td><td id="sum-eco" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 107.188</td><td id="sumpct-eco" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+  <tr><td style="font-weight:700">Total Zêluz</td><td id="sum-total" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 185.890</td><td id="sumpct-total" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+</table>
+</div>
+
+<div style="text-align:center;margin:12px 0">
+  <button class="btn btn-gold" onclick="salvar()">Salvar Dados</button>
+  <button class="btn btn-green" onclick="exportar()">Exportar</button>
+  <button class="btn btn-red" onclick="limpar()">Limpar</button>
+</div>
+
+</div><!-- fim month-abr -->
+
+<!-- MESES FUTUROS -->
+<div class="tab-content" id="month-mai"><div class="em-construcao" style="margin-top:20px"><div class="icon">📅</div><div class="msg">Maio 2026 — Em breve</div><div class="sub">Dados serão preenchidos com base nos resultados de abril.</div></div></div>
+<div class="tab-content" id="month-jun"><div class="em-construcao" style="margin-top:20px"><div class="icon">📅</div><div class="msg">Junho 2026 — Em breve</div><div class="sub">Dados serão preenchidos após maio.</div></div></div>
+<div class="tab-content" id="month-jul"><div class="em-construcao" style="margin-top:20px"><div class="icon">📅</div><div class="msg">Julho 2026 — Em breve</div><div class="sub">Revisão geral do Q2 + novas metas Q3.</div></div></div>
+
+<div class="footer">
+Dashboard Amanda — Zêluz — 2026<br>
+Metas: Departamento Financeiro | Metodologia: Thiago Concer (Varejo Ativo)
+</div>
+
+</div>
+
+<script>
+/* ===== METAS ===== */
+const METAS={
+  extras:{base:9557,alvo:10426,ouro:11294},
+  banho:{base:45475,alvo:49609,ouro:53743},
+  emporio:{base:40139,alvo:43788,ouro:47437},
+  vet:{base:12018,alvo:13110,ouro:14203},
+  hosp:{base:32599,alvo:35562,ouro:38526},
+  daycare:{base:46103,alvo:50294,ouro:54486}
+};
+const ECO_BASE=107188,TOTAL_BASE=185890;
+
+function parseNum(v){if(!v)return 0;return parseFloat(v.replace(/[^\d.,]/g,'').replace(/\./g,'').replace(',','.'))||0}
+function fmt(n){return'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0})}
+
+function calc(){
+  const t={extras:0,banho:0,emporio:0,vet:0,hosp:0,daycare:0};
+  document.querySelectorAll('input[data-area]').forEach(i=>{t[i.dataset.area]+=parseNum(i.value)});
+
+  ['extras','banho','emporio','vet','hosp','daycare'].forEach(a=>{
+    const v=t[a],m=METAS[a],pBase=m.base>0?(v/m.base)*100:0,pOuro=m.ouro>0?Math.min(100,(v/m.ouro)*100):0;
+    document.getElementById('total-'+a).textContent=fmt(v);
+    document.getElementById('bar-'+a).style.width=pOuro+'%';
+    document.getElementById('pct-'+a).textContent=Math.round(pBase)+'%';
+    document.getElementById('sum-'+a).textContent=fmt(v);
+    document.getElementById('sumpct-'+a).textContent=Math.round(pBase)+'%';
+  });
+
+  const eco=t.banho+t.extras+t.emporio+t.vet;
+  const total=eco+t.hosp+t.daycare;
+  document.getElementById('sum-eco').textContent=fmt(eco);
+  document.getElementById('sumpct-eco').textContent=Math.round((eco/ECO_BASE)*100)+'%';
+  document.getElementById('sum-total').textContent=fmt(total);
+  document.getElementById('sumpct-total').textContent=Math.round((total/TOTAL_BASE)*100)+'%';
+}
+
+/* ===== TABS ===== */
+function switchMonth(m){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['abr','mai','jun','jul'][i]===m)});
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='month-'+m));
+}
+
+/* ===== SCENARIO SELECTOR ===== */
+function selectScenario(s){
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  document.querySelectorAll('.scenario').forEach(sc=>sc.classList.remove('active'));
+  document.getElementById('scenario-'+s).classList.add('active');
+}
+
+function lockScenario(s){
+  if(!confirm('Confirmar '+( s==='B'?'Cenário B (Igual 25/25)':'Cenário A (Diferenciado 20/30)')+'?\n\nO outro cenário será ocultado.')){return}
+  document.getElementById('scenario-area').innerHTML='';
+  const chosen=document.getElementById('scenario-'+s);
+  const lock=document.getElementById('lock-msg');
+  lock.style.display='block';
+  lock.textContent='Cenário '+(s==='B'?'B — Igual (25/25)':'A — Diferenciado (20/30)')+' selecionado';
+  document.getElementById('scenario-area').appendChild(chosen);
+  chosen.classList.add('active');
+  chosen.querySelector('.escolher-btn').remove();
+  localStorage.setItem('zeluz-dash-scenario',s);
+}
+
+/* ===== EDITABLE LISTS ===== */
+function renderList(key,containerId){
+  const items=JSON.parse(localStorage.getItem(key)||'[]');
+  const c=document.getElementById(containerId);
+  c.innerHTML='';
+  items.forEach((txt,i)=>{
+    const d=document.createElement('div');d.className='editable-item';
+    d.innerHTML='<span class="bullet">▸</span><span class="text">'+txt+'</span><button class="del-btn" onclick="removeItem(\''+key+'\','+i+',\''+containerId+'\')">&times;</button>';
+    c.appendChild(d);
+  });
+}
+function addToList(key,inputId,containerId){
+  const inp=document.getElementById(inputId);
+  const v=inp.value.trim();if(!v)return;
+  const items=JSON.parse(localStorage.getItem(key)||'[]');
+  items.push(v);
+  localStorage.setItem(key,JSON.stringify(items));
+  inp.value='';
+  renderList(key,containerId);
+}
+function removeItem(key,idx,containerId){
+  const items=JSON.parse(localStorage.getItem(key)||'[]');
+  items.splice(idx,1);
+  localStorage.setItem(key,JSON.stringify(items));
+  renderList(key,containerId);
+}
+function addScript(){addToList('zeluz-scripts','script-input','scripts-list')}
+function addReativacao(){addToList('zeluz-reativacao','reativacao-input','reativacao-list')}
+
+/* ===== SAVE/LOAD ===== */
+function salvar(){
+  const d={};
+  document.querySelectorAll('input[data-area]').forEach(i=>{d[i.dataset.area+'-'+i.dataset.sem]=i.value});
+  localStorage.setItem('zeluz-dash-abr26',JSON.stringify(d));
+  alert('Dados salvos!');
+}
+function carregar(){
+  const r=localStorage.getItem('zeluz-dash-abr26');
+  if(r){try{const d=JSON.parse(r);document.querySelectorAll('input[data-area]').forEach(i=>{const k=i.dataset.area+'-'+i.dataset.sem;if(d[k])i.value=d[k]});calc()}catch(e){}}
+  const s=localStorage.getItem('zeluz-dash-scenario');
+  if(s)lockScenario(s);
+  renderList('zeluz-scripts','scripts-list');
+  renderList('zeluz-reativacao','reativacao-list');
+}
+function limpar(){
+  if(!confirm('Limpar todos os dados de abril?'))return;
+  localStorage.removeItem('zeluz-dash-abr26');
+  document.querySelectorAll('input[data-area]').forEach(i=>i.value='');calc();
+}
+function exportar(){
+  const t={extras:0,banho:0,emporio:0,vet:0,hosp:0,daycare:0};
+  document.querySelectorAll('input[data-area]').forEach(i=>{t[i.dataset.area]+=parseNum(i.value)});
+  const eco=t.banho+t.extras+t.emporio+t.vet,total=eco+t.hosp+t.daycare;
+  let txt='RELATÓRIO SEMANAL — ABRIL 2026\n================================\n';
+  txt+='Extras SPA:  '+fmt(t.extras)+' / '+fmt(METAS.extras.base)+'\n';
+  txt+='Banho SPA:   '+fmt(t.banho)+' / '+fmt(METAS.banho.base)+'\n';
+  txt+='Empório:     '+fmt(t.emporio)+' / '+fmt(METAS.emporio.base)+'\n';
+  txt+='Veterinária: '+fmt(t.vet)+' / '+fmt(METAS.vet.base)+'\n';
+  txt+='Hospedagem:  '+fmt(t.hosp)+' / '+fmt(METAS.hosp.base)+'\n';
+  txt+='Daycare:     '+fmt(t.daycare)+' / '+fmt(METAS.daycare.base)+'\n';
+  txt+='--------------------------------\n';
+  txt+='Ecossistema: '+fmt(eco)+' / '+fmt(ECO_BASE)+'\n';
+  txt+='Total Zêluz: '+fmt(total)+' / '+fmt(TOTAL_BASE)+'\n';
+  const b=new Blob([txt],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='relatorio-abril-2026.txt';a.click();
+}
+carregar();
+</script>
+</body>
+</html>
