@@ -942,7 +942,11 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
   <div class="nav-sep"></div>
   <div class="sidebar-nav">
-    <a class="nav-item" id="nav-geral" onclick="accessGeral()"><i class="bi bi-speedometer2"></i> Visão Zêluz <span class="nav-badge">Painel</span></a>
+    <a class="nav-item" id="nav-geral" onclick="toggleSubnav('geral-sub');switchView('geral')"><i class="bi bi-grid-1x2"></i> Visão Zêluz <i class="bi bi-chevron-down" style="font-size:10px;margin-left:auto;opacity:.4"></i></a>
+    <div class="subnav" id="geral-sub" style="display:none">
+      <a class="nav-item nav-sub" id="nav-estrategias-jogos" onclick="switchView('estrategias-jogos')"><i class="bi bi-lightning-charge" style="font-size:14px"></i> Estratégias & Jogos</a>
+      <a class="nav-item nav-sub" id="nav-metas-mes" onclick="switchView('metas-mes')"><i class="bi bi-trophy" style="font-size:14px"></i> Metas do Mês</a>
+    </div>
 
     <div class="nav-section-label">Gestão</div>
     <a class="nav-item" id="nav-adriana" onclick="switchView('adriana')"><i class="bi bi-person-badge"></i> Adriana</a>
@@ -1001,6 +1005,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div class="kpi-label">Ecossistema</div>
     <div class="kpi-value" id="kpi-eco">R$ 0</div>
     <div class="kpi-pct" id="kpi-eco-pct">0% da meta Cuidado</div>
+    <div class="kpi-falta" id="kpi-eco-falta" style="font-size:12px;font-weight:700;color:var(--z-red);margin-top:4px">Falta: R$ 107.188</div>
     <div class="kpi-meta">Meta: R$ 107.188</div>
   </div>
   <div class="kpi-card spa">
@@ -1009,6 +1014,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div class="kpi-label">SPA Dermoprotetor</div>
     <div class="kpi-value" id="kpi-spa">R$ 0</div>
     <div class="kpi-pct" id="kpi-spa-pct">0%</div>
+    <div class="kpi-falta" id="kpi-spa-falta" style="font-size:12px;font-weight:700;color:var(--z-red);margin-top:4px">Falta: R$ 55.032</div>
     <div class="kpi-meta">Meta: R$ 55.032</div>
   </div>
   <div class="kpi-card emporio">
@@ -1017,6 +1023,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div class="kpi-label">Empório</div>
     <div class="kpi-value" id="kpi-emp">R$ 0</div>
     <div class="kpi-pct" id="kpi-emp-pct">0%</div>
+    <div class="kpi-falta" id="kpi-emp-falta" style="font-size:12px;font-weight:700;color:var(--z-red);margin-top:4px">Falta: R$ 40.139</div>
     <div class="kpi-meta">Meta: R$ 40.139</div>
   </div>
   <div class="kpi-card vetcare">
@@ -1025,6 +1032,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div class="kpi-label">VetCare</div>
     <div class="kpi-value" id="kpi-vet">R$ 0</div>
     <div class="kpi-pct" id="kpi-vet-pct">0%</div>
+    <div class="kpi-falta" id="kpi-vet-falta" style="font-size:12px;font-weight:700;color:var(--z-red);margin-top:4px">Falta: R$ 12.018</div>
     <div class="kpi-meta">Meta: R$ 12.018</div>
   </div>
 </div>
@@ -1145,194 +1153,6 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
 </div>
 
-<!-- ===== IDEIAS PARA VENDER MAIS ===== -->
-<h2 class="sec"><i class="bi bi-lightbulb"></i> Ideias para Vender Mais</h2>
-<div class="editable-area">
-<h3>Banco de Ideias <span class="badge-green badge">Editável</span></h3>
-<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Registre ideias de vendas, promoções, ações que podem funcionar.</p>
-<div class="items" id="ideias-list"></div>
-<div class="add-row">
-  <input type="text" id="ideias-input" placeholder="Adicionar ideia..." onkeydown="if(event.key==='Enter')addIdeia()">
-  <button class="add-btn" onclick="addIdeia()">+</button>
-</div>
-</div>
-
-<!-- ===== ESTRATÉGIAS DO MÊS ===== -->
-<h2 class="sec"><i class="bi bi-lightning-charge"></i> Estratégias do Mês</h2>
-<div class="editable-area">
-<h3>Scripts e Estratégias Prontos <span class="badge-green badge">Editável</span></h3>
-<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Adicione scripts de venda, estratégias de reativação, ideias que já funcionaram.</p>
-<div class="items" id="scripts-list"></div>
-<div class="add-row">
-  <input type="text" id="script-input" placeholder="Adicionar script ou estratégia..." onkeydown="if(event.key==='Enter')addScript()">
-  <button class="add-btn" onclick="addScript()">+</button>
-</div>
-</div>
-
-<!-- ===== REATIVAÇÃO DE TUTORES ===== -->
-<h2 class="sec"><i class="bi bi-arrow-repeat"></i> Reativação de Tutores</h2>
-<div class="card">
-<p style="font-size:12px;margin-bottom:10px"><strong>Quem manda:</strong> Fernanda + Joyce (todas enviam). Supervisora coordena.</p>
-<table>
-  <tr><th style="text-align:left">Faixa</th><th style="text-align:left">Ação</th><th>Quem</th></tr>
-  <tr><td>15-30 dias sem vir</td><td style="text-align:left">"Estamos sentindo falta do [nome]. Vamos agendar?"</td><td>Todas</td></tr>
-  <tr><td>45-90 dias</td><td style="text-align:left">"Separamos um presente pro [nome]" + opções de dia</td><td>Todas</td></tr>
-  <tr><td>90+ dias</td><td style="text-align:left">Não gastar energia — foco nos ativos</td><td>—</td></tr>
-</table>
-</div>
-<div class="editable-area">
-<h3>Scripts de Reativação <span class="badge-green badge">Editável</span></h3>
-<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Adicione scripts que já funcionaram com tutores reais.</p>
-<div class="items" id="reativacao-list"></div>
-<div class="add-row">
-  <input type="text" id="reativacao-input" placeholder="Adicionar script de reativação..." onkeydown="if(event.key==='Enter')addReativacao()">
-  <button class="add-btn" onclick="addReativacao()">+</button>
-</div>
-</div>
-
-<!-- ===== 1. METAS ===== -->
-<h2 class="sec"><i class="bi bi-trophy"></i> Metas de Abril</h2>
-
-<div class="card">
-<p style="font-size:13px">Três níveis de meta. Cada nível paga mais. As premiações são <strong>cumulativas</strong> — quanto mais níveis bater, mais ganha.</p>
-<div class="meta-grid">
-  <div class="meta-box" style="border-color:var(--z-meta-cuidado)">
-    <div class="nivel" style="color:var(--z-meta-cuidado-text)">Nível 1</div>
-    <div class="alvo" style="color:var(--z-meta-cuidado-text)">Meta CUIDADO</div>
-    <div class="ref">O cuidado mínimo que mantém a operação</div>
-  </div>
-  <div class="meta-box" style="border-color:var(--z-blue)">
-    <div class="nivel" style="color:var(--z-blue)">Nível 2</div>
-    <div class="alvo" style="color:var(--z-blue)">Meta ZÊLO</div>
-    <div class="ref">O zelo que faz a diferença</div>
-  </div>
-  <div class="meta-box" style="border-color:var(--z-gold)">
-    <div class="nivel" style="color:var(--z-gold)">Nível 3</div>
-    <div class="alvo" style="color:var(--z-gold)">Meta ENCANTO</div>
-    <div class="ref">Onde o encanto acontece!</div>
-  </div>
-</div>
-</div>
-
-<div class="card">
-<table>
-  <tr><th style="text-align:left">Área</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td>Extras SPA Dermoprotetor</td><td>R$ 9.557</td><td>R$ 10.426</td><td>R$ 11.294</td></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td>Banho SPA Dermoprotetor</td><td>R$ 45.475</td><td>R$ 49.609</td><td>R$ 53.743</td></tr>
-  <tr style="border-left:3px solid var(--z-emporio)"><td>Empório</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
-  <tr style="border-left:3px solid var(--z-vetcare)"><td>Veterinária</td><td>R$ 12.018</td><td>R$ 13.110</td><td>R$ 14.203</td></tr>
-  <tr style="font-weight:700;background:rgba(222,180,40,.06);border-left:3px solid var(--z-gold)"><td>Ecossistema (SPA+Empório+Vet)</td><td>R$ 107.188</td><td>R$ 116.933</td><td>R$ 126.677</td></tr>
-  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-gray-500)">Hospedagem</td><td style="color:var(--z-gray-500)">R$ 32.599</td><td style="color:var(--z-gray-500)">R$ 35.562</td><td style="color:var(--z-gray-500)">R$ 38.526</td></tr>
-  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-gray-500)">Daycare</td><td style="color:var(--z-gray-500)">R$ 46.103</td><td style="color:var(--z-gray-500)">R$ 50.294</td><td style="color:var(--z-gray-500)">R$ 54.486</td></tr>
-  <tr class="tot"><td>Total Zêluz</td><td>R$ 185.890</td><td>R$ 202.789</td><td>R$ 219.688</td></tr>
-</table>
-<div class="nota"><strong>Ecossistema</strong> = SPA Dermoprotetor (banho + extras) + Empório + Veterinária — meta do time.<br><strong>Hospedagem e Daycare</strong> = fazem parte do Total Zêluz. O time todo ganha se o total bater.</div>
-</div>
-
-<!-- ===== 2. PREMIAÇÃO ===== -->
-<h2 class="sec"><i class="bi bi-gift"></i> Premiação — Quanto cada membro do Time pode FAZER</h2>
-
-<div class="pessoa" style="border-left-color:var(--z-blue)">
-<h3>Supervisora (Amanda) <span class="badge-blue badge">40% do pool</span></h3>
-<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-spa)">
-<h3>Fernanda — Consultora de Bem-Estar <span class="badge" style="background:var(--z-spa)">25% do pool</span></h3>
-<div class="info">Gatilhos: 15% Extras + 25% Banho + 40% Eco + 20% Total</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Extras SPA Dermoprotetor</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
-  <tr><td>Banho SPA Dermoprotetor</td><td>R$ 200</td><td>R$ 250</td><td>R$ 350</td></tr>
-  <tr><td>Ecossistema</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-emporio)">
-<h3>Joyce — Consultora de Bem-Estar <span class="badge" style="background:var(--z-emporio)">25% do pool</span></h3>
-<div class="info">Gatilhos: 50% Empório + 30% Eco + 20% Total</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Empório</td><td>R$ 350</td><td>R$ 500</td><td>R$ 700</td></tr>
-  <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-vetcare)">
-<h3>Suellen — Veterinária <span class="badge" style="background:var(--z-vetcare)">10% do pool</span></h3>
-<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Ecossistema</td><td>R$ 200</td><td>R$ 300</td><td>R$ 400</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
-</table>
-</div>
-
-<!-- ===== 3. REMUNERAÇÃO (sem Suellen) ===== -->
-<h2 class="sec"><i class="bi bi-cash-stack"></i> Remuneração Total</h2>
-
-<div class="card">
-<p style="font-size:12px;color:var(--z-gray-500);margin-bottom:10px"><strong>Composição*:</strong> Salário + R$ 300 (assiduidade) + R$ 380 (alimentação) + Premiação = Total</p>
-<table>
-  <tr><th style="text-align:left">Pessoa</th><th>Sem meta</th><th>+ Cuidado</th><th>+ Zêlo</th><th>+ Encanto</th></tr>
-  <tr><td>Supervisora (Amanda)</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.880</td><td>Sal. + R$ 2.430</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 3.030</td></tr>
-  <tr><td>Fernanda</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
-  <tr><td>Joyce</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
-</table>
-<div class="nota"><strong>Pagamento da premiação:</strong> apurada dia 1 do mês seguinte, paga até o 5.° dia útil.</div>
-</div>
-
-<!-- ===== 4. ROTINA ===== -->
-<h2 class="sec"><i class="bi bi-calendar-week"></i> Rotina Semanal</h2>
-
-<div class="rotina-timeline">
-  <div class="dia-mini gold"><div class="dia-label">SEG</div><div class="dia-nome">Rota Zelosa</div><div class="dia-tempo">15 min</div></div>
-  <div class="dia-mini"><div class="dia-label">TER</div><div class="dia-nome">Pulso do Dia</div><div class="dia-tempo">10 min</div></div>
-  <div class="dia-mini blue"><div class="dia-label">QUA</div><div class="dia-nome">Feedback Zeloso</div><div class="dia-tempo">30 min</div></div>
-  <div class="dia-mini"><div class="dia-label">QUI</div><div class="dia-nome">Pulso do Dia</div><div class="dia-tempo">10 min</div></div>
-  <div class="dia-mini green"><div class="dia-label">SEX</div><div class="dia-nome">Balanço Zeloso</div><div class="dia-tempo">20 min</div></div>
-  <div class="dia-mini"><div class="dia-label">SÁB</div><div class="dia-nome">Encerrar o Jogo</div><div class="dia-tempo">10 min</div></div>
-</div>
-
-<!-- ===== 5. JOGOS ===== -->
-<h2 class="sec"><i class="bi bi-controller"></i> Jogos de Vendas — Abril</h2>
-<div class="nota" style="margin-bottom:10px"><strong>Orçamento:</strong> R$ 200/mês = R$ 50/semana</div>
-
-<div class="jogo">
-  <h3><span contenteditable="true" style="outline:none">Semana 1 (01-05/abr) — VINTÃO</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
-  <div class="como"><span contenteditable="true" style="outline:none">Nota de R$ 20 circula. Quem fizer a maior venda do dia, fica com a nota. Se alguém superar, a nota muda de mão. Sábado: quem tiver, ganha.</span></div>
-  <div class="premio-lbl"><span contenteditable="true" style="outline:none">R$ 20</span></div>
-</div>
-<div class="jogo">
-  <h3><span contenteditable="true" style="outline:none">Semana 2 (06-12/abr) — DESAFIO BOB'S</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
-  <div class="como"><span contenteditable="true" style="outline:none">Quem bater a meta diária (Fernanda: X extras | Joyce: R$ X no Empório) ganha sanduíche do Bob's. Simples: bateu = ganhou.</span></div>
-  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Sanduíche Bob's (até R$ 25)</span></div>
-</div>
-<div class="jogo">
-  <h3><span contenteditable="true" style="outline:none">Semana 3 (13-19/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
-  <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
-  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
-</div>
-<div class="jogo">
-  <h3><span contenteditable="true" style="outline:none">Semana 4 (20-30/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
-  <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
-  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
-</div>
-<div style="text-align:center;margin:8px 0 0;font-size:11px;color:rgba(35,77,103,.35);font-style:italic">
-  Clique em qualquer texto para editar — as alterações são salvas automaticamente
-</div>
-
 <!-- ===== 6. ACOMPANHAMENTO SEMANAL ===== -->
 <h2 class="sec"><i class="bi bi-graph-up-arrow"></i> Acompanhamento Semanal</h2>
 <p style="font-size:12px;color:var(--z-gray-500);margin-bottom:12px">Preencha os números. Gráficos atualizam automaticamente. Dados salvos no navegador.</p>
@@ -1402,15 +1222,15 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 <div class="sum-card">
 <h3>Acumulado Abril 2026</h3>
 <table>
-  <tr><th style="text-align:left">Área</th><th>Acumulado</th><th>Meta Cuidado</th><th>%</th></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Extras SPA Dermoprotetor</td><td id="sum-extras">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-spa)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Banho SPA Dermoprotetor</td><td id="sum-banho">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 45.475</td><td id="sumpct-banho" style="color:var(--z-spa)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-emporio)"><td style="color:var(--z-emporio-light)">Empório</td><td id="sum-emporio">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 40.139</td><td id="sumpct-emporio" style="color:var(--z-emporio-light)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-vetcare)"><td style="color:var(--z-vetcare-light)">Veterinária</td><td id="sum-vet">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 12.018</td><td id="sumpct-vet" style="color:var(--z-vetcare-light)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-hosp)">Hospedagem</td><td id="sum-hosp">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 32.599</td><td id="sumpct-hosp" style="color:var(--z-hosp)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-daycare)">Daycare</td><td id="sum-daycare">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 46.103</td><td id="sumpct-daycare" style="color:var(--z-daycare)">0%</td></tr>
-  <tr style="border-top:2px solid var(--z-gold)"><td style="font-weight:700">Ecossistema</td><td id="sum-eco" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 107.188</td><td id="sumpct-eco" style="color:var(--z-gold);font-weight:700">0%</td></tr>
-  <tr><td style="font-weight:700">Total Zêluz</td><td id="sum-total" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 185.890</td><td id="sumpct-total" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+  <tr><th style="text-align:left">Área</th><th>Acumulado</th><th>Meta Cuidado</th><th>Falta</th><th>%</th></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Extras SPA Dermoprotetor</td><td id="sum-extras">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 9.557</td><td id="sumfalta-extras" style="color:var(--z-red)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-spa)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Banho SPA Dermoprotetor</td><td id="sum-banho">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 45.475</td><td id="sumfalta-banho" style="color:var(--z-red)">R$ 45.475</td><td id="sumpct-banho" style="color:var(--z-spa)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-emporio)"><td style="color:var(--z-emporio-light)">Empório</td><td id="sum-emporio">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 40.139</td><td id="sumfalta-emporio" style="color:var(--z-red)">R$ 40.139</td><td id="sumpct-emporio" style="color:var(--z-emporio-light)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-vetcare)"><td style="color:var(--z-vetcare-light)">Veterinária</td><td id="sum-vet">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 12.018</td><td id="sumfalta-vet" style="color:var(--z-red)">R$ 12.018</td><td id="sumpct-vet" style="color:var(--z-vetcare-light)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-hosp)">Hospedagem</td><td id="sum-hosp">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 32.599</td><td id="sumfalta-hosp" style="color:var(--z-red)">R$ 32.599</td><td id="sumpct-hosp" style="color:var(--z-hosp)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-daycare)">Daycare</td><td id="sum-daycare">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 46.103</td><td id="sumfalta-daycare" style="color:var(--z-red)">R$ 46.103</td><td id="sumpct-daycare" style="color:var(--z-daycare)">0%</td></tr>
+  <tr style="border-top:2px solid var(--z-gold)"><td style="font-weight:700">Ecossistema</td><td id="sum-eco" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 107.188</td><td id="sumfalta-eco" style="color:var(--z-gold);font-weight:700">R$ 107.188</td><td id="sumpct-eco" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+  <tr><td style="font-weight:700">Total Zêluz</td><td id="sum-total" style="font-weight:700">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 185.890</td><td id="sumfalta-total" style="color:var(--z-gold);font-weight:700">R$ 185.890</td><td id="sumpct-total" style="color:var(--z-gold);font-weight:700">0%</td></tr>
 </table>
 </div>
 
@@ -1426,6 +1246,227 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 </div>
 
 </div><!-- fim view-geral -->
+
+
+<!-- VIEW ESTRATEGIAS & JOGOS -->
+<div class="person-view" id="view-estrategias-jogos">
+
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(222,180,40,.04),rgba(35,77,103,.06));border-radius:16px;border-left:4px solid var(--z-gold)">
+    <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--z-gold),var(--z-gold-light));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0"><i class="bi bi-lightning-charge"></i></div>
+    <div>
+      <h2 style="font-size:22px;font-weight:800;color:var(--z-blue);margin:0;border:none;padding:0">Estratégias & Jogos</h2>
+      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Ferramentas, rotina e jogos de vendas — Abril 2026</p>
+    </div>
+  </div>
+
+<!-- ===== IDEIAS PARA VENDER MAIS ===== -->
+<h2 class="sec"><i class="bi bi-lightbulb"></i> Ideias para Vender Mais</h2>
+<div class="editable-area">
+<h3>Banco de Ideias <span class="badge-green badge">Editável</span></h3>
+<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Registre ideias de vendas, promoções, ações que podem funcionar.</p>
+<div class="items" id="ideias-list"></div>
+<div class="add-row">
+  <input type="text" id="ideias-input" placeholder="Adicionar ideia..." onkeydown="if(event.key==='Enter')addIdeia()">
+  <button class="add-btn" onclick="addIdeia()">+</button>
+</div>
+</div>
+
+<!-- ===== ESTRATÉGIAS DO MÊS ===== -->
+<h2 class="sec"><i class="bi bi-lightning-charge"></i> Estratégias do Mês</h2>
+<div class="editable-area">
+<h3>Scripts e Estratégias Prontos <span class="badge-green badge">Editável</span></h3>
+<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Adicione scripts de venda, estratégias de reativação, ideias que já funcionaram.</p>
+<div class="items" id="scripts-list"></div>
+<div class="add-row">
+  <input type="text" id="script-input" placeholder="Adicionar script ou estratégia..." onkeydown="if(event.key==='Enter')addScript()">
+  <button class="add-btn" onclick="addScript()">+</button>
+</div>
+</div>
+
+<!-- ===== REATIVAÇÃO DE TUTORES ===== -->
+<h2 class="sec"><i class="bi bi-arrow-repeat"></i> Reativação de Tutores</h2>
+<div class="card">
+<p style="font-size:12px;margin-bottom:10px"><strong>Quem manda:</strong> Fernanda + Joyce (todas enviam). Supervisora coordena.</p>
+<table>
+  <tr><th style="text-align:left">Faixa</th><th style="text-align:left">Ação</th><th>Quem</th></tr>
+  <tr><td>15-30 dias sem vir</td><td style="text-align:left">"Estamos sentindo falta do [nome]. Vamos agendar?"</td><td>Todas</td></tr>
+  <tr><td>45-90 dias</td><td style="text-align:left">"Separamos um presente pro [nome]" + opções de dia</td><td>Todas</td></tr>
+  <tr><td>90+ dias</td><td style="text-align:left">Não gastar energia — foco nos ativos</td><td>—</td></tr>
+</table>
+</div>
+<div class="editable-area">
+<h3>Scripts de Reativação <span class="badge-green badge">Editável</span></h3>
+<p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Adicione scripts que já funcionaram com tutores reais.</p>
+<div class="items" id="reativacao-list"></div>
+<div class="add-row">
+  <input type="text" id="reativacao-input" placeholder="Adicionar script de reativação..." onkeydown="if(event.key==='Enter')addReativacao()">
+  <button class="add-btn" onclick="addReativacao()">+</button>
+</div>
+</div>
+
+<!-- ===== 4. ROTINA ===== -->
+<h2 class="sec"><i class="bi bi-calendar-week"></i> Rotina Semanal</h2>
+
+<div class="rotina-timeline">
+  <div class="dia-mini gold"><div class="dia-label">SEG</div><div class="dia-nome">Rota Zelosa</div><div class="dia-tempo">15 min</div></div>
+  <div class="dia-mini"><div class="dia-label">TER</div><div class="dia-nome">Pulso do Dia</div><div class="dia-tempo">10 min</div></div>
+  <div class="dia-mini blue"><div class="dia-label">QUA</div><div class="dia-nome">Feedback Zeloso</div><div class="dia-tempo">30 min</div></div>
+  <div class="dia-mini"><div class="dia-label">QUI</div><div class="dia-nome">Pulso do Dia</div><div class="dia-tempo">10 min</div></div>
+  <div class="dia-mini green"><div class="dia-label">SEX</div><div class="dia-nome">Balanço Zeloso</div><div class="dia-tempo">20 min</div></div>
+  <div class="dia-mini"><div class="dia-label">SÁB</div><div class="dia-nome">Encerrar o Jogo</div><div class="dia-tempo">10 min</div></div>
+</div>
+
+<!-- ===== 5. JOGOS ===== -->
+<h2 class="sec"><i class="bi bi-controller"></i> Jogos de Vendas — Abril</h2>
+<div class="nota" style="margin-bottom:10px"><strong>Orçamento:</strong> R$ 200/mês = R$ 50/semana</div>
+
+<div class="jogo">
+  <h3><span contenteditable="true" style="outline:none">Semana 1 (01-05/abr) — VINTÃO</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
+  <div class="como"><span contenteditable="true" style="outline:none">Nota de R$ 20 circula. Quem fizer a maior venda do dia, fica com a nota. Se alguém superar, a nota muda de mão. Sábado: quem tiver, ganha.</span></div>
+  <div class="premio-lbl"><span contenteditable="true" style="outline:none">R$ 20</span></div>
+</div>
+<div class="jogo">
+  <h3><span contenteditable="true" style="outline:none">Semana 2 (06-12/abr) — DESAFIO BOB'S</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
+  <div class="como"><span contenteditable="true" style="outline:none">Quem bater a meta diária (Fernanda: X extras | Joyce: R$ X no Empório) ganha sanduíche do Bob's. Simples: bateu = ganhou.</span></div>
+  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Sanduíche Bob's (até R$ 25)</span></div>
+</div>
+<div class="jogo">
+  <h3><span contenteditable="true" style="outline:none">Semana 3 (13-19/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
+  <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
+  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
+</div>
+<div class="jogo">
+  <h3><span contenteditable="true" style="outline:none">Semana 4 (20-30/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
+  <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
+  <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
+</div>
+<div style="text-align:center;margin:8px 0 0;font-size:11px;color:rgba(35,77,103,.35);font-style:italic">
+  Clique em qualquer texto para editar — as alterações são salvas automaticamente
+</div>
+
+
+</div><!-- fim view-estrategias-jogos -->
+
+<!-- VIEW METAS DO MES -->
+<div class="person-view" id="view-metas-mes">
+
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(35,77,103,.06),rgba(222,180,40,.04));border-radius:16px;border-left:4px solid var(--z-blue)">
+    <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),var(--z-blue-deep));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0"><i class="bi bi-trophy"></i></div>
+    <div>
+      <h2 style="font-size:22px;font-weight:800;color:var(--z-blue);margin:0;border:none;padding:0">Metas do Mês</h2>
+      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Metas, premiação e remuneração — Abril 2026</p>
+    </div>
+  </div>
+
+<!-- ===== 1. METAS ===== -->
+<h2 class="sec"><i class="bi bi-trophy"></i> Metas de Abril</h2>
+
+<div class="card">
+<p style="font-size:13px">Três níveis de meta. Cada nível paga mais. As premiações são <strong>cumulativas</strong> — quanto mais níveis bater, mais ganha.</p>
+<div class="meta-grid">
+  <div class="meta-box" style="border-color:var(--z-meta-cuidado)">
+    <div class="nivel" style="color:var(--z-meta-cuidado-text)">Nível 1</div>
+    <div class="alvo" style="color:var(--z-meta-cuidado-text)">Meta CUIDADO</div>
+    <div class="ref">O cuidado mínimo que mantém a operação</div>
+  </div>
+  <div class="meta-box" style="border-color:var(--z-blue)">
+    <div class="nivel" style="color:var(--z-blue)">Nível 2</div>
+    <div class="alvo" style="color:var(--z-blue)">Meta ZÊLO</div>
+    <div class="ref">O zelo que faz a diferença</div>
+  </div>
+  <div class="meta-box" style="border-color:var(--z-gold)">
+    <div class="nivel" style="color:var(--z-gold)">Nível 3</div>
+    <div class="alvo" style="color:var(--z-gold)">Meta ENCANTO</div>
+    <div class="ref">Onde o encanto acontece!</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<table>
+  <tr><th style="text-align:left">Área</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td>Extras SPA Dermoprotetor</td><td>R$ 9.557</td><td>R$ 10.426</td><td>R$ 11.294</td></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td>Banho SPA Dermoprotetor</td><td>R$ 45.475</td><td>R$ 49.609</td><td>R$ 53.743</td></tr>
+  <tr style="border-left:3px solid var(--z-emporio)"><td>Empório</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
+  <tr style="border-left:3px solid var(--z-vetcare)"><td>Veterinária</td><td>R$ 12.018</td><td>R$ 13.110</td><td>R$ 14.203</td></tr>
+  <tr style="font-weight:700;background:rgba(222,180,40,.06);border-left:3px solid var(--z-gold)"><td>Ecossistema (SPA+Empório+Vet)</td><td>R$ 107.188</td><td>R$ 116.933</td><td>R$ 126.677</td></tr>
+  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-gray-500)">Hospedagem</td><td style="color:var(--z-gray-500)">R$ 32.599</td><td style="color:var(--z-gray-500)">R$ 35.562</td><td style="color:var(--z-gray-500)">R$ 38.526</td></tr>
+  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-gray-500)">Daycare</td><td style="color:var(--z-gray-500)">R$ 46.103</td><td style="color:var(--z-gray-500)">R$ 50.294</td><td style="color:var(--z-gray-500)">R$ 54.486</td></tr>
+  <tr class="tot"><td>Total Zêluz</td><td>R$ 185.890</td><td>R$ 202.789</td><td>R$ 219.688</td></tr>
+</table>
+<div class="nota"><strong>Ecossistema</strong> = SPA Dermoprotetor (banho + extras) + Empório + Veterinária — meta do time.<br><strong>Hospedagem e Daycare</strong> = fazem parte do Total Zêluz. O time todo ganha se o total bater.</div>
+</div>
+
+<!-- ===== 2. PREMIAÇÃO ===== -->
+<h2 class="sec"><i class="bi bi-gift"></i> Premiação — Quanto cada membro do Time pode FAZER*</h2>
+<div class="card" style="border-left:4px solid var(--z-gold);background:rgba(222,180,40,.03);padding:14px 20px;margin-bottom:16px">
+  <p style="font-size:13px;color:rgba(35,77,103,.5);margin-bottom:4px"><strong>Composição*:</strong> Salário + Assiduidade (R$ 300)* + Caju (R$ 380)* + Premiação</p>
+  <p style="font-size:11px;color:rgba(35,77,103,.35)">*Assiduidade e Caju são condicionados ao cumprimento das regras pré-definidas — não são automáticos.</p>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-blue)">
+<h3>Supervisora (Amanda) <span class="badge-blue badge">40% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-spa)">
+<h3>Fernanda — Consultora de Bem-Estar <span class="badge" style="background:var(--z-spa)">25% do pool</span></h3>
+<div class="info">Gatilhos: 15% Extras + 25% Banho + 40% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
+  <tr><td>Extras SPA Dermoprotetor</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr><td>Banho SPA Dermoprotetor</td><td>R$ 200</td><td>R$ 250</td><td>R$ 350</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-emporio)">
+<h3>Joyce — Consultora de Bem-Estar <span class="badge" style="background:var(--z-emporio)">25% do pool</span></h3>
+<div class="info">Gatilhos: 50% Empório + 30% Eco + 20% Total</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
+  <tr><td>Empório</td><td>R$ 350</td><td>R$ 500</td><td>R$ 700</td></tr>
+  <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
+</table>
+</div>
+
+<div class="pessoa" style="border-left-color:var(--z-vetcare)">
+<h3>Suellen — Veterinária <span class="badge" style="background:var(--z-vetcare)">10% do pool</span></h3>
+<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
+<table>
+  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
+  <tr><td>Ecossistema</td><td>R$ 200</td><td>R$ 300</td><td>R$ 400</td></tr>
+  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
+  <tr class="tot"><td>Total Premiação</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
+</table>
+</div>
+
+<!-- ===== 3. REMUNERAÇÃO (sem Suellen) ===== -->
+<h2 class="sec"><i class="bi bi-cash-stack"></i> Remuneração Total</h2>
+
+<div class="card">
+<p style="font-size:12px;color:var(--z-gray-500);margin-bottom:10px"><strong>Composição*:</strong> Salário + R$ 300 (assiduidade) + R$ 380 (alimentação) + Premiação = Total</p>
+<table>
+  <tr><th style="text-align:left">Pessoa</th><th>Sem meta</th><th>+ Cuidado</th><th>+ Zêlo</th><th>+ Encanto</th></tr>
+  <tr><td>Supervisora (Amanda)</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.880</td><td>Sal. + R$ 2.430</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 3.030</td></tr>
+  <tr><td>Fernanda</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
+  <tr><td>Joyce</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
+</table>
+<div class="nota"><strong>Pagamento da premiação:</strong> apurada dia 1 do mês seguinte, paga até o 5.° dia útil.</div>
+</div>
+
+
+</div><!-- fim view-metas-mes -->
 
 <!-- ===== VIEW AMANDA ===== -->
 <div class="person-view active" id="view-amanda">
@@ -2376,7 +2417,9 @@ var _viewTitles = {
   'emporio':  'Empório',
   'spa':      'SPA Dermoprotetor',
   'vetcare':  'VetCare',
-  'guia-pratico': 'Guia Prático Ágora'
+  'guia-pratico': 'Guia Prático Ágora',
+  'estrategias-jogos': 'Estratégias & Jogos',
+  'metas-mes': 'Metas do Mês'
 };
 
 function toggleSubnav(id){
@@ -2536,6 +2579,27 @@ function calc(){
   elSet('kpi-spa', fmt(spa)); elSet('kpi-spa-pct', pct(spa, SPA_BASE)+'%');
   elSet('kpi-emp', fmt(t.emporio)); elSet('kpi-emp-pct', pct(t.emporio, METAS.emporio.base)+'%');
   elSet('kpi-vet', fmt(t.vet)); elSet('kpi-vet-pct', pct(t.vet, METAS.vet.base)+'%');
+
+  /* Falta nos KPI cards */
+  function setFalta(id, falta) {
+    var el = document.getElementById(id);
+    if(!el) return;
+    if(falta > 0) { el.textContent = 'Falta: ' + fmt(falta); el.style.color = 'var(--z-red)'; }
+    else { el.textContent = 'Meta batida!'; el.style.color = 'var(--z-green)'; }
+  }
+  setFalta('kpi-eco-falta', ECO_BASE - eco);
+  setFalta('kpi-spa-falta', SPA_BASE - spa);
+  setFalta('kpi-emp-falta', METAS.emporio.base - t.emporio);
+  setFalta('kpi-vet-falta', METAS.vet.base - t.vet);
+
+  /* Falta no Resumo Acumulado */
+  var faltaAreas = {extras: METAS.extras.base, banho: METAS.banho.base, emporio: METAS.emporio.base, vet: METAS.vet.base, hosp: METAS.hosp.base, daycare: METAS.daycare.base};
+  Object.keys(faltaAreas).forEach(function(a){
+    var el = document.getElementById('sumfalta-' + a);
+    if(el){ var f = faltaAreas[a] - t[a]; el.textContent = f > 0 ? fmt(f) : 'Bateu!'; el.style.color = f > 0 ? '#C0392B' : 'var(--z-green)'; }
+  });
+  setFalta('sumfalta-eco', ECO_BASE - eco);
+  setFalta('sumfalta-total', TOTAL_BASE - total);
 
   /* Fernanda resumo — IDs removidos (seção deletada), calls mantidos para compatibilidade */
   elSet('f-r3-spa', fmt(spa)); elSet('f-r3-pct-spa', pct(spa,SPA_BASE)+'%');
