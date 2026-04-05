@@ -876,6 +876,39 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   letter-spacing: 0.5px; color: var(--z-gold); margin-bottom: 6px;
 }
 
+
+/* --- CALENDAR 5 ETAPAS --- */
+.etapas-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin: 12px 0;
+}
+.etapas-cal-grid .cal-hd {
+  font-size: 10px; font-weight: 700; text-align: center;
+  color: var(--z-gray-500); padding: 4px; text-transform: uppercase;
+}
+.etapas-cal-grid .cal-d {
+  text-align: center; padding: 8px 4px; border-radius: 6px;
+  font-size: 13px; font-weight: 600;
+}
+.etapas-cal-grid .cal-d.fer { background: rgba(192,57,43,.08); color: #C0392B; text-decoration: line-through; }
+.etapas-cal-grid .cal-d.sab { background: var(--z-gray-100); color: var(--z-gray-400); }
+.etapas-cal-grid .cal-d.e1 { border-left: 3px solid #C0392B; }
+.etapas-cal-grid .cal-d.e2 { border-left: 3px solid #27AE60; }
+.etapas-cal-grid .cal-d.e3 { border-left: 3px solid var(--z-blue); }
+.etapas-cal-grid .cal-d.e4 { border-left: 3px solid #D4850A; }
+.etapas-cal-grid .cal-d.e5 { border-left: 3px solid var(--z-vetcare); }
+.etapa-badge {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 99px; margin-left: 6px;
+}
+.etapa-curta { background: rgba(192,57,43,.08); color: #C0392B; }
+.etapa-cheia { background: rgba(39,174,96,.08); color: #27AE60; }
+.etapa-feriado { background: rgba(243,156,18,.08); color: #D4850A; }
+.etapa-final { background: rgba(35,77,103,.08); color: var(--z-blue); }
+
 </style>
 </head>
 <body>
@@ -996,6 +1029,100 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
 </div>
 
+
+<!-- ===== CALENDARIO 5 ETAPAS ===== -->
+<h2 class="sec"><i class="bi bi-calendar3" style="color:var(--z-gold)"></i> Calendário Abril 2026 — 5 Etapas</h2>
+<div class="card" style="margin-bottom:24px">
+  <div class="etapas-cal-grid">
+    <div class="cal-hd">Seg</div>
+    <div class="cal-hd">Ter</div>
+    <div class="cal-hd">Qua</div>
+    <div class="cal-hd">Qui</div>
+    <div class="cal-hd">Sex</div>
+    <div class="cal-hd">Sáb</div>
+    <!-- Semana 1 -->
+    <div class="cal-d" style="opacity:.15"></div>
+    <div class="cal-d" style="opacity:.15"></div>
+    <div class="cal-d e1">01</div>
+    <div class="cal-d e1">02</div>
+    <div class="cal-d fer e1" title="Sexta-Santa">03</div>
+    <div class="cal-d sab e1">04</div>
+    <!-- Semana 2 -->
+    <div class="cal-d e2">06</div>
+    <div class="cal-d e2">07</div>
+    <div class="cal-d e2">08</div>
+    <div class="cal-d e2">09</div>
+    <div class="cal-d e2">10</div>
+    <div class="cal-d sab e2">11</div>
+    <!-- Semana 3 -->
+    <div class="cal-d e3">13</div>
+    <div class="cal-d e3">14</div>
+    <div class="cal-d e3">15</div>
+    <div class="cal-d e3">16</div>
+    <div class="cal-d e3">17</div>
+    <div class="cal-d sab e3">18</div>
+    <!-- Semana 4 -->
+    <div class="cal-d e4">20</div>
+    <div class="cal-d fer e4" title="Tiradentes">21</div>
+    <div class="cal-d e4">22</div>
+    <div class="cal-d e4">23</div>
+    <div class="cal-d e4">24</div>
+    <div class="cal-d sab e4">25</div>
+    <!-- Semana 5 -->
+    <div class="cal-d e5">27</div>
+    <div class="cal-d e5">28</div>
+    <div class="cal-d e5">29</div>
+    <div class="cal-d e5">30</div>
+    <div class="cal-d" style="opacity:.15"></div>
+    <div class="cal-d" style="opacity:.15"></div>
+  </div>
+
+  <table style="margin-top:16px">
+    <tr>
+      <th style="text-align:left">Etapa</th>
+      <th>Período</th>
+      <th>Dias Úteis</th>
+      <th>Observação</th>
+      <th>Peso</th>
+    </tr>
+    <tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:#C0392B;border-radius:50%;margin-right:6px"></span>Etapa 1</td>
+      <td>01 – 04/abr</td>
+      <td>2 + sáb</td>
+      <td><span class="etapa-badge etapa-curta">Semana curta</span> Sexta-Santa (03)</td>
+      <td><strong>8%</strong></td>
+    </tr>
+    <tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:#27AE60;border-radius:50%;margin-right:6px"></span>Etapa 2</td>
+      <td>06 – 11/abr</td>
+      <td>5 + sáb</td>
+      <td><span class="etapa-badge etapa-cheia">Semana cheia</span></td>
+      <td><strong>27%</strong></td>
+    </tr>
+    <tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:#234D67;border-radius:50%;margin-right:6px"></span>Etapa 3</td>
+      <td>13 – 18/abr</td>
+      <td>5 + sáb</td>
+      <td><span class="etapa-badge etapa-cheia">Semana cheia</span></td>
+      <td><strong>27%</strong></td>
+    </tr>
+    <tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:#D4850A;border-radius:50%;margin-right:6px"></span>Etapa 4</td>
+      <td>20 – 25/abr</td>
+      <td>4 + sáb</td>
+      <td><span class="etapa-badge etapa-feriado">Tiradentes (21)</span></td>
+      <td><strong>20%</strong></td>
+    </tr>
+    <tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:#2E7D8A;border-radius:50%;margin-right:6px"></span>Etapa 5</td>
+      <td>27 – 30/abr</td>
+      <td>4</td>
+      <td><span class="etapa-badge etapa-final">Push final</span> Sem sábado</td>
+      <td><strong>18%</strong></td>
+    </tr>
+  </table>
+</div>
+
 <!-- ===== CHART + CALENDAR ===== -->
 <div class="chart-calendar-row">
   <div class="chart-card">
@@ -1007,21 +1134,12 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
   </div>
   <div class="cal-card">
-    <h3><i class="bi bi-calendar3"></i> Abril 2026</h3>
-    <div class="mini-cal" id="mini-cal"></div>
-    <div class="cal-legend">
-      <span><span class="dot" style="background:var(--z-gold)"></span> Rota Zelosa</span>
-      <span><span class="dot" style="background:var(--z-blue)"></span> Feedback Zeloso</span>
-      <span><span class="dot" style="background:var(--z-green)"></span> Balanço Zeloso</span>
-    </div>
-    <div class="todo-section">
-      <h4><i class="bi bi-check2-square"></i> Tarefas</h4>
-      <div style="border:1px solid var(--z-gray-200);border-radius:var(--radius-sm);padding:10px">
-        <div class="items" id="todo-list"></div>
-        <div class="add-row" style="margin-top:6px">
-          <input type="text" id="todo-input" placeholder="Nova tarefa..." onkeydown="if(event.key==='Enter')addTodo()" style="padding:8px 10px">
-          <button class="add-btn" onclick="addTodo()" style="width:32px;height:32px;font-size:18px">+</button>
-        </div>
+    <h3><i class="bi bi-check2-square"></i> Tarefas Diárias</h3>
+    <div style="border:1px solid var(--z-gray-200);border-radius:var(--radius-sm);padding:10px">
+      <div class="items" id="todo-list"></div>
+      <div class="add-row" style="margin-top:6px">
+        <input type="text" id="todo-input" placeholder="Nova tarefa..." onkeydown="if(event.key==='Enter')addTodo()" style="padding:8px 10px">
+        <button class="add-btn" onclick="addTodo()" style="width:32px;height:32px;font-size:18px">+</button>
       </div>
     </div>
   </div>
