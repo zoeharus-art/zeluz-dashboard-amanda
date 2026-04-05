@@ -542,6 +542,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 
 /* --- JOGOS --- */
 .jogo {
+  position: relative;
   border-radius: 16px;
   padding: 20px 24px;
   margin-bottom: 12px;
@@ -1324,25 +1325,37 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 
 <div id="jogos-ativos-container">
   <div class="jogo" style="position:relative">
-    <button onclick="deletarJogoAtivo(this)" style="position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(192,57,43,.4);font-size:16px;cursor:pointer;padding:4px" title="Remover jogo"><i class="bi bi-trash"></i></button>
+    <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+      <span style="font-size:14px;color:var(--z-gold);cursor:default" title="Clique no texto para editar"><i class="bi bi-pencil-fill"></i></span>
+      <button onclick="deletarJogoAtivo(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:0" title="Remover jogo"><i class="bi bi-trash-fill"></i></button>
+    </div>
     <h3><span contenteditable="true" style="outline:none">Semana 1 (01-05/abr) — VINTÃO</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
     <div class="como"><span contenteditable="true" style="outline:none">Nota de R$ 20 circula. Quem fizer a maior venda do dia, fica com a nota. Se alguém superar, a nota muda de mão. Sábado: quem tiver, ganha.</span></div>
     <div class="premio-lbl"><span contenteditable="true" style="outline:none">R$ 20</span></div>
   </div>
   <div class="jogo" style="position:relative">
-    <button onclick="deletarJogoAtivo(this)" style="position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(192,57,43,.4);font-size:16px;cursor:pointer;padding:4px" title="Remover jogo"><i class="bi bi-trash"></i></button>
+    <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+      <span style="font-size:14px;color:var(--z-gold);cursor:default" title="Clique no texto para editar"><i class="bi bi-pencil-fill"></i></span>
+      <button onclick="deletarJogoAtivo(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:0" title="Remover jogo"><i class="bi bi-trash-fill"></i></button>
+    </div>
     <h3><span contenteditable="true" style="outline:none">Semana 2 (06-12/abr) — DESAFIO BOB'S</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
     <div class="como"><span contenteditable="true" style="outline:none">Quem bater a meta diária (Fernanda: X extras | Joyce: R$ X no Empório) ganha sanduíche do Bob's. Simples: bateu = ganhou.</span></div>
     <div class="premio-lbl"><span contenteditable="true" style="outline:none">Sanduíche Bob's (até R$ 25)</span></div>
   </div>
   <div class="jogo" style="position:relative">
-    <button onclick="deletarJogoAtivo(this)" style="position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(192,57,43,.4);font-size:16px;cursor:pointer;padding:4px" title="Remover jogo"><i class="bi bi-trash"></i></button>
+    <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+      <span style="font-size:14px;color:var(--z-gold);cursor:default" title="Clique no texto para editar"><i class="bi bi-pencil-fill"></i></span>
+      <button onclick="deletarJogoAtivo(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:0" title="Remover jogo"><i class="bi bi-trash-fill"></i></button>
+    </div>
     <h3><span contenteditable="true" style="outline:none">Semana 3 (13-19/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
     <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
     <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
   </div>
   <div class="jogo" style="position:relative">
-    <button onclick="deletarJogoAtivo(this)" style="position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(192,57,43,.4);font-size:16px;cursor:pointer;padding:4px" title="Remover jogo"><i class="bi bi-trash"></i></button>
+    <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+      <span style="font-size:14px;color:var(--z-gold);cursor:default" title="Clique no texto para editar"><i class="bi bi-pencil-fill"></i></span>
+      <button onclick="deletarJogoAtivo(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:0" title="Remover jogo"><i class="bi bi-trash-fill"></i></button>
+    </div>
     <h3><span contenteditable="true" style="outline:none">Semana 4 (20-30/abr) — Clique para definir</span><span style="font-size:12px;opacity:.3;margin-left:6px">✎</span></h3>
     <div class="como"><span contenteditable="true" style="outline:none">Clique para descrever o jogo da semana...</span></div>
     <div class="premio-lbl"><span contenteditable="true" style="outline:none">Até R$ 25</span></div>
@@ -3689,8 +3702,8 @@ function selecionarJogo(num, nome, objetivo, descricao, premio) {
     if(premioel) premioel.textContent = premio;
   } else {
     var html = '<div class="jogo" style="position:relative">' +
-      '<button onclick="deletarJogoAtivo(this)" style="position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(192,57,43,.4);font-size:16px;cursor:pointer;padding:4px" title="Remover jogo"><i class="bi bi-trash"></i></button>' +
-      '<h3><span contenteditable="true" style="outline:none">' + nome + '</span><span style="font-size:12px;opacity:.3;margin-left:6px">\u270e</span></h3>' +
+      '<div style="position:absolute;top:10px;right:10px;display:flex;gap:6px"><span style="font-size:14px;color:var(--z-gold);cursor:default" title="Editar"><i class="bi bi-pencil-fill"></i></span><button onclick="deletarJogoAtivo(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:0" title="Remover"><i class="bi bi-trash-fill"></i></button></div>' +
+      '<h3><span contenteditable="true" style="outline:none">' + nome + '</span></h3>' +
       '<div class="como"><span contenteditable="true" style="outline:none">' + descricao + '</span></div>' +
       '<div class="premio-lbl"><span contenteditable="true" style="outline:none">' + premio + '</span></div></div>';
     container.insertAdjacentHTML('beforeend', html);
@@ -3710,6 +3723,51 @@ function deletarJogoAtivo(btn) {
   }
 }
 
+
+function editarJogoBanco(btn) {
+  var card = btn.closest('.card');
+  if(!card) return;
+  var h3 = card.querySelector('h3');
+  var objP = card.querySelector('p[style*="color:var(--z-blue)"]');
+  var descP = card.querySelector('p[style*="color:var(--z-gray-500)"]');
+  var nome = h3 ? h3.textContent.trim() : '';
+  var obj = objP ? objP.textContent.replace('Objetivo: ','') : '';
+  var desc = descP ? descP.textContent.trim() : '';
+  var novoNome = prompt('Nome do jogo:', nome);
+  if(novoNome === null) return;
+  var novoObj = prompt('Objetivo:', obj);
+  if(novoObj === null) return;
+  var novoDesc = prompt('Descri\u00e7\u00e3o:', desc);
+  if(novoDesc === null) return;
+  if(h3) h3.textContent = novoNome;
+  if(objP) objP.innerHTML = '<strong>Objetivo:</strong> ' + novoObj;
+  if(descP) descP.textContent = novoDesc;
+}
+
+function deletarJogoBanco(btn) {
+  var card = btn.closest('.card');
+  if(!card) return;
+  var h3 = card.querySelector('h3');
+  var titulo = h3 ? h3.textContent.trim() : 'este jogo';
+  if(confirm('Remover "' + titulo + '" do banco de jogos?')){
+    card.remove();
+  }
+}
+
+function injetarBotoesBanco() {
+  var cards = document.querySelectorAll('#view-banco-jogos .card[style*="border-left:4px"]');
+  cards.forEach(function(card){
+    if(card.querySelector('.banco-jogo-actions')) return;
+    var div = document.createElement('div');
+    div.className = 'banco-jogo-actions';
+    div.style.cssText = 'position:absolute;top:10px;right:10px;display:flex;gap:6px;z-index:2';
+    div.innerHTML = '<button onclick="editarJogoBanco(this)" style="background:none;border:none;color:var(--z-gold);font-size:14px;cursor:pointer;padding:2px" title="Editar jogo"><i class="bi bi-pencil-fill"></i></button>' +
+      '<button onclick="deletarJogoBanco(this)" style="background:none;border:none;color:#C0392B;font-size:14px;cursor:pointer;padding:2px" title="Remover jogo"><i class="bi bi-trash-fill"></i></button>';
+    card.style.position = 'relative';
+    card.insertBefore(div, card.firstChild);
+  });
+}
+document.addEventListener('DOMContentLoaded', injetarBotoesBanco);
 
 function criarNovoJogo() {
   var nome = prompt('Nome do jogo:');
@@ -3740,9 +3798,7 @@ function criarNovoJogo() {
     '<span style="font-size:10px;padding:3px 8px;border-radius:8px;background:rgba(35,77,103,.05);color:var(--z-blue)"><i class="bi bi-clock"></i> '+duracao+'</span>' +
     '<span style="font-size:10px;padding:3px 8px;border-radius:8px;background:rgba(39,174,96,.06);color:#27AE60"><i class="bi bi-cash"></i> '+premio+'</span>' +
     '<span style="font-size:10px;padding:3px 8px;border-radius:8px;background:rgba(35,77,103,.05);color:var(--z-gray-500)"><i class="bi bi-card-text"></i> '+material+'</span>' +
-    '</div>' +
-    '<button onclick="selecionarJogo('+num+',\''+nome.replace("'","\\'")+'\',...arguments)" style="margin-top:12px;width:100%;padding:8px;border:1.5px solid var(--z-gold);background:rgba(222,180,40,.06);color:var(--z-gold);border-radius:8px;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer"><i class="bi bi-plus-circle" style="margin-right:4px"></i> Selecionar para o mês</button>' +
-    '</div>';
+    '</div></div>';
 
   // Insert before the "Criar Novo" card
   var criarCard = document.querySelector('#view-banco-jogos [onclick="criarNovoJogo()"]');
