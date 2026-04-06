@@ -911,9 +911,74 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 .etapa-feriado { background: rgba(243,156,18,.08); color: #D4850A; }
 .etapa-final { background: rgba(35,77,103,.08); color: var(--z-blue); }
 
+
+/* --- LOGIN OVERLAY --- */
+#login-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, #234D67 0%, #1A3A4F 100%);
+  z-index: 9999; display: flex; align-items: center; justify-content: center;
+}
+#login-box {
+  background: white; border-radius: 20px; padding: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3); text-align: center;
+  width: 340px; max-width: 90vw;
+}
+#login-box h2 { color: var(--z-blue); font-size: 22px; margin: 0 0 4px; }
+#login-box p { color: var(--z-gray-400); font-size: 13px; margin: 0 0 24px; }
+#login-box select, #login-box input {
+  width: 100%; padding: 12px 16px; border: 1.5px solid rgba(35,77,103,.12);
+  border-radius: 10px; font-family: var(--font); font-size: 14px;
+  margin-bottom: 12px; outline: none; color: var(--z-blue);
+}
+#login-box select:focus, #login-box input:focus { border-color: var(--z-gold); }
+#login-box button {
+  width: 100%; padding: 12px; background: var(--z-gold); color: white;
+  border: none; border-radius: 10px; font-family: var(--font);
+  font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 8px;
+}
+#login-box button:hover { background: var(--z-gold-light); }
+#login-error { color: #C0392B; font-size: 12px; margin-top: 8px; display: none; }
+
 </style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyAN8Gyv70C4zwlsQ3M8nJVVLBP5ZyS5gSI",
+    authDomain: "zeluz-comercial.firebaseapp.com",
+    projectId: "zeluz-comercial",
+    storageBucket: "zeluz-comercial.firebasestorage.app",
+    messagingSenderId: "802328266203",
+    appId: "1:802328266203:web:ae3b4dd4b758730bad13fe"
+  });
+  var db = firebase.firestore();
+</script>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY -->
+<div id="login-overlay">
+  <div id="login-box">
+    <img src="assets/stickers/simbolo-zeluz-42-transparente.png" alt="Zêluz" style="width:80px;margin-bottom:16px" onerror="this.style.display='none'">
+    <h2>ÁGORA</h2>
+    <p>Departamento Comercial Zêluz</p>
+    <select id="login-user">
+      <option value="">Selecione seu nome...</option>
+      <option value="adriana">Adriana</option>
+      <option value="marcia">Márcia</option>
+      <option value="amanda">Amanda</option>
+      <option value="fernanda">Fernanda</option>
+      <option value="joyce">Joyce</option>
+      <option value="suellen">Suellen</option>
+    </select>
+    <input type="password" id="login-senha" placeholder="Senha (4 dígitos)" maxlength="4" inputmode="numeric" onkeydown="if(event.key==='Enter')fazerLogin()">
+    <button onclick="fazerLogin()">Entrar</button>
+    <div id="login-error">Senha incorreta</div>
+  </div>
+</div>
+
 
 <!-- PASSWORD MODAL -->
 <div id="password-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center">
@@ -977,6 +1042,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   <div class="sidebar-footer">
     <span class="month-label">ABR 2026</span>
     <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"><i class="bi bi-moon-fill" id="theme-icon"></i></button>
+    <button onclick="sair()" style="background:none;border:1px solid rgba(255,253,246,.15);color:rgba(255,253,246,.5);font-family:var(--font);font-size:11px;padding:6px 12px;border-radius:8px;cursor:pointer;margin-top:8px;width:100%" title="Sair"><i class="bi bi-box-arrow-left" style="margin-right:4px"></i> Sair</button>
   </div>
 </nav>
 
@@ -1241,6 +1307,21 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   <button class="btn btn-gold" onclick="salvar()"><i class="bi bi-save"></i> Salvar Dados</button>
   <button class="btn btn-green" onclick="exportar()"><i class="bi bi-download"></i> Exportar</button>
   <button class="btn btn-red" onclick="limpar()"><i class="bi bi-trash3"></i> Limpar</button>
+</div>
+
+<!-- SENHAS DA EQUIPE -->
+<div id="quadro-senhas" style="display:none">
+<h2 class="sec"><i class="bi bi-key" style="color:var(--z-gold)"></i> Senhas da Equipe</h2>
+<div class="card" style="border-left:4px solid var(--z-gold);max-width:400px">
+  <p style="font-size:11px;color:var(--z-gray-400);margin-bottom:12px">Acesso ao Ágora — compartilhe apenas com a pessoa correspondente.</p>
+  <table style="font-size:13px">
+    <tr><th style="text-align:left">Nome</th><th>Senha</th><th style="text-align:left">Acesso</th></tr>
+    <tr><td><strong>Amanda</strong></td><td style="font-weight:700;letter-spacing:2px">3847</td><td style="font-size:11px;color:var(--z-gray-400)">Tudo</td></tr>
+    <tr><td><strong>Fernanda</strong></td><td style="font-weight:700;letter-spacing:2px">6215</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
+    <tr><td><strong>Joyce</strong></td><td style="font-weight:700;letter-spacing:2px">4783</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
+    <tr><td><strong>Suellen</strong></td><td style="font-weight:700;letter-spacing:2px">9136</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
+  </table>
+</div>
 </div>
 
 <!-- FOOTER -->
@@ -3835,6 +3916,177 @@ function restaurarJogosCustom() {
   });
 }
 document.addEventListener('DOMContentLoaded', restaurarJogosCustom);
+
+
+
+/* ===== AUTHENTICATION ===== */
+var USUARIOS = {
+  adriana:  {senha:'0902', role:'admin', views:['all']},
+  marcia:   {senha:'0902', role:'admin', views:['all']},
+  amanda:   {senha:'3847', role:'supervisor', views:['all']},
+  fernanda: {senha:'6215', role:'consultor', views:['fernanda']},
+  joyce:    {senha:'4783', role:'consultor', views:['joyce']},
+  suellen:  {senha:'9136', role:'consultor', views:['suellen']}
+};
+var currentUser = null;
+
+function sair() {
+  localStorage.removeItem('agora-session');
+  currentUser = null;
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('login-senha').value = '';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+function fazerLogin() {
+  var user = document.getElementById('login-user').value;
+  var senha = document.getElementById('login-senha').value;
+  var err = document.getElementById('login-error');
+  if(!user || !senha) { err.textContent = 'Selecione seu nome e digite a senha'; err.style.display = 'block'; return; }
+  var u = USUARIOS[user];
+  if(!u || u.senha !== senha) { err.textContent = 'Senha incorreta'; err.style.display = 'block'; return; }
+  currentUser = {id: user, role: u.role, views: u.views};
+  document.getElementById('login-overlay').style.display = 'none';
+  aplicarPermissoes();
+  carregarDadosFirestore();
+  // Save session
+  localStorage.setItem('agora-session', JSON.stringify({id:user, ts:Date.now()}));
+}
+
+function aplicarPermissoes() {
+  if(!currentUser) return;
+  if(currentUser.role === 'consultor') {
+    // Hide sidebar items that aren't theirs
+    var navItems = document.querySelectorAll('.sidebar .nav-item');
+    var allowedView = currentUser.views[0]; // fernanda, joyce, or suellen
+    navItems.forEach(function(item) {
+      var onclick = item.getAttribute('onclick') || '';
+      // Show only their view
+      if(onclick.indexOf("switchView('") !== -1) {
+        var viewName = onclick.match(/switchView\('([^']+)'/);
+        if(viewName) {
+          var vn = viewName[1];
+          if(vn === allowedView) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      }
+    });
+    // Hide all section headers and sub-navs
+    document.querySelectorAll('.sidebar .nav-section, .sidebar .nav-sub-container').forEach(function(el) {
+      el.style.display = 'none';
+    });
+    // Auto-switch to their view
+    switchView(allowedView);
+    // Hide sidebar toggle for simplicity
+  }
+  // Show password table only for admin/supervisor
+  var quadroSenhas = document.getElementById('quadro-senhas');
+  if(quadroSenhas) {
+    quadroSenhas.style.display = (currentUser.role === 'admin' || currentUser.role === 'supervisor') ? 'block' : 'none';
+  }
+
+  // Update greeting
+  var greeting = document.querySelector('.main-header');
+  if(greeting) {
+    var nameEl = greeting.querySelector('[style*="Boa"]') || greeting.querySelector('.greeting');
+    // The greeting updates happen via the header which already shows the view name
+  }
+}
+
+// Auto-login from session (same browser, same day)
+function autoLogin() {
+  var session = localStorage.getItem('agora-session');
+  if(session) {
+    try {
+      var s = JSON.parse(session);
+      // Session valid for 12 hours
+      if(Date.now() - s.ts < 12*60*60*1000 && USUARIOS[s.id]) {
+        currentUser = {id: s.id, role: USUARIOS[s.id].role, views: USUARIOS[s.id].views};
+        document.getElementById('login-overlay').style.display = 'none';
+        aplicarPermissoes();
+        carregarDadosFirestore();
+        return;
+      }
+    } catch(e) {}
+  }
+}
+
+/* ===== FIRESTORE SYNC ===== */
+var FIRESTORE_COLLECTION = 'dados';
+var FIRESTORE_MES = '2026-04';
+
+function getDocRef() {
+  return db.collection(FIRESTORE_COLLECTION).doc(FIRESTORE_MES);
+}
+
+function carregarDadosFirestore() {
+  getDocRef().onSnapshot(function(doc) {
+    if(doc.exists) {
+      var data = doc.data();
+      // Fill inputs from Firestore data
+      var areas = ['extras','banho','emporio','vet','hosp','daycare'];
+      areas.forEach(function(area) {
+        if(data[area]) {
+          for(var sem = 1; sem <= 5; sem++) {
+            var val = data[area]['sem'+sem];
+            if(val !== undefined && val !== null && val !== '') {
+              // Update ALL inputs with this area+sem (they sync across views)
+              document.querySelectorAll('input[data-area="'+area+'"][data-sem="'+sem+'"]').forEach(function(inp) {
+                if(parseFloat(inp.value) !== val) {
+                  inp.value = val > 0 ? val : '';
+                }
+              });
+            }
+          }
+        }
+      });
+      // Trigger recalc
+      if(typeof calc === 'function') calc();
+    }
+  }, function(error) {
+    console.error('Firestore listener error:', error);
+  });
+}
+
+function salvarParaFirestore() {
+  if(!currentUser) return;
+  var areas = ['extras','banho','emporio','vet','hosp','daycare'];
+  var data = {};
+  areas.forEach(function(area) {
+    data[area] = {};
+    for(var sem = 1; sem <= 5; sem++) {
+      var inp = document.querySelector('#view-geral input[data-area="'+area+'"][data-sem="'+sem+'"]');
+      if(inp) {
+        data[area]['sem'+sem] = parseNum(inp.value);
+      }
+    }
+  });
+  data.ultimaAtualizacao = new Date().toISOString();
+  data.atualizadoPor = currentUser.id;
+  getDocRef().set(data, {merge: true}).then(function() {
+    var ind = document.getElementById('autosave-indicator');
+    if(ind){ind.style.opacity='1';ind.textContent='Salvo na nuvem';setTimeout(function(){ind.style.opacity='0'},2000);}
+  }).catch(function(error) {
+    console.error('Erro ao salvar:', error);
+  });
+}
+
+// Override the existing input event to also save to Firestore
+var _originalCalc = typeof calc === 'function' ? calc : null;
+document.addEventListener('input', function(e) {
+  if(e.target.matches('input[data-area][data-sem]')) {
+    // Debounce Firestore save
+    clearTimeout(window._firestoreTimer);
+    window._firestoreTimer = setTimeout(salvarParaFirestore, 1500);
+  }
+});
+
+// Run auto-login on load
+document.addEventListener('DOMContentLoaded', autoLogin);
 
 </script>
 </body>
