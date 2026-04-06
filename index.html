@@ -3302,8 +3302,26 @@ function reloadMonthVars(){
   POUP = getMonthConfig().poupanca;
 }
 
-function parseNum(v){ if(!v) return 0; return parseFloat(v.replace(/[^\d.,]/g,'').replace(/\./g,'').replace(',','.'))||0; }
-function fmt(n){ return 'R$ ' + n.toLocaleString('pt-BR',{minimumFractionDigits:0, maximumFractionDigits:0}); }
+function parseNum(v){
+  if(!v) return 0;
+  v = String(v).replace(/[^\d.,]/g,'').trim();
+  if(!v) return 0;
+  var lastDot = v.lastIndexOf('.');
+  var lastComma = v.lastIndexOf(',');
+  if(lastComma > lastDot){
+    /* Formato BR: 1.500,50 → comma é decimal */
+    v = v.replace(/\./g,'').replace(',','.');
+  } else if(lastDot > -1 && lastComma === -1){
+    /* Só ponto — se 3 dígitos depois, é milhar (1.500); senão, decimal (1500.50) */
+    var afterDot = v.substring(lastDot + 1);
+    if(afterDot.length === 3) v = v.replace(/\./g,'');
+  } else if(lastDot > lastComma){
+    /* Formato EN: 1,500.50 */
+    v = v.replace(/,/g,'');
+  }
+  return parseFloat(v) || 0;
+}
+function fmt(n){ return 'R$ ' + n.toLocaleString('pt-BR',{minimumFractionDigits:2, maximumFractionDigits:2}); }
 function pct(v,b){ return b>0 ? Math.round((v/b)*100) : 0; }
 function clamp(n){ return Math.min(100, Math.max(0, n)); }
 function fmtFalta(v, meta){
