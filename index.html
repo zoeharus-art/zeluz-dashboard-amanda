@@ -3956,6 +3956,9 @@ function fazerLogin() {
 
 function aplicarPermissoes() {
   if(!currentUser) return;
+  // Reset: show everything first (for admin/supervisor or after switching users)
+  document.querySelectorAll('.sidebar .nav-item').forEach(function(item) { item.style.display = ''; });
+  document.querySelectorAll('.sidebar .nav-section, .sidebar .nav-sub-container').forEach(function(el) { el.style.display = ''; });
   if(currentUser.role === 'consultor') {
     // Hide sidebar items that aren't theirs
     var navItems = document.querySelectorAll('.sidebar .nav-item');
