@@ -939,6 +939,140 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 #login-box button:hover { background: var(--z-gold-light); }
 #login-error { color: #C0392B; font-size: 12px; margin-top: 8px; display: none; }
 
+/* ===== MEU DIA ZELOSO �� INLINE ===== */
+.mdz-container { max-width: 480px; margin: 0 auto; }
+.mdz-date-nav {
+  display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px;
+}
+.mdz-date-arrow {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--z-white); border: 1.5px solid rgba(35,77,103,.10);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--z-blue); font-size: 1rem;
+  box-shadow: var(--shadow-sm); transition: all .15s;
+}
+.mdz-date-arrow:active { background: var(--z-gold-wash-08); border-color: var(--z-gold); }
+.mdz-date-val { font-size: .9rem; font-weight: 700; color: var(--z-blue); }
+.mdz-date-dow { font-size: .68rem; color: var(--z-gray-400); font-weight: 500; margin-top: 1px; text-align: center; }
+.mdz-dayoff {
+  display: none; background: rgba(192,57,43,.06); border: 1px solid rgba(192,57,43,.15);
+  border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #C0392B;
+  text-align: center; margin-bottom: 16px; font-weight: 600;
+}
+.mdz-dayoff.show { display: block; }
+
+.mdz-counter {
+  background: var(--z-white); border-radius: 20px; box-shadow: var(--shadow-md);
+  padding: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 18px;
+  border: 1.5px solid rgba(35,77,103,.06);
+}
+.mdz-ring-wrap { flex-shrink: 0; position: relative; width: 72px; height: 72px; }
+.mdz-ring-svg { width: 72px; height: 72px; transform: rotate(-90deg); }
+.mdz-ring-bg { fill: none; stroke: var(--z-gray-200); stroke-width: 6; }
+.mdz-ring-fill { fill: none; stroke: var(--z-gold); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset .6s cubic-bezier(.4,0,.2,1); }
+.mdz-ring-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mdz-ring-num .num { font-size: 1.1rem; font-weight: 800; color: var(--z-blue); line-height: 1; }
+.mdz-ring-num .den { font-size: .55rem; font-weight: 600; color: var(--z-gray-400); }
+.mdz-counter-info { flex: 1; min-width: 0; }
+.mdz-counter-label { font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--z-gray-400); margin-bottom: 4px; }
+.mdz-counter-msg { font-size: .85rem; font-weight: 700; color: var(--z-blue); line-height: 1.3; }
+.mdz-voucher {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--z-gold-wash-08); border: 1px solid var(--z-gold-wash-20);
+  border-radius: 20px; padding: 3px 10px; font-size: .65rem; font-weight: 700; color: #B8940E; margin-top: 6px;
+}
+
+.mdz-input-card {
+  background: var(--z-white); border-radius: 16px; box-shadow: var(--shadow-sm);
+  border: 1.5px solid rgba(35,77,103,.06); padding: 18px; margin-bottom: 10px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.mdz-input-card:focus-within { border-color: var(--z-gold); box-shadow: 0 0 0 3px var(--z-gold-wash-08), var(--shadow-md); }
+.mdz-ic-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.mdz-ic-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+}
+.mdz-ic-label { font-size: .75rem; font-weight: 700; color: var(--z-blue); }
+.mdz-ic-hint { font-size: .65rem; color: var(--z-gray-400); font-weight: 400; display: block; margin-top: 2px; }
+.mdz-ic-row { display: flex; align-items: baseline; gap: 6px; }
+.mdz-ic-prefix { font-size: 1rem; font-weight: 600; color: var(--z-gray-400); }
+.mdz-ic-input {
+  flex: 1; border: none; outline: none; font-family: var(--font);
+  font-size: 2.2rem; font-weight: 800; color: var(--z-black); background: transparent;
+  -moz-appearance: textfield; min-width: 0; letter-spacing: -.02em;
+}
+.mdz-ic-input::-webkit-outer-spin-button, .mdz-ic-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.mdz-ic-input::placeholder { color: var(--z-gray-200); font-weight: 700; }
+.mdz-ic-unit { font-size: .8rem; font-weight: 600; color: var(--z-gray-400); align-self: flex-end; padding-bottom: 6px; }
+
+.mdz-results {
+  background: var(--z-white); border-radius: 16px; border: 1.5px solid var(--z-gold-wash-20);
+  box-shadow: 0 4px 16px var(--z-gold-wash-05); padding: 18px; margin-bottom: 10px;
+  border-left: 4px solid var(--z-gold); display: none;
+}
+.mdz-results.show { display: block; }
+.mdz-results-title {
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--z-gold); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+}
+.mdz-results-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+.mdz-result-item { text-align: center; }
+.mdz-result-label { font-size: .55rem; font-weight: 600; color: var(--z-gray-400); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.mdz-result-value { font-size: 1.05rem; font-weight: 800; color: var(--z-blue); }
+.mdz-result-value.good { color: var(--z-green); }
+.mdz-result-value.warn { color: #E67E22; }
+.mdz-result-value.bad { color: var(--z-red); }
+
+.mdz-streak { margin-bottom: 16px; }
+.mdz-streak-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.mdz-streak-title { font-size: .7rem; font-weight: 700; color: var(--z-blue); }
+.mdz-streak-count { font-size: .65rem; font-weight: 600; color: var(--z-gold); }
+.mdz-streak-dots { display: flex; flex-wrap: wrap; gap: 4px; }
+.mdz-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--z-gray-200); transition: all .2s;
+}
+.mdz-dot.filled { background: var(--z-gold); }
+.mdz-dot.today { box-shadow: 0 0 0 2px var(--z-gold-wash-30); }
+
+.mdz-save-btn {
+  width: 100%; padding: 14px; border: none; border-radius: 12px;
+  background: linear-gradient(135deg, var(--z-gold), var(--z-gold-light));
+  color: white; font-family: var(--font); font-size: 14px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all .2s; box-shadow: 0 4px 12px var(--z-gold-wash-20);
+}
+.mdz-save-btn:hover { box-shadow: 0 6px 20px var(--z-gold-wash-30); transform: translateY(-1px); }
+.mdz-save-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.mdz-save-btn.done { background: linear-gradient(135deg, var(--z-green), #2ecc71); }
+
+/* MDZ Gerenciamento Amanda */
+.mdz-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.mdz-kpi { background: var(--z-white); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-sm); border: 1px solid rgba(35,77,103,.06); text-align: center; }
+.mdz-kpi-label { font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--z-gray-400); margin-bottom: 4px; }
+.mdz-kpi-value { font-size: 1.3rem; font-weight: 800; color: var(--z-blue); }
+.mdz-kpi-value.gold { color: var(--z-gold); }
+.mdz-kpi.full { grid-column: 1 / -1; }
+.mdz-rank { margin-bottom: 16px; }
+.mdz-rank-title { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--z-gray-400); margin-bottom: 8px; }
+.mdz-rank-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--z-white); border-radius: 10px; margin-bottom: 6px; box-shadow: var(--shadow-sm); }
+.mdz-rank-pos { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 800; color: white; background: var(--z-gray-300); flex-shrink: 0; }
+.mdz-rank-pos.p1 { background: var(--z-gold); }
+.mdz-rank-pos.p2 { background: var(--z-blue); }
+.mdz-rank-name { flex: 1; font-size: .8rem; font-weight: 600; color: var(--z-blue); }
+.mdz-rank-val { font-size: .85rem; font-weight: 800; }
+.mdz-rank-val.good { color: var(--z-green); }
+.mdz-rank-val.gold { color: var(--z-gold); }
+
+/* MDZ Sub-tabs (Amanda: Meu Dia / Gerenciamento) */
+.mdz-tabs { display: flex; gap: 0; margin-bottom: 20px; background: var(--z-gray-100); border-radius: 10px; padding: 3px; }
+.mdz-tab {
+  flex: 1; text-align: center; padding: 10px 8px; border-radius: 8px;
+  font-size: .75rem; font-weight: 600; color: var(--z-gray-500); cursor: pointer; transition: all .2s;
+}
+.mdz-tab.active { background: var(--z-white); color: var(--z-blue); box-shadow: var(--shadow-sm); }
+
 </style>
 
 <!-- Firebase SDK -->
@@ -954,6 +1088,75 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     appId: "1:802328266203:web:ae3b4dd4b758730bad13fe"
   });
   var db = firebase.firestore();
+
+  /* ===== MONTH CONFIG ===== */
+  var MONTH_DATA = {
+    '2026-04': {
+      label: 'Abril 2026', labelShort: 'ABR 2026', month: 3, year: 2026, diasUteis: 24,
+      feriadosCal: [21],
+      feriadosDates: ['2026-04-03','2026-04-21'],
+      metas: {
+        extras:{base:9557,alvo:10426,ouro:11294},
+        banho:{base:45475,alvo:49609,ouro:53743},
+        emporio:{base:40139,alvo:43788,ouro:47437},
+        vet:{base:12018,alvo:13110,ouro:14203},
+        hosp:{base:32599,alvo:35562,ouro:38526},
+        daycare:{base:46103,alvo:50294,ouro:54486}
+      },
+      ecoBase:107188, totalBase:185890, spaBase:55032,
+      etapaMetas: {
+        extras:[765,2581,2581,1912,1718],
+        banho:[3638,12278,12278,9095,8186],
+        emporio:[3211,10838,10838,8028,7225],
+        vet:[961,3245,3245,2404,2163],
+        hosp:[4890,3260,4890,16300,3260],
+        daycare:[29967,7376,2305,3227,3227]
+      },
+      poupanca: {
+        amanda:{gatilhos:[{area:'eco',metas:[107188,116933,126677],premios:[850,1200,1650]},{area:'total',metas:[185890,202789,219688],premios:[350,550,700]}],totais:[1200,1750,2350]},
+        fernanda:{gatilhos:[{area:'extras',metas:[9557,10426,11294],premios:[100,150,200]},{area:'banho',metas:[45475,49609,53743],premios:[200,250,350]},{area:'eco',metas:[107188,116933,126677],premios:[300,450,600]},{area:'total',metas:[185890,202789,219688],premios:[150,200,300]}],totais:[750,1050,1450]},
+        joyce:{gatilhos:[{area:'emporio',metas:[40139,43788,47437],premios:[350,500,700]},{area:'eco',metas:[107188,116933,126677],premios:[250,350,450]},{area:'total',metas:[185890,202789,219688],premios:[150,200,300]}],totais:[750,1050,1450]},
+        suellen:{gatilhos:[{area:'eco',metas:[107188,116933,126677],premios:[200,300,400]},{area:'total',metas:[185890,202789,219688],premios:[100,150,200]}],totais:[300,450,600]}
+      },
+      voucherMin: 22
+    },
+    '2026-05': {
+      label: 'Maio 2026', labelShort: 'MAI 2026', month: 4, year: 2026, diasUteis: 25,
+      feriadosCal: [1],
+      feriadosDates: ['2026-05-01'],
+      metas: {
+        extras:{base:8792,alvo:9592,ouro:10391},
+        banho:{base:47320,alvo:51622,ouro:55923},
+        emporio:{base:40693,alvo:44393,ouro:48092},
+        vet:{base:9369,alvo:10220,ouro:11072},
+        hosp:{base:13989,alvo:15260,ouro:16532},
+        daycare:{base:72848,alvo:79470,ouro:86093}
+      },
+      ecoBase:106173, totalBase:193008, spaBase:56112,
+      etapaMetas: {
+        extras:[616,2022,2110,2022,2022],
+        banho:[3312,10883,11356,10883,10883],
+        emporio:[1628,9767,9767,9767,9767],
+        vet:[282,3654,3186,1124,1124],
+        hosp:[420,2797,4476,3637,2658],
+        daycare:[8014,56092,5100,1458,2186]
+      },
+      poupanca: {
+        amanda:{gatilhos:[{area:'eco',metas:[106173,115825,125478],premios:[900,1250,1600]},{area:'total',metas:[193008,210555,228101],premios:[350,600,700]}],totais:[1250,1850,2300]},
+        fernanda:{gatilhos:[{area:'extras',metas:[8792,9592,10391],premios:[100,150,200]},{area:'banho',metas:[47320,51622,55923],premios:[200,300,350]},{area:'eco',metas:[106173,115825,125478],premios:[350,500,600]},{area:'total',metas:[193008,210555,228101],premios:[150,200,300]}],totais:[800,1150,1450]},
+        joyce:{gatilhos:[{area:'emporio',metas:[40693,44393,48092],premios:[350,500,700]},{area:'eco',metas:[106173,115825,125478],premios:[300,450,450]},{area:'total',metas:[193008,210555,228101],premios:[150,200,300]}],totais:[800,1150,1450]},
+        suellen:{gatilhos:[{area:'eco',metas:[106173,115825,125478],premios:[200,300,350]},{area:'total',metas:[193008,210555,228101],premios:[100,150,200]}],totais:[300,450,550]}
+      },
+      voucherMin: 23
+    }
+  };
+
+  var ACTIVE_MONTH = localStorage.getItem('agora-mes-ativo') || '2026-04';
+  function getMonthConfig(){ return MONTH_DATA[ACTIVE_MONTH]; }
+  function setActiveMonth(m){
+    ACTIVE_MONTH = m;
+    localStorage.setItem('agora-mes-ativo', m);
+  }
 </script>
 </head>
 <body>
@@ -1044,7 +1247,10 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
   <div class="nav-sep"></div>
   <div class="sidebar-footer">
-    <span class="month-label">ABR 2026</span>
+    <select id="month-selector" onchange="trocarMes(this.value)" style="background:rgba(255,253,246,.08);color:var(--z-gold);border:1px solid rgba(222,180,40,.25);border-radius:8px;padding:6px 10px;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;width:100%">
+      <option value="2026-04">ABR 2026</option>
+      <option value="2026-05">MAI 2026</option>
+    </select>
     <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"><i class="bi bi-moon-fill" id="theme-icon"></i></button>
     <button onclick="sair()" style="background:none;border:1px solid rgba(255,253,246,.15);color:rgba(255,253,246,.5);font-family:var(--font);font-size:11px;padding:6px 12px;border-radius:8px;cursor:pointer;margin-top:8px;width:100%" title="Sair"><i class="bi bi-box-arrow-left" style="margin-right:4px"></i> Sair</button>
   </div>
@@ -1380,7 +1586,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--z-gold),var(--z-gold-light));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0"><i class="bi bi-lightning-charge"></i></div>
     <div>
       <h2 style="font-size:22px;font-weight:800;color:var(--z-blue);margin:0;border:none;padding:0">Estratégias & Jogos</h2>
-      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Ferramentas, rotina e jogos de vendas — Abril 2026</p>
+      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Ferramentas, rotina e jogos de vendas</p>
     </div>
   </div>
 
@@ -2440,7 +2646,55 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
       <p style="font-size:12px;color:rgba(35,77,103,.5);margin:2px 0 0">30 segundos. Todo dia conta. Visão da supervisora.</p>
     </div>
   </div>
-  <iframe src="meu-dia-zeloso.html?tab=visao" style="width:100%;height:800px;border:none;border-radius:16px;background:var(--z-cream)"></iframe>
+
+  <!-- Sub-tabs Amanda -->
+  <div class="mdz-tabs">
+    <div class="mdz-tab active" onclick="mdzAmandaTab('meu-dia')">Meu Dia</div>
+    <div class="mdz-tab" onclick="mdzAmandaTab('gerenciamento')">Gerenciamento</div>
+  </div>
+
+  <!-- Tab: Meu Dia Amanda -->
+  <div id="mdz-amanda-meudia" class="mdz-container">
+    <div class="mdz-date-nav">
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(-1,'amanda')"><i class="bi bi-chevron-left"></i></div>
+      <div><div class="mdz-date-val" id="mdz-dv-amanda"></div><div class="mdz-date-dow" id="mdz-dw-amanda"></div></div>
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(1,'amanda')"><i class="bi bi-chevron-right"></i></div>
+    </div>
+    <div class="mdz-dayoff" id="mdz-dayoff-amanda"><i class="bi bi-calendar-x"></i> Dia sem expediente</div>
+    <div class="mdz-counter">
+      <div class="mdz-ring-wrap">
+        <svg class="mdz-ring-svg" viewBox="0 0 72 72"><circle class="mdz-ring-bg" cx="36" cy="36" r="30"/><circle class="mdz-ring-fill" cx="36" cy="36" r="30" id="mdz-ring-amanda" stroke-dasharray="188.5" stroke-dashoffset="188.5"/></svg>
+        <div class="mdz-ring-num"><div class="num" id="mdz-cnt-amanda">0</div><div class="den" id="mdz-den-amanda">/24</div></div>
+      </div>
+      <div class="mdz-counter-info">
+        <div class="mdz-counter-label">Dias preenchidos</div>
+        <div class="mdz-counter-msg" id="mdz-msg-amanda">Comece hoje!</div>
+        <div class="mdz-voucher" id="mdz-chip-amanda"><i class="bi bi-gift"></i> <span>0 dias para o voucher</span></div>
+      </div>
+    </div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.08)"><i class="bi bi-people-fill" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Tutores atendidos</div><span class="mdz-ic-hint">Todos que passaram por você hoje</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-atendi-amanda" oninput="mdzCalc('amanda')"><span class="mdz-ic-unit">tutores</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(39,174,96,.08)"><i class="bi bi-bag-plus-fill" style="color:var(--z-green)"></i></div><div><div class="mdz-ic-label">Levaram algo a mais</div><span class="mdz-ic-hint">Compraram ALÉM do serviço que vieram fazer</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-extra-amanda" oninput="mdzCalc('amanda')"><span class="mdz-ic-unit">extras</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:var(--z-gold-wash-08)"><i class="bi bi-cash-stack" style="color:var(--z-gold)"></i></div><div><div class="mdz-ic-label">Valor dos extras R$</div><span class="mdz-ic-hint">Quanto os extras valeram (upsell total)</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valextra-amanda" oninput="mdzCalc('amanda')"></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.06)"><i class="bi bi-wallet2" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Total vendido hoje</div><span class="mdz-ic-hint">Valor total do dia — pega direto do sistema</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valor-amanda" oninput="mdzCalc('amanda')"></div></div>
+    <div class="mdz-results" id="mdz-results-amanda"><div class="mdz-results-title"><i class="bi bi-lightning-charge-fill"></i> Resultado de hoje</div><div class="mdz-results-grid"><div class="mdz-result-item"><div class="mdz-result-label">Aproveitamento</div><div class="mdz-result-value" id="mdz-conv-amanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Médio</div><div class="mdz-result-value" id="mdz-ticket-amanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Extra</div><div class="mdz-result-value" id="mdz-textra-amanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Desperdício</div><div class="mdz-result-value" id="mdz-desp-amanda">—</div></div></div></div>
+    <div class="mdz-streak"><div class="mdz-streak-header"><span class="mdz-streak-title">Sequência do mês</span><span class="mdz-streak-count" id="mdz-streak-amanda">0 / 24 dias</span></div><div class="mdz-streak-dots" id="mdz-dots-amanda"></div></div>
+    <button class="mdz-save-btn" id="mdz-save-amanda" onclick="mdzSave('amanda')"><i class="bi bi-check-circle-fill"></i> Salvar meu dia</button>
+  </div>
+
+  <!-- Tab: Gerenciamento Amanda -->
+  <div id="mdz-amanda-gerenciamento" style="display:none">
+    <div id="mdz-visao-date" style="font-size:.75rem;font-weight:600;color:var(--z-gray-400);text-align:center;margin-bottom:16px"></div>
+    <div class="mdz-kpi-grid">
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Tutores</div><div class="mdz-kpi-value" id="mdz-v-tutores">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Extras vendidos</div><div class="mdz-kpi-value" id="mdz-v-extras">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Aproveitamento</div><div class="mdz-kpi-value" id="mdz-v-conv">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Ticket Médio</div><div class="mdz-kpi-value" id="mdz-v-ticket">—</div></div>
+      <div class="mdz-kpi full"><div class="mdz-kpi-label">Faturamento total do dia</div><div class="mdz-kpi-value gold" id="mdz-v-fat">—</div></div>
+    </div>
+    <div class="mdz-rank"><div class="mdz-rank-title">Ranking — Aproveitamento</div><div id="mdz-rank-conv"></div></div>
+    <div class="mdz-rank"><div class="mdz-rank-title">Ranking — Ticket Médio</div><div id="mdz-rank-ticket"></div></div>
+    <div class="mdz-rank"><div class="mdz-rank-title">Dedicação — Dias Preenchidos</div><div id="mdz-rank-streak"></div></div>
+  </div>
 </div><!-- fim view-meu-dia-amanda -->
 
 
@@ -2701,7 +2955,32 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
       <p style="font-size:12px;color:rgba(35,77,103,.5);margin:2px 0 0">Registre seus números do dia. 30 segundos.</p>
     </div>
   </div>
-  <iframe src="meu-dia-zeloso.html?tab=fernanda" style="width:100%;height:800px;border:none;border-radius:16px;background:var(--z-cream)"></iframe>
+  <div class="mdz-container">
+    <div class="mdz-date-nav">
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(-1,'fernanda')"><i class="bi bi-chevron-left"></i></div>
+      <div><div class="mdz-date-val" id="mdz-dv-fernanda"></div><div class="mdz-date-dow" id="mdz-dw-fernanda"></div></div>
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(1,'fernanda')"><i class="bi bi-chevron-right"></i></div>
+    </div>
+    <div class="mdz-dayoff" id="mdz-dayoff-fernanda"><i class="bi bi-calendar-x"></i> Dia sem expediente</div>
+    <div class="mdz-counter">
+      <div class="mdz-ring-wrap">
+        <svg class="mdz-ring-svg" viewBox="0 0 72 72"><circle class="mdz-ring-bg" cx="36" cy="36" r="30"/><circle class="mdz-ring-fill" cx="36" cy="36" r="30" id="mdz-ring-fernanda" stroke-dasharray="188.5" stroke-dashoffset="188.5"/></svg>
+        <div class="mdz-ring-num"><div class="num" id="mdz-cnt-fernanda">0</div><div class="den" id="mdz-den-fernanda">/24</div></div>
+      </div>
+      <div class="mdz-counter-info">
+        <div class="mdz-counter-label">Dias preenchidos</div>
+        <div class="mdz-counter-msg" id="mdz-msg-fernanda">Comece hoje!</div>
+        <div class="mdz-voucher" id="mdz-chip-fernanda"><i class="bi bi-gift"></i> <span>0 dias para o voucher</span></div>
+      </div>
+    </div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.08)"><i class="bi bi-people-fill" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Tutores atendidos</div><span class="mdz-ic-hint">Todos que passaram por você hoje</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-atendi-fernanda" oninput="mdzCalc('fernanda')"><span class="mdz-ic-unit">tutores</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(39,174,96,.08)"><i class="bi bi-bag-plus-fill" style="color:var(--z-green)"></i></div><div><div class="mdz-ic-label">Levaram algo a mais</div><span class="mdz-ic-hint">Compraram ALÉM do serviço que vieram fazer</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-extra-fernanda" oninput="mdzCalc('fernanda')"><span class="mdz-ic-unit">extras</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:var(--z-gold-wash-08)"><i class="bi bi-cash-stack" style="color:var(--z-gold)"></i></div><div><div class="mdz-ic-label">Valor dos extras R$</div><span class="mdz-ic-hint">Quanto os extras valeram (upsell total)</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valextra-fernanda" oninput="mdzCalc('fernanda')"></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.06)"><i class="bi bi-wallet2" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Total vendido hoje</div><span class="mdz-ic-hint">Valor total do dia — pega direto do sistema</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valor-fernanda" oninput="mdzCalc('fernanda')"></div></div>
+    <div class="mdz-results" id="mdz-results-fernanda"><div class="mdz-results-title"><i class="bi bi-lightning-charge-fill"></i> Resultado de hoje</div><div class="mdz-results-grid"><div class="mdz-result-item"><div class="mdz-result-label">Aproveitamento</div><div class="mdz-result-value" id="mdz-conv-fernanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Médio</div><div class="mdz-result-value" id="mdz-ticket-fernanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Extra</div><div class="mdz-result-value" id="mdz-textra-fernanda">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Desperdício</div><div class="mdz-result-value" id="mdz-desp-fernanda">—</div></div></div></div>
+    <div class="mdz-streak"><div class="mdz-streak-header"><span class="mdz-streak-title">Sequência do mês</span><span class="mdz-streak-count" id="mdz-streak-fernanda">0 / 24 dias</span></div><div class="mdz-streak-dots" id="mdz-dots-fernanda"></div></div>
+    <button class="mdz-save-btn" id="mdz-save-fernanda" onclick="mdzSave('fernanda')"><i class="bi bi-check-circle-fill"></i> Salvar meu dia</button>
+  </div>
 </div><!-- fim view-meu-dia-fernanda -->
 
 <!-- VIEW JOYCE (Empório) -->
@@ -2867,7 +3146,32 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
       <p style="font-size:12px;color:rgba(35,77,103,.5);margin:2px 0 0">Registre seus números do dia. 30 segundos.</p>
     </div>
   </div>
-  <iframe src="meu-dia-zeloso.html?tab=joyce" style="width:100%;height:800px;border:none;border-radius:16px;background:var(--z-cream)"></iframe>
+  <div class="mdz-container">
+    <div class="mdz-date-nav">
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(-1,'joyce')"><i class="bi bi-chevron-left"></i></div>
+      <div><div class="mdz-date-val" id="mdz-dv-joyce"></div><div class="mdz-date-dow" id="mdz-dw-joyce"></div></div>
+      <div class="mdz-date-arrow" onclick="mdzChangeDate(1,'joyce')"><i class="bi bi-chevron-right"></i></div>
+    </div>
+    <div class="mdz-dayoff" id="mdz-dayoff-joyce"><i class="bi bi-calendar-x"></i> Dia sem expediente</div>
+    <div class="mdz-counter">
+      <div class="mdz-ring-wrap">
+        <svg class="mdz-ring-svg" viewBox="0 0 72 72"><circle class="mdz-ring-bg" cx="36" cy="36" r="30"/><circle class="mdz-ring-fill" cx="36" cy="36" r="30" id="mdz-ring-joyce" stroke-dasharray="188.5" stroke-dashoffset="188.5"/></svg>
+        <div class="mdz-ring-num"><div class="num" id="mdz-cnt-joyce">0</div><div class="den" id="mdz-den-joyce">/24</div></div>
+      </div>
+      <div class="mdz-counter-info">
+        <div class="mdz-counter-label">Dias preenchidos</div>
+        <div class="mdz-counter-msg" id="mdz-msg-joyce">Comece hoje!</div>
+        <div class="mdz-voucher" id="mdz-chip-joyce"><i class="bi bi-gift"></i> <span>0 dias para o voucher</span></div>
+      </div>
+    </div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.08)"><i class="bi bi-people-fill" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Tutores atendidos</div><span class="mdz-ic-hint">Todos que passaram por você hoje</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-atendi-joyce" oninput="mdzCalc('joyce')"><span class="mdz-ic-unit">tutores</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(39,174,96,.08)"><i class="bi bi-bag-plus-fill" style="color:var(--z-green)"></i></div><div><div class="mdz-ic-label">Levaram algo a mais</div><span class="mdz-ic-hint">Compraram ALÉM do serviço que vieram fazer</span></div></div><div class="mdz-ic-row"><input class="mdz-ic-input" type="number" inputmode="numeric" placeholder="0" id="mdz-extra-joyce" oninput="mdzCalc('joyce')"><span class="mdz-ic-unit">extras</span></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:var(--z-gold-wash-08)"><i class="bi bi-cash-stack" style="color:var(--z-gold)"></i></div><div><div class="mdz-ic-label">Valor dos extras R$</div><span class="mdz-ic-hint">Quanto os extras valeram (upsell total)</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valextra-joyce" oninput="mdzCalc('joyce')"></div></div>
+    <div class="mdz-input-card"><div class="mdz-ic-header"><div class="mdz-ic-icon" style="background:rgba(35,77,103,.06)"><i class="bi bi-wallet2" style="color:var(--z-blue)"></i></div><div><div class="mdz-ic-label">Total vendido hoje</div><span class="mdz-ic-hint">Valor total do dia — pega direto do sistema</span></div></div><div class="mdz-ic-row"><span class="mdz-ic-prefix">R$</span><input class="mdz-ic-input" type="number" inputmode="decimal" step="0.01" placeholder="0" id="mdz-valor-joyce" oninput="mdzCalc('joyce')"></div></div>
+    <div class="mdz-results" id="mdz-results-joyce"><div class="mdz-results-title"><i class="bi bi-lightning-charge-fill"></i> Resultado de hoje</div><div class="mdz-results-grid"><div class="mdz-result-item"><div class="mdz-result-label">Aproveitamento</div><div class="mdz-result-value" id="mdz-conv-joyce">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Médio</div><div class="mdz-result-value" id="mdz-ticket-joyce">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Ticket Extra</div><div class="mdz-result-value" id="mdz-textra-joyce">—</div></div><div class="mdz-result-item"><div class="mdz-result-label">Desperdício</div><div class="mdz-result-value" id="mdz-desp-joyce">—</div></div></div></div>
+    <div class="mdz-streak"><div class="mdz-streak-header"><span class="mdz-streak-title">Sequência do mês</span><span class="mdz-streak-count" id="mdz-streak-joyce">0 / 24 dias</span></div><div class="mdz-streak-dots" id="mdz-dots-joyce"></div></div>
+    <button class="mdz-save-btn" id="mdz-save-joyce" onclick="mdzSave('joyce')"><i class="bi bi-check-circle-fill"></i> Salvar meu dia</button>
+  </div>
 </div><!-- fim view-meu-dia-joyce -->
 
 <!-- VIEW SUELLEN (VetCare) -->
@@ -3098,7 +3402,7 @@ function switchView(view){
   var titleEl = document.getElementById('page-title');
   if(titleEl){
     var label = _viewTitles[view] || view;
-    titleEl.innerHTML = '<span>' + label + '</span> &middot; Abril 2026';
+    titleEl.innerHTML = '<span>' + label + '</span> &middot; ' + getMonthConfig().label;
   }
 
   /* render person views */
@@ -3111,6 +3415,10 @@ function switchView(view){
     renderList('zeluz-premios-amanda','premios-amanda-list');
     calc();
   }
+  /* MDZ views — refresh on navigate */
+  if(view === 'meu-dia-fernanda') mdzLoadDay('fernanda');
+  if(view === 'meu-dia-joyce') mdzLoadDay('joyce');
+  if(view === 'meu-dia-amanda'){ mdzLoadDay('amanda'); mdzAmandaTab('meu-dia'); }
   if(view === 'fernanda') renderList('zeluz-premios-fernanda','premios-fernanda-list');
   if(view === 'joyce') renderList('zeluz-premios-joyce','premios-joyce-list');
   if(view === 'suellen'){
@@ -3121,16 +3429,17 @@ function switchView(view){
   closeSidebar();
 }
 
-/* ===== MINI CALENDAR ===== */
+/* ===== MINI CALENDAR (dinâmico por mês) ===== */
 function renderCalendar(){
   var cal = document.getElementById('mini-cal');
   if(!cal) return;
-  var year=2026, month=3;
+  var mc = getMonthConfig();
+  var year=mc.year, month=mc.month;
   var firstDay = new Date(year, month, 1).getDay();
   var daysInMonth = new Date(year, month+1, 0).getDate();
   var today = new Date();
   var todayDay = (today.getFullYear()===year && today.getMonth()===month) ? today.getDate() : -1;
-  var feriados = [21]; // Tiradentes
+  var feriados = mc.feriadosCal;
   var html = '<table><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr><tr>';
   for(var i=0; i<firstDay; i++) html += '<td></td>';
   for(var d=1; d<=daysInMonth; d++){
@@ -3152,16 +3461,16 @@ function renderCalendar(){
 }
 renderCalendar();
 
-/* ===== METAS ===== */
-var METAS = {
-  extras: {base:9557, alvo:10426, ouro:11294},
-  banho:  {base:45475, alvo:49609, ouro:53743},
-  emporio:{base:40139, alvo:43788, ouro:47437},
-  vet:    {base:12018, alvo:13110, ouro:14203},
-  hosp:   {base:32599, alvo:35562, ouro:38526},
-  daycare:{base:46103, alvo:50294, ouro:54486}
-};
-var ECO_BASE = 107188, TOTAL_BASE = 185890, SPA_BASE = 55032;
+/* ===== METAS (dinâmico por mês) ===== */
+function getMetas(){ return getMonthConfig().metas; }
+function getEcoBase(){ return getMonthConfig().ecoBase; }
+function getTotalBase(){ return getMonthConfig().totalBase; }
+function getSpaBase(){ return getMonthConfig().spaBase; }
+var METAS = getMetas();
+var ECO_BASE = getEcoBase(), TOTAL_BASE = getTotalBase(), SPA_BASE = getSpaBase();
+function reloadMonthVars(){
+  METAS = getMetas(); ECO_BASE = getEcoBase(); TOTAL_BASE = getTotalBase(); SPA_BASE = getSpaBase();
+}
 
 function parseNum(v){ if(!v) return 0; return parseFloat(v.replace(/[^\d.,]/g,'').replace(/\./g,'').replace(',','.'))||0; }
 function fmt(n){ return 'R$ ' + n.toLocaleString('pt-BR',{minimumFractionDigits:0, maximumFractionDigits:0}); }
@@ -3259,41 +3568,8 @@ function calc(){
 
 
 
-  /* ===== POUPANCA DA ZELOSA ===== */
-  // Premiacao por gatilho batido
-  var POUP = {
-    amanda: {
-      gatilhos: [
-        {area:'eco', metas:[107188,116933,126677], premios:[850,1200,1650]},
-        {area:'total', metas:[185890,202789,219688], premios:[350,550,700]}
-      ],
-      totais: [1200, 1750, 2350]
-    },
-    fernanda: {
-      gatilhos: [
-        {area:'extras', metas:[9557,10426,11294], premios:[100,150,200]},
-        {area:'banho', metas:[45475,49609,53743], premios:[200,250,350]},
-        {area:'eco', metas:[107188,116933,126677], premios:[300,450,600]},
-        {area:'total', metas:[185890,202789,219688], premios:[150,200,300]}
-      ],
-      totais: [750, 1050, 1450]
-    },
-    joyce: {
-      gatilhos: [
-        {area:'emporio', metas:[40139,43788,47437], premios:[350,500,700]},
-        {area:'eco', metas:[107188,116933,126677], premios:[250,350,450]},
-        {area:'total', metas:[185890,202789,219688], premios:[150,200,300]}
-      ],
-      totais: [750, 1050, 1450]
-    },
-    suellen: {
-      gatilhos: [
-        {area:'eco', metas:[107188,116933,126677], premios:[200,300,400]},
-        {area:'total', metas:[185890,202789,219688], premios:[100,150,200]}
-      ],
-      totais: [300, 450, 600]
-    }
-  };
+  /* ===== POUPANCA DA ZELOSA (dinâmico por mês) ===== */
+  var POUP = getMonthConfig().poupanca;
 
   function calcPoupanca(pessoa) {
     var p = POUP[pessoa];
@@ -3363,15 +3639,8 @@ function calc(){
     }
   });
 
-  /* Verde/Vermelho nos inputs semanais — metas EXATAS por etapa (fonte: metas-jogos-abril-2026) */
-  var ETAPA_METAS_AREA = {
-    extras:  [765, 2581, 2581, 1912, 1718],
-    banho:   [3638, 12278, 12278, 9095, 8186],
-    emporio: [3211, 10838, 10838, 8028, 7225],
-    vet:     [961, 3245, 3245, 2404, 2163],
-    hosp:    [4890, 3260, 4890, 16300, 3260],
-    daycare: [29967, 7376, 2305, 3227, 3227]
-  };
+  /* Verde/Vermelho nos inputs semanais — metas EXATAS por etapa (dinâmico por mês) */
+  var ETAPA_METAS_AREA = getMonthConfig().etapaMetas;
   var seenColor = {};
   document.querySelectorAll('input[data-area][data-sem]').forEach(function(inp){
     var area = inp.dataset.area;
@@ -3858,13 +4127,13 @@ function salvar(){
     var k = i.dataset.area + '-' + i.dataset.sem;
     if(!seen[k]){ seen[k] = true; d[k] = i.value; }
   });
-  localStorage.setItem('zeluz-dash-abr26', JSON.stringify(d));
+  localStorage.setItem('zeluz-dash-'+ACTIVE_MONTH, JSON.stringify(d));
   var ind = document.getElementById('autosave-indicator');
   if(ind){ ind.style.opacity = '1'; ind.textContent = 'Salvo!'; setTimeout(function(){ ind.style.opacity = '0'; }, 2000); }
 }
 
 function carregar(){
-  var r = localStorage.getItem('zeluz-dash-abr26');
+  var r = localStorage.getItem('zeluz-dash-'+ACTIVE_MONTH);
   if(r){
     try {
       var d = JSON.parse(r); var loaded = {};
@@ -3897,7 +4166,7 @@ function carregar(){
 
 function limpar(){
   if(!confirm('Limpar todos os dados de abril?')) return;
-  localStorage.removeItem('zeluz-dash-abr26');
+  localStorage.removeItem('zeluz-dash-'+ACTIVE_MONTH);
   document.querySelectorAll('input[data-area]').forEach(function(i){ i.value = ''; });
   calc();
 }
@@ -4037,7 +4306,7 @@ setInterval(function(){
     var k=i.dataset.area+'-'+i.dataset.sem;
     if(!seen[k]){seen[k]=true;d[k]=i.value;}
   });
-  localStorage.setItem('zeluz-dash-abr26',JSON.stringify(d));
+  localStorage.setItem('zeluz-dash-'+ACTIVE_MONTH,JSON.stringify(d));
 
   /* 2. Jogos (contenteditable) */
   if(typeof saveJogos === 'function') saveJogos();
@@ -4049,8 +4318,42 @@ setInterval(function(){
 </script>
 
 <script>
+/* ===== TROCAR MÊS ===== */
+function trocarMes(mes){
+  if(!MONTH_DATA[mes]) return;
+  /* Salvar dados atuais antes de trocar */
+  salvar();
+  setActiveMonth(mes);
+  reloadMonthVars();
+  /* Recarregar dados do novo mês */
+  carregar();
+  renderCalendar();
+  calc();
+  /* Recarregar Firestore do novo mês */
+  if(currentUser) carregarDadosFirestore();
+  /* Atualizar MDZ */
+  if(typeof reloadMdz === 'function') reloadMdz();
+  /* Atualizar header */
+  var titleEl = document.getElementById('page-title');
+  if(titleEl){
+    var currentView = document.querySelector('.person-view.active');
+    if(currentView){
+      var viewId = currentView.id.replace('view-','');
+      var label = _viewTitles[viewId] || viewId;
+      titleEl.innerHTML = '<span>' + label + '</span> &middot; ' + getMonthConfig().label;
+    }
+  }
+}
+
 /* ===== DEFERRED INIT ===== */
 document.addEventListener('DOMContentLoaded', function(){
+  /* Restaurar mês ativo no seletor */
+  var sel = document.getElementById('month-selector');
+  if(sel) sel.value = ACTIVE_MONTH;
+  /* Consultoras só veem mês ativo (admin/supervisor podem trocar) */
+  if(currentUser && currentUser.role === 'consultor'){
+    if(sel) sel.style.display = 'none';
+  }
   calc();
 });
 
@@ -4267,6 +4570,7 @@ function fazerLogin() {
   document.getElementById('login-overlay').style.display = 'none';
   aplicarPermissoes();
   carregarDadosFirestore();
+  if(typeof carregarMdzFirestore === 'function') carregarMdzFirestore();
   // Save session
   localStorage.setItem('agora-session', JSON.stringify({id:user, ts:Date.now()}));
 }
@@ -4287,7 +4591,7 @@ function aplicarPermissoes() {
         var viewName = onclick.match(/switchView\('([^']+)'/);
         if(viewName) {
           var vn = viewName[1];
-          if(vn === allowedView) {
+          if(vn === allowedView || vn === 'meu-dia-'+allowedView) {
             item.style.display = '';
           } else {
             item.style.display = 'none';
@@ -4303,10 +4607,14 @@ function aplicarPermissoes() {
     switchView(allowedView);
     // Hide sidebar toggle for simplicity
   }
-  // Hide Senhas nav for consultors
+  // Hide Senhas nav and month selector for consultors
   var navSenhas = document.getElementById('nav-senhas');
   if(navSenhas) {
     navSenhas.style.display = (currentUser.role === 'admin' || currentUser.role === 'supervisor') ? '' : 'none';
+  }
+  var monthSel = document.getElementById('month-selector');
+  if(monthSel) {
+    monthSel.style.display = (currentUser.role === 'admin' || currentUser.role === 'supervisor') ? '' : 'none';
   }
 
   // Update greeting
@@ -4329,6 +4637,7 @@ function autoLogin() {
         document.getElementById('login-overlay').style.display = 'none';
         aplicarPermissoes();
         carregarDadosFirestore();
+        if(typeof carregarMdzFirestore === 'function') carregarMdzFirestore();
         return;
       }
     } catch(e) {}
@@ -4337,10 +4646,14 @@ function autoLogin() {
 
 /* ===== FIRESTORE SYNC ===== */
 var FIRESTORE_COLLECTION = 'dados';
-var FIRESTORE_MES = '2026-04';
+function getFirestoreMes(){ return ACTIVE_MONTH; }
 
 function getDocRef() {
-  return db.collection(FIRESTORE_COLLECTION).doc(FIRESTORE_MES);
+  return db.collection(FIRESTORE_COLLECTION).doc(getFirestoreMes());
+}
+
+function getMdzDocRef() {
+  return db.collection('mdz').doc(getFirestoreMes());
 }
 
 function carregarDadosFirestore() {
@@ -4407,6 +4720,329 @@ document.addEventListener('input', function(e) {
 
 // Run auto-login on load
 document.addEventListener('DOMContentLoaded', autoLogin);
+
+/* ===== MEU DIA ZELOSO — ENGINE ===== */
+var MDZ_PEOPLE = ['fernanda','joyce','amanda'];
+var MDZ_NAMES = {fernanda:'Fernanda',joyce:'Joyce',amanda:'Amanda'};
+var mdzDates = {fernanda:new Date(),joyce:new Date(),amanda:new Date()};
+var _mdzCache = {}; // cache dos dados Firebase MDZ
+
+var MDZ_DOWS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+var MDZ_MONTHS = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+function mdzDateKey(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function mdzIsHoliday(d){ return getMonthConfig().feriadosDates.indexOf(mdzDateKey(d)) >= 0; }
+function mdzIsSunday(d){ return d.getDay() === 0; }
+function mdzIsWorkDay(d){ return !mdzIsSunday(d) && !mdzIsHoliday(d); }
+function mdzFmtDate(d){ return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0'); }
+
+/* Firebase MDZ key */
+function mdzFireKey(person,d){ return person+'_'+mdzDateKey(d||mdzDates[person]); }
+
+/* Load MDZ data (from cache, populated by Firebase listener) */
+function mdzLoadData(person,d){
+  var key = mdzFireKey(person,d);
+  return _mdzCache[key] || null;
+}
+
+/* Update date display */
+function mdzUpdateDate(person){
+  var d = mdzDates[person];
+  var el = document.getElementById('mdz-dv-'+person);
+  var dw = document.getElementById('mdz-dw-'+person);
+  if(el) el.textContent = mdzFmtDate(d)+' / '+MDZ_MONTHS[d.getMonth()];
+  if(dw) dw.textContent = MDZ_DOWS[d.getDay()];
+  mdzLoadDay(person);
+}
+
+function mdzChangeDate(dir, person){
+  mdzDates[person].setDate(mdzDates[person].getDate()+dir);
+  mdzUpdateDate(person);
+}
+
+/* Load day data into inputs */
+function mdzLoadDay(person){
+  var data = mdzLoadData(person);
+  var setF = function(id,v){ var el=document.getElementById(id); if(el) el.value=v||''; };
+  setF('mdz-atendi-'+person, data?data.atendi:'');
+  setF('mdz-extra-'+person, data?data.extra:'');
+  setF('mdz-valextra-'+person, data?data.valorExtras:'');
+  setF('mdz-valor-'+person, data?data.valor:'');
+  mdzCalc(person);
+  mdzUpdateCounter(person);
+  mdzBuildDots(person);
+
+  var currentD = mdzDates[person];
+  var off = !mdzIsWorkDay(currentD);
+  var banner = document.getElementById('mdz-dayoff-'+person);
+  if(banner) banner.classList.toggle('show', off);
+
+  var btn = document.getElementById('mdz-save-'+person);
+  if(btn){
+    btn.disabled = off;
+    if(off){
+      btn.innerHTML = '<i class="bi bi-calendar-x"></i> Sem expediente';
+      btn.classList.remove('done');
+    } else if(data){
+      btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Atualizar';
+      btn.classList.add('done');
+    } else {
+      btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Salvar meu dia';
+      btn.classList.remove('done');
+    }
+  }
+}
+
+/* CALC — com lógica de desperdício corrigida */
+function mdzCalc(person){
+  var atendi = parseInt(document.getElementById('mdz-atendi-'+person)?.value)||0;
+  var extra = parseInt(document.getElementById('mdz-extra-'+person)?.value)||0;
+  var valorExtras = parseFloat(document.getElementById('mdz-valextra-'+person)?.value)||0;
+  var valor = parseFloat(document.getElementById('mdz-valor-'+person)?.value)||0;
+
+  var res = document.getElementById('mdz-results-'+person);
+  if(!res) return;
+
+  if(atendi===0 && extra===0 && valor===0){ res.classList.remove('show'); return; }
+  res.classList.add('show');
+
+  // Aproveitamento = % dos tutores que levaram algo a mais
+  var aprov = atendi>0 ? (extra/atendi*100) : 0;
+  // Ticket Médio = valor total / tutores atendidos
+  var ticket = atendi>0 ? (valor/atendi) : 0;
+  // Ticket Extra médio = valor dos extras / quantidade de extras
+  var ticketExtra = extra>0 ? (valorExtras/extra) : 0;
+  // Desperdício CORRIGIDO = ticket_extra_medio × (tutores que NÃO levaram extra)
+  var naoCompraram = Math.max(0, atendi - extra);
+  var desp = ticketExtra * naoCompraram;
+
+  var convEl = document.getElementById('mdz-conv-'+person);
+  if(convEl){ convEl.textContent = aprov.toFixed(0)+'%'; convEl.className = 'mdz-result-value '+(aprov>=40?'good':aprov>=25?'warn':'bad'); }
+
+  var tickEl = document.getElementById('mdz-ticket-'+person);
+  if(tickEl){ tickEl.textContent = 'R$'+ticket.toFixed(0); tickEl.className = 'mdz-result-value '+(ticket>=100?'good':''); }
+
+  var texEl = document.getElementById('mdz-textra-'+person);
+  if(texEl){ texEl.textContent = extra>0?'R$'+ticketExtra.toFixed(0):'—'; texEl.className = 'mdz-result-value'; }
+
+  var despEl = document.getElementById('mdz-desp-'+person);
+  if(despEl){ despEl.textContent = desp>0?'R$'+desp.toFixed(0):'—'; despEl.className = 'mdz-result-value '+(desp>500?'bad':desp>0?'warn':''); }
+}
+
+/* SAVE — salva no Firebase */
+function mdzSave(person){
+  var atendi = document.getElementById('mdz-atendi-'+person)?.value;
+  var extra = document.getElementById('mdz-extra-'+person)?.value;
+  var valorExtras = document.getElementById('mdz-valextra-'+person)?.value;
+  var valor = document.getElementById('mdz-valor-'+person)?.value;
+
+  if(!atendi && !extra && !valor){ return; }
+
+  var currentD = mdzDates[person];
+  if(!mdzIsWorkDay(currentD)){ return; }
+
+  var key = mdzFireKey(person);
+  var rec = {
+    atendi: atendi||'', extra: extra||'', valorExtras: valorExtras||'', valor: valor||'',
+    savedAt: new Date().toISOString(), savedBy: currentUser ? currentUser.id : 'unknown'
+  };
+
+  // Salvar no cache
+  _mdzCache[key] = rec;
+
+  // Salvar no Firebase
+  var data = {};
+  data[key] = rec;
+  getMdzDocRef().set(data, {merge:true}).then(function(){
+    var btn = document.getElementById('mdz-save-'+person);
+    if(btn){
+      btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Salvo!';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Atualizar'; },1500);
+    }
+  }).catch(function(e){ console.error('Erro MDZ save:', e); });
+
+  mdzUpdateCounter(person);
+  mdzBuildDots(person);
+}
+
+/* COUNTER */
+function mdzCountFilled(person){
+  var mc = getMonthConfig();
+  var y = mc.year, m = mc.month;
+  var daysInMonth = new Date(y, m+1, 0).getDate();
+  var filled = 0;
+  for(var day=1; day<=daysInMonth; day++){
+    var d = new Date(y, m, day);
+    if(!mdzIsWorkDay(d)) continue;
+    if(mdzLoadData(person, d)) filled++;
+  }
+  return filled;
+}
+
+function mdzUpdateCounter(person){
+  var mc = getMonthConfig();
+  var total = mc.diasUteis;
+  var vMin = mc.voucherMin;
+  var filled = mdzCountFilled(person);
+  var remaining = Math.max(0, vMin - filled);
+  var pct = filled / total;
+  var circ = 188.5;
+  var offset = circ - (circ * pct);
+
+  var ring = document.getElementById('mdz-ring-'+person);
+  if(ring) ring.style.strokeDashoffset = offset;
+
+  var numEl = document.getElementById('mdz-cnt-'+person);
+  if(numEl) numEl.textContent = filled;
+
+  var denEl = document.getElementById('mdz-den-'+person);
+  if(denEl) denEl.textContent = '/'+total;
+
+  var msgEl = document.getElementById('mdz-msg-'+person);
+  if(msgEl){
+    if(filled===0) msgEl.textContent = 'Comece hoje!';
+    else if(filled >= vMin) msgEl.textContent = 'Voucher garantido!';
+    else msgEl.textContent = filled+' de '+total+' dias';
+  }
+
+  var chipEl = document.getElementById('mdz-chip-'+person);
+  if(chipEl){
+    if(filled >= vMin){
+      chipEl.innerHTML = '<i class="bi bi-gift-fill"></i> Voucher garantido!';
+      chipEl.style.background = 'rgba(39,174,96,.12)'; chipEl.style.borderColor = 'rgba(39,174,96,.3)'; chipEl.style.color = '#27AE60';
+    } else {
+      chipEl.innerHTML = '<i class="bi bi-gift"></i> Faltam '+remaining+' dias';
+      chipEl.style.background = ''; chipEl.style.borderColor = ''; chipEl.style.color = '';
+    }
+  }
+
+  var strEl = document.getElementById('mdz-streak-'+person);
+  if(strEl) strEl.textContent = filled+' / '+total+' dias';
+}
+
+/* STREAK DOTS */
+function mdzBuildDots(person){
+  var container = document.getElementById('mdz-dots-'+person);
+  if(!container) return;
+  var mc = getMonthConfig();
+  var y = mc.year, m = mc.month;
+  var daysInMonth = new Date(y, m+1, 0).getDate();
+  var todayKey = mdzDateKey(new Date());
+  var html = '';
+  for(var day=1; day<=daysInMonth; day++){
+    var d = new Date(y, m, day);
+    if(!mdzIsWorkDay(d)) continue;
+    var key = mdzDateKey(d);
+    var filled = mdzLoadData(person, d) !== null;
+    var today = key === todayKey;
+    var cls = 'mdz-dot';
+    if(filled) cls += ' filled';
+    if(today) cls += ' today';
+    html += '<div class="'+cls+'" title="Dia '+day+'"></div>';
+  }
+  container.innerHTML = html;
+}
+
+/* AMANDA TABS */
+function mdzAmandaTab(tab){
+  var tabs = document.querySelectorAll('#view-meu-dia-amanda .mdz-tab');
+  tabs.forEach(function(t,i){ t.classList.toggle('active', ['meu-dia','gerenciamento'][i]===tab); });
+  document.getElementById('mdz-amanda-meudia').style.display = tab==='meu-dia'?'block':'none';
+  document.getElementById('mdz-amanda-gerenciamento').style.display = tab==='gerenciamento'?'block':'none';
+  if(tab==='gerenciamento') mdzUpdateVisao();
+}
+
+/* VISÃO (Gerenciamento Amanda) */
+function mdzUpdateVisao(){
+  var today = new Date();
+  var viEl = document.getElementById('mdz-visao-date');
+  if(viEl) viEl.textContent = mdzFmtDate(today)+' — '+MDZ_DOWS[today.getDay()]+' — '+getMonthConfig().label;
+
+  var totAtendi=0, totExtra=0, totVal=0;
+  var pData = [];
+
+  MDZ_PEOPLE.forEach(function(p){
+    var d = mdzLoadData(p, today);
+    var at = d ? (parseInt(d.atendi)||0) : 0;
+    var ex = d ? (parseInt(d.extra)||0) : 0;
+    var va = d ? (parseFloat(d.valor)||0) : 0;
+    totAtendi+=at; totExtra+=ex; totVal+=va;
+    var aprov = at>0 ? ex/at*100 : 0;
+    var ticket = at>0 ? va/at : 0;
+    var streak = mdzCountFilled(p);
+    pData.push({name:MDZ_NAMES[p], person:p, at:at, ex:ex, va:va, aprov:aprov, ticket:ticket, streak:streak});
+  });
+
+  var aprovTot = totAtendi>0 ? (totExtra/totAtendi*100) : 0;
+  var tickTot = totAtendi>0 ? (totVal/totAtendi) : 0;
+
+  function mdzSet(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  mdzSet('mdz-v-tutores', totAtendi||'—');
+  mdzSet('mdz-v-extras', totExtra||'—');
+  mdzSet('mdz-v-conv', aprovTot>0 ? aprovTot.toFixed(0)+'%' : '—');
+  mdzSet('mdz-v-ticket', tickTot>0 ? 'R$'+tickTot.toFixed(0) : '—');
+  mdzSet('mdz-v-fat', totVal>0 ? 'R$ '+totVal.toLocaleString('pt-BR',{minimumFractionDigits:2}) : '—');
+
+  var sortedConv = pData.slice().sort(function(a,b){return b.aprov-a.aprov;});
+  var sortedTicket = pData.slice().sort(function(a,b){return b.ticket-a.ticket;});
+  var sortedStreak = pData.slice().sort(function(a,b){return b.streak-a.streak;});
+
+  function buildRank(arr, valFn){
+    return arr.map(function(p,i){
+      var r = valFn(p);
+      var posClass = i===0?'p1':i===1?'p2':'';
+      return '<div class="mdz-rank-row"><div class="mdz-rank-pos '+posClass+'">'+(i+1)+'</div><div class="mdz-rank-name">'+p.name+'</div><div class="mdz-rank-val '+r.cls+'">'+r.val+'</div></div>';
+    }).join('');
+  }
+
+  var convList = document.getElementById('mdz-rank-conv');
+  if(convList) convList.innerHTML = buildRank(sortedConv, function(p){ return {val:p.aprov>0?p.aprov.toFixed(0)+'%':'—', cls:p.aprov>=40?'good':p.aprov>0?'warn':''}; });
+
+  var tickList = document.getElementById('mdz-rank-ticket');
+  if(tickList) tickList.innerHTML = buildRank(sortedTicket, function(p){ return {val:p.ticket>0?'R$'+p.ticket.toFixed(0):'—', cls:p.ticket>=100?'good':''}; });
+
+  var strList = document.getElementById('mdz-rank-streak');
+  if(strList) strList.innerHTML = buildRank(sortedStreak, function(p){
+    var mc = getMonthConfig();
+    return {val:p.streak+'/'+mc.diasUteis, cls:p.streak>=mc.voucherMin?'gold':''};
+  });
+}
+
+/* FIREBASE LISTENER MDZ */
+function carregarMdzFirestore(){
+  getMdzDocRef().onSnapshot(function(doc){
+    if(doc.exists){
+      _mdzCache = doc.data();
+    } else {
+      _mdzCache = {};
+    }
+    // Refresh all MDZ views
+    MDZ_PEOPLE.forEach(function(p){
+      mdzLoadDay(p);
+    });
+  }, function(error){
+    console.error('Firestore MDZ listener error:', error);
+  });
+}
+
+/* RELOAD MDZ (chamado ao trocar mês) */
+function reloadMdz(){
+  _mdzCache = {};
+  MDZ_PEOPLE.forEach(function(p){
+    mdzDates[p] = new Date();
+    mdzUpdateDate(p);
+  });
+  carregarMdzFirestore();
+}
+
+/* INIT MDZ */
+document.addEventListener('DOMContentLoaded', function(){
+  MDZ_PEOPLE.forEach(function(p){ mdzUpdateDate(p); });
+  carregarMdzFirestore();
+});
 
 </script>
 </body>
