@@ -1118,7 +1118,19 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
         joyce:{gatilhos:[{area:'emporio',metas:[40139,43788,47437],premios:[350,500,700]},{area:'eco',metas:[107188,116933,126677],premios:[250,350,450]},{area:'total',metas:[185890,202789,219688],premios:[150,200,300]}],totais:[750,1050,1450]},
         suellen:{gatilhos:[{area:'eco',metas:[107188,116933,126677],premios:[200,300,400]},{area:'total',metas:[185890,202789,219688],premios:[100,150,200]}],totais:[300,450,600]}
       },
-      voucherMin: 22
+      voucherMin: 22,
+      etapaLabels: ['E1 · 01–04/abr','E2 · 06–11/abr','E3 · 13–18/abr','E4 · 20–25/abr','E5 · 27–30/abr'],
+      etapaPesos: {extras:[8,27,27,20,18],banho:[8,27,27,20,18],emporio:[8,27,27,20,18],vet:[8,27,27,20,18],hosp:[15,10,15,50,10],daycare:[65,16,5,7,7]},
+      notasDaycare: '65% das matrículas até dia 5',
+      notasHosp: 'Pico na semana do Tiradentes (E4)',
+      etapaInfo: [
+        {periodo:'01–04/abr',dias:'2 + sáb',nota:'<span class="etapa-badge etapa-curta">Semana curta</span> Sexta-Santa (03)',peso:'8%'},
+        {periodo:'06–11/abr',dias:'5 + sáb',nota:'<span class="etapa-badge etapa-cheia">Semana cheia</span>',peso:'27%'},
+        {periodo:'13–18/abr',dias:'5 + sáb',nota:'<span class="etapa-badge etapa-cheia">Semana cheia</span>',peso:'27%'},
+        {periodo:'20–25/abr',dias:'4 + sáb',nota:'<span class="etapa-badge etapa-feriado">Tiradentes (21)</span>',peso:'20%'},
+        {periodo:'27–30/abr',dias:'4',nota:'<span class="etapa-badge etapa-final">Push final</span> Sem sábado',peso:'18%'}
+      ],
+      etapaDays: [[1,2,3,4],[6,7,8,9,10,11],[13,14,15,16,17,18],[20,21,22,23,24,25],[27,28,29,30]]
     },
     '2026-05': {
       label: 'Maio 2026', labelShort: 'MAI 2026', month: 4, year: 2026, diasUteis: 25,
@@ -1147,7 +1159,19 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
         joyce:{gatilhos:[{area:'emporio',metas:[40693,44393,48092],premios:[350,500,700]},{area:'eco',metas:[106173,115825,125478],premios:[300,450,450]},{area:'total',metas:[193008,210555,228101],premios:[150,200,300]}],totais:[800,1150,1450]},
         suellen:{gatilhos:[{area:'eco',metas:[106173,115825,125478],premios:[200,300,350]},{area:'total',metas:[193008,210555,228101],premios:[100,150,200]}],totais:[300,450,550]}
       },
-      voucherMin: 23
+      voucherMin: 23,
+      etapaLabels: ['E1 · 01–03/mai','E2 · 04–10/mai','E3 · 11–17/mai','E4 · 18–24/mai','E5 · 25–31/mai'],
+      etapaPesos: {extras:[7,23,24,23,23],banho:[7,23,24,23,23],emporio:[4,24,24,24,24],vet:[3,39,34,12,12],hosp:[3,20,32,26,19],daycare:[11,77,7,2,3]},
+      notasDaycare: '77% do faturamento entra até dia 10',
+      notasHosp: 'Distribuição: E1:3%, E2:20%, E3:32%, E4:26%, E5:19%',
+      etapaInfo: [
+        {periodo:'01–03/mai',dias:'1 + sáb',nota:'<span class="etapa-badge etapa-curta">Semana curta</span> Feriado 01/mai',peso:'4%'},
+        {periodo:'04–10/mai',dias:'6 dias',nota:'<span class="etapa-badge etapa-cheia">Dia das Mães</span> 10/mai (dom)',peso:'24%'},
+        {periodo:'11–17/mai',dias:'6 dias',nota:'<span class="etapa-badge etapa-cheia">Semana cheia</span>',peso:'24%'},
+        {periodo:'18–24/mai',dias:'6 dias',nota:'<span class="etapa-badge etapa-cheia">Semana cheia</span>',peso:'24%'},
+        {periodo:'25–31/mai',dias:'6 dias',nota:'<span class="etapa-badge etapa-final">Push final</span>',peso:'24%'}
+      ],
+      etapaDays: [[1,2,3],[4,5,6,7,8,9,10],[11,12,13,14,15,16,17],[18,19,20,21,22,23,24],[25,26,27,28,29,30,31]]
     }
   };
 
@@ -1263,7 +1287,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   <header class="main-header">
     <div style="display:flex;align-items:center;gap:12px">
       <button class="hamburger" onclick="openSidebar()"><i class="bi bi-list"></i></button>
-      <h1 id="page-title"><span>Amanda — Supervisora</span> &middot; Abril 2026</h1>
+      <h1 id="page-title"><span>Amanda — Supervisora</span></h1>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span class="autosave-indicator" id="autosave-indicator">Salvo</span>
@@ -1318,9 +1342,9 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 
 
 <!-- ===== CALENDARIO 5 ETAPAS ===== -->
-<h2 class="sec"><i class="bi bi-calendar3" style="color:var(--z-gold)"></i> Calendário Abril 2026 — 5 Etapas</h2>
-<div class="card" style="margin-bottom:24px">
-  <div class="etapas-cal-grid">
+<h2 class="sec"><i class="bi bi-calendar3" style="color:var(--z-gold)"></i> <span id="cal-title">Calendário — 5 Etapas</span></h2>
+<div class="card" style="margin-bottom:24px" id="cal-etapas-container">
+  <div class="etapas-cal-grid" id="cal-etapas-grid">
     <div class="cal-hd">Seg</div>
     <div class="cal-hd">Ter</div>
     <div class="cal-hd">Qua</div>
@@ -1364,50 +1388,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div class="cal-d" style="opacity:.15"></div>
   </div>
 
-  <table style="margin-top:16px">
-    <tr>
-      <th style="text-align:left">Etapa</th>
-      <th>Período</th>
-      <th>Dias Úteis</th>
-      <th>Observação</th>
-      <th>Peso</th>
-    </tr>
-    <tr>
-      <td><span style="display:inline-block;width:10px;height:10px;background:#C0392B;border-radius:50%;margin-right:6px"></span>Etapa 1</td>
-      <td>01 – 04/abr</td>
-      <td>2 + sáb</td>
-      <td><span class="etapa-badge etapa-curta">Semana curta</span> Sexta-Santa (03)</td>
-      <td><strong>8%</strong></td>
-    </tr>
-    <tr>
-      <td><span style="display:inline-block;width:10px;height:10px;background:#27AE60;border-radius:50%;margin-right:6px"></span>Etapa 2</td>
-      <td>06 – 11/abr</td>
-      <td>5 + sáb</td>
-      <td><span class="etapa-badge etapa-cheia">Semana cheia</span></td>
-      <td><strong>27%</strong></td>
-    </tr>
-    <tr>
-      <td><span style="display:inline-block;width:10px;height:10px;background:#234D67;border-radius:50%;margin-right:6px"></span>Etapa 3</td>
-      <td>13 – 18/abr</td>
-      <td>5 + sáb</td>
-      <td><span class="etapa-badge etapa-cheia">Semana cheia</span></td>
-      <td><strong>27%</strong></td>
-    </tr>
-    <tr>
-      <td><span style="display:inline-block;width:10px;height:10px;background:#D4850A;border-radius:50%;margin-right:6px"></span>Etapa 4</td>
-      <td>20 – 25/abr</td>
-      <td>4 + sáb</td>
-      <td><span class="etapa-badge etapa-feriado">Tiradentes (21)</span></td>
-      <td><strong>20%</strong></td>
-    </tr>
-    <tr>
-      <td><span style="display:inline-block;width:10px;height:10px;background:#2E7D8A;border-radius:50%;margin-right:6px"></span>Etapa 5</td>
-      <td>27 – 30/abr</td>
-      <td>4</td>
-      <td><span class="etapa-badge etapa-final">Push final</span> Sem sábado</td>
-      <td><strong>18%</strong></td>
-    </tr>
-  </table>
+  <div id="etapa-table-container"></div>
 </div>
 
 <!-- ===== CHART + CALENDAR ===== -->
@@ -1550,7 +1531,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 <!-- ===== 10. RESUMO ACUMULADO ===== -->
 <h2 class="sec"><i class="bi bi-pie-chart"></i> Resumo Acumulado</h2>
 <div class="sum-card">
-<h3>Acumulado Abril 2026</h3>
+<h3 id="acum-title">Acumulado</h3>
 <table>
   <tr><th style="text-align:left">Área</th><th>Acumulado</th><th>Meta Cuidado</th><th>Falta</th><th>%</th></tr>
   <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Extras SPA Dermoprotetor</td><td id="sum-extras">R$ 0</td><td style="color:rgba(255,255,255,.4)">R$ 9.557</td><td id="sumfalta-extras" style="color:var(--z-red)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-spa)">0%</td></tr>
@@ -1648,7 +1629,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 </div>
 
 <!-- ===== 5. JOGOS ===== -->
-<h2 class="sec"><i class="bi bi-controller"></i> Jogos de Vendas — Abril</h2>
+<h2 class="sec"><i class="bi bi-controller"></i> Jogos de Vendas</h2>
 <div class="nota" style="margin-bottom:10px"><strong>Orçamento:</strong> R$ 200/mês = R$ 50/semana</div>
 
 <div id="jogos-ativos-container">
@@ -1703,244 +1684,11 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),var(--z-blue-deep));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0"><i class="bi bi-trophy"></i></div>
     <div>
       <h2 style="font-size:22px;font-weight:800;color:var(--z-blue);margin:0;border:none;padding:0">Metas do Mês</h2>
-      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Metas, premiação e remuneração — Abril 2026</p>
+      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0" id="metas-mes-subtitle">Metas, premiação e remuneração</p>
     </div>
   </div>
 
-<!-- ===== 1. METAS ===== -->
-<h2 class="sec"><i class="bi bi-trophy"></i> Metas de Abril</h2>
-
-<div class="card">
-<p style="font-size:13px">Três níveis de meta. Cada nível paga mais. As premiações são <strong>cumulativas</strong> — quanto mais níveis bater, mais ganha.</p>
-<div class="meta-grid">
-  <div class="meta-box" style="border-color:var(--z-meta-cuidado)">
-    <div class="nivel" style="color:var(--z-meta-cuidado-text)">Nível 1</div>
-    <div class="alvo" style="color:var(--z-meta-cuidado-text)">Meta CUIDADO</div>
-    <div class="ref">O cuidado mínimo que mantém a operação</div>
-  </div>
-  <div class="meta-box" style="border-color:var(--z-blue)">
-    <div class="nivel" style="color:var(--z-blue)">Nível 2</div>
-    <div class="alvo" style="color:var(--z-blue)">Meta ZÊLO</div>
-    <div class="ref">O zelo que faz a diferença</div>
-  </div>
-  <div class="meta-box" style="border-color:var(--z-gold)">
-    <div class="nivel" style="color:var(--z-gold)">Nível 3</div>
-    <div class="alvo" style="color:var(--z-gold)">Meta ENCANTO</div>
-    <div class="ref">Onde o encanto acontece!</div>
-  </div>
-</div>
-</div>
-
-<div class="card">
-<table>
-  <tr><th style="text-align:left">Área</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td>Extras SPA Dermoprotetor</td><td>R$ 9.557</td><td>R$ 10.426</td><td>R$ 11.294</td></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td>Banho SPA Dermoprotetor</td><td>R$ 45.475</td><td>R$ 49.609</td><td>R$ 53.743</td></tr>
-  <tr style="border-left:3px solid var(--z-emporio)"><td>Empório</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
-  <tr style="border-left:3px solid var(--z-vetcare)"><td>Veterinária</td><td>R$ 12.018</td><td>R$ 13.110</td><td>R$ 14.203</td></tr>
-  <tr style="font-weight:700;background:rgba(222,180,40,.06);border-left:3px solid var(--z-gold)"><td>Ecossistema (SPA+Empório+Vet)</td><td>R$ 107.188</td><td>R$ 116.933</td><td>R$ 126.677</td></tr>
-  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-gray-500)">Hospedagem</td><td style="color:var(--z-gray-500)">R$ 32.599</td><td style="color:var(--z-gray-500)">R$ 35.562</td><td style="color:var(--z-gray-500)">R$ 38.526</td></tr>
-  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-gray-500)">Daycare</td><td style="color:var(--z-gray-500)">R$ 46.103</td><td style="color:var(--z-gray-500)">R$ 50.294</td><td style="color:var(--z-gray-500)">R$ 54.486</td></tr>
-  <tr class="tot"><td>Total Zêluz</td><td>R$ 185.890</td><td>R$ 202.789</td><td>R$ 219.688</td></tr>
-</table>
-<div class="nota"><strong>Ecossistema</strong> = SPA Dermoprotetor (banho + extras) + Empório + Veterinária — meta do time.<br><strong>Hospedagem e Daycare</strong> = fazem parte do Total Zêluz. O time todo ganha se o total bater.</div>
-</div>
-
-<!-- ===== 2. PREMIAÇÃO ===== -->
-<h2 class="sec"><i class="bi bi-gift"></i> Premiação — Quanto cada membro do Time pode FAZER*</h2>
-<div class="card" style="border-left:4px solid var(--z-gold);background:rgba(222,180,40,.03);padding:14px 20px;margin-bottom:16px">
-  <p style="font-size:13px;color:rgba(35,77,103,.5);margin-bottom:4px"><strong>Composição*:</strong> Salário + Assiduidade (R$ 300)* + Caju (R$ 380)* + Premiação</p>
-  <p style="font-size:11px;color:rgba(35,77,103,.35)">*Assiduidade e Caju são condicionados ao cumprimento das regras pré-definidas — não são automáticos.</p>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-blue)">
-<h3>Supervisora (Amanda) <span class="badge-blue badge">40% do pool</span></h3>
-<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-spa)">
-<h3>Fernanda — Consultora de Bem-Estar <span class="badge" style="background:var(--z-spa)">25% do pool</span></h3>
-<div class="info">Gatilhos: 15% Extras + 25% Banho + 40% Eco + 20% Total</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Extras SPA Dermoprotetor</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
-  <tr><td>Banho SPA Dermoprotetor</td><td>R$ 200</td><td>R$ 250</td><td>R$ 350</td></tr>
-  <tr><td>Ecossistema</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-emporio)">
-<h3>Joyce — Consultora de Bem-Estar <span class="badge" style="background:var(--z-emporio)">25% do pool</span></h3>
-<div class="info">Gatilhos: 50% Empório + 30% Eco + 20% Total</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Empório</td><td>R$ 350</td><td>R$ 500</td><td>R$ 700</td></tr>
-  <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
-</table>
-</div>
-
-<div class="pessoa" style="border-left-color:var(--z-vetcare)">
-<h3>Suellen — Veterinária <span class="badge" style="background:var(--z-vetcare)">10% do pool</span></h3>
-<div class="info">Gatilhos: 70% Ecossistema + 30% Total Zêluz</div>
-<table>
-  <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-  <tr><td>Ecossistema</td><td>R$ 200</td><td>R$ 300</td><td>R$ 400</td></tr>
-  <tr><td>Total Zêluz</td><td>R$ 100</td><td>R$ 150</td><td>R$ 200</td></tr>
-  <tr class="tot"><td>Total Premiação</td><td>R$ 300</td><td>R$ 450</td><td>R$ 600</td></tr>
-</table>
-</div>
-
-<!-- ===== 3. REMUNERAÇÃO (sem Suellen) ===== -->
-<h2 class="sec"><i class="bi bi-cash-stack"></i> Remuneração Total</h2>
-
-<div class="card">
-<p style="font-size:12px;color:var(--z-gray-500);margin-bottom:10px"><strong>Composição*:</strong> Salário + R$ 300 (assiduidade) + R$ 380 (alimentação) + Premiação = Total</p>
-<table>
-  <tr><th style="text-align:left">Pessoa</th><th>Sem meta</th><th>+ Cuidado</th><th>+ Zêlo</th><th>+ Encanto</th></tr>
-  <tr><td>Supervisora (Amanda)</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.880</td><td>Sal. + R$ 2.430</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 3.030</td></tr>
-  <tr><td>Fernanda</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
-  <tr><td>Joyce</td><td>Sal. + R$ 680</td><td>Sal. + R$ 1.430</td><td>Sal. + R$ 1.730</td><td style="color:var(--z-green);font-weight:700">Sal. + R$ 2.130</td></tr>
-</table>
-<div class="nota"><strong>Pagamento da premiação:</strong> apurada dia 1 do mês seguinte, paga até o 5.° dia útil.</div>
-</div>
-
-
-  <!-- DIVISAO SEMANAL DAS METAS -->
-  <h2 class="sec" style="margin-top:32px"><i class="bi bi-calendar-week" style="color:var(--z-gold)"></i> Divisão Semanal das Metas</h2>
-  <div class="card" style="margin-bottom:12px;padding:12px 16px">
-    <p style="font-size:12px;color:var(--z-gray-500);margin-bottom:0">
-      <strong>Nível 1 — Cuidado (+10%):</strong> O mínimo que mantém a operação &nbsp;|&nbsp;
-      <strong>Nível 2 — Zêlo (+20%):</strong> O zelo que faz a diferença &nbsp;|&nbsp;
-      <strong>Nível 3 — Encanto (+30%):</strong> Onde o encanto acontece!
-    </p>
-  </div>
-
-  <!-- METAS POR ETAPA — 3 FAIXAS (fonte: metas-jogos-abril-2026.html) -->
-
-  <!-- Extras SPA -->
-  <div class="card" style="border-left:3px solid var(--z-spa);margin-bottom:10px;padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-spa);margin-bottom:8px"><i class="bi bi-stars" style="margin-right:6px"></i>Extras SPA Dermoprotetor — Fernanda</h3>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>8%</td><td>R$ 765</td><td>R$ 834</td><td>R$ 904</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>27%</td><td>R$ 2.581</td><td>R$ 2.816</td><td>R$ 3.050</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>27%</td><td>R$ 2.581</td><td>R$ 2.816</td><td>R$ 3.050</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>20%</td><td>R$ 1.912</td><td>R$ 2.086</td><td>R$ 2.259</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>18%</td><td>R$ 1.718</td><td>R$ 1.874</td><td>R$ 2.031</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 9.557</td><td>R$ 10.426</td><td>R$ 11.294</td></tr>
-    </table>
-  </div>
-
-  <!-- Banho SPA -->
-  <div class="card" style="border-left:3px solid var(--z-spa);margin-bottom:10px;padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-spa);margin-bottom:8px"><i class="bi bi-droplet-half" style="margin-right:6px"></i>Banho SPA Dermoprotetor — Fernanda</h3>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>8%</td><td>R$ 3.638</td><td>R$ 3.969</td><td>R$ 4.299</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>27%</td><td>R$ 12.278</td><td>R$ 13.394</td><td>R$ 14.510</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>27%</td><td>R$ 12.278</td><td>R$ 13.394</td><td>R$ 14.510</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>20%</td><td>R$ 9.095</td><td>R$ 9.921</td><td>R$ 10.748</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>18%</td><td>R$ 8.186</td><td>R$ 8.931</td><td>R$ 9.676</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 45.475</td><td>R$ 49.609</td><td>R$ 53.743</td></tr>
-    </table>
-  </div>
-
-  <!-- Empório -->
-  <div class="card" style="border-left:3px solid var(--z-emporio);margin-bottom:10px;padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-emporio);margin-bottom:8px"><i class="bi bi-shop" style="margin-right:6px"></i>Empório — Joyce</h3>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>8%</td><td>R$ 3.211</td><td>R$ 3.503</td><td>R$ 3.795</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>27%</td><td>R$ 10.838</td><td>R$ 11.823</td><td>R$ 12.808</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>27%</td><td>R$ 10.838</td><td>R$ 11.823</td><td>R$ 12.808</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>20%</td><td>R$ 8.028</td><td>R$ 8.758</td><td>R$ 9.487</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>18%</td><td>R$ 7.225</td><td>R$ 7.882</td><td>R$ 8.539</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
-    </table>
-  </div>
-
-  <!-- VetCare -->
-  <div class="card" style="border-left:3px solid var(--z-vetcare);margin-bottom:10px;padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-vetcare);margin-bottom:8px"><i class="bi bi-heart-pulse" style="margin-right:6px"></i>VetCare — Suellen</h3>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>8%</td><td>R$ 961</td><td>R$ 1.049</td><td>R$ 1.136</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>27%</td><td>R$ 3.245</td><td>R$ 3.540</td><td>R$ 3.835</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>27%</td><td>R$ 3.245</td><td>R$ 3.540</td><td>R$ 3.835</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>20%</td><td>R$ 2.404</td><td>R$ 2.622</td><td>R$ 2.840</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>18%</td><td>R$ 2.163</td><td>R$ 2.360</td><td>R$ 2.556</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 12.018</td><td>R$ 13.110</td><td>R$ 14.203</td></tr>
-    </table>
-  </div>
-
-  <!-- Ecossistema -->
-  <div class="card" style="border:2px solid var(--z-gold);margin-bottom:10px;padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-gold);margin-bottom:8px"><i class="bi bi-trophy" style="margin-right:6px"></i>Ecossistema Total — Amanda (Supervisora)</h3>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>8%</td><td>R$ 8.575</td><td>R$ 9.355</td><td>R$ 10.134</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>27%</td><td>R$ 28.941</td><td>R$ 31.572</td><td>R$ 34.203</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>27%</td><td>R$ 28.941</td><td>R$ 31.572</td><td>R$ 34.203</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>20%</td><td>R$ 21.438</td><td>R$ 23.387</td><td>R$ 25.335</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>18%</td><td>R$ 19.294</td><td>R$ 21.048</td><td>R$ 22.802</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 107.188</td><td>R$ 116.933</td><td>R$ 126.677</td></tr>
-    </table>
-  </div>
-
-  <!-- Daycare -->
-  <div class="card" style="border-left:3px solid #D4875A;margin-bottom:10px;padding:14px 16px;opacity:.85">
-    <h3 style="font-size:14px;font-weight:700;color:#D4875A;margin-bottom:4px"><i class="bi bi-sun" style="margin-right:6px"></i>Daycare — Acompanhamento</h3>
-    <p style="font-size:10px;color:#C0392B;margin-bottom:8px"><i class="bi bi-exclamation-triangle"></i> Pesos baseados nos dados REAIS de Abr/25 — 65% das matrículas até dia 5</p>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr style="background:rgba(212,135,90,.06)"><td>E1 · 01–04/abr</td><td><strong>65%</strong></td><td>R$ 29.967</td><td>R$ 32.691</td><td>R$ 35.416</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>16%</td><td>R$ 7.376</td><td>R$ 8.047</td><td>R$ 8.718</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>5%</td><td>R$ 2.305</td><td>R$ 2.515</td><td>R$ 2.724</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>7%</td><td>R$ 3.227</td><td>R$ 3.521</td><td>R$ 3.814</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>7%</td><td>R$ 3.227</td><td>R$ 3.521</td><td>R$ 3.814</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 46.103</td><td>R$ 50.294</td><td>R$ 54.486</td></tr>
-    </table>
-  </div>
-
-  <!-- Hospedagem -->
-  <div class="card" style="border-left:3px solid #5AABB5;margin-bottom:10px;padding:14px 16px;opacity:.85">
-    <h3 style="font-size:14px;font-weight:700;color:#5AABB5;margin-bottom:4px"><i class="bi bi-house-heart" style="margin-right:6px"></i>Hospedagem (Auaulândia) — Acompanhamento</h3>
-    <p style="font-size:10px;color:#C0392B;margin-bottom:8px"><i class="bi bi-exclamation-triangle"></i> Pico concentrado na semana do feriado Tiradentes (E4)</p>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>15%</td><td>R$ 4.890</td><td>R$ 5.334</td><td>R$ 5.779</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>10%</td><td>R$ 3.260</td><td>R$ 3.556</td><td>R$ 3.853</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>15%</td><td>R$ 4.890</td><td>R$ 5.334</td><td>R$ 5.779</td></tr>
-      <tr style="background:rgba(90,171,181,.06)"><td>E4 · 20–25/abr</td><td><strong>50%</strong></td><td>R$ 16.300</td><td>R$ 17.781</td><td>R$ 19.263</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>10%</td><td>R$ 3.260</td><td>R$ 3.556</td><td>R$ 3.853</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>R$ 32.599</td><td>R$ 35.562</td><td>R$ 38.526</td></tr>
-    </table>
-  </div>
-
-  <!-- Total Zêluz Consolidado -->
-  <div class="card" style="border:2px solid var(--z-blue);background:rgba(35,77,103,.02);padding:14px 16px">
-    <h3 style="font-size:14px;font-weight:700;color:var(--z-blue);margin-bottom:8px"><i class="bi bi-building" style="margin-right:6px"></i>Total Zêluz — Visão Completa</h3>
-    <p style="font-size:11px;color:var(--z-gray-500);margin-bottom:8px">Ecossistema + Hospedagem + Daycare</p>
-    <table style="font-size:12px">
-      <tr><th style="text-align:left">Etapa</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>
-      <tr><td>E1 · 01–04/abr</td><td>R$ 43.432</td><td>R$ 47.380</td><td>R$ 51.329</td></tr>
-      <tr><td>E2 · 06–11/abr</td><td>R$ 39.577</td><td>R$ 43.175</td><td>R$ 46.774</td></tr>
-      <tr><td>E3 · 13–18/abr</td><td>R$ 36.136</td><td>R$ 39.421</td><td>R$ 42.706</td></tr>
-      <tr><td>E4 · 20–25/abr</td><td>R$ 40.965</td><td>R$ 44.689</td><td>R$ 48.412</td></tr>
-      <tr><td>E5 · 27–30/abr</td><td>R$ 25.781</td><td>R$ 28.125</td><td>R$ 30.469</td></tr>
-      <tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total Mês</td><td>R$ 185.890</td><td>R$ 202.789</td><td>R$ 219.688</td></tr>
-    </table>
-  </div>
+  <div id="metas-mes-content"></div>
 
 </div><!-- fim view-metas-mes -->
 
@@ -4165,7 +3913,7 @@ function carregar(){
 }
 
 function limpar(){
-  if(!confirm('Limpar todos os dados de abril?')) return;
+  if(!confirm('Limpar todos os dados de '+getMonthConfig().label+'?')) return;
   localStorage.removeItem('zeluz-dash-'+ACTIVE_MONTH);
   document.querySelectorAll('input[data-area]').forEach(function(i){ i.value = ''; });
   calc();
@@ -4179,7 +3927,7 @@ function exportar(){
     if(!seen[k]){ seen[k] = true; t[i.dataset.area] += parseNum(i.value); }
   });
   var spa = t.banho + t.extras; var eco = spa + t.emporio + t.vet; var total = eco + t.hosp + t.daycare;
-  var txt = 'RELATÓRIO SEMANAL — ABRIL 2026\n================================\n';
+  var txt = 'RELATÓRIO SEMANAL — '+getMonthConfig().label.toUpperCase()+'\n================================\n';
   txt += 'Extras SPA Dermoprotetor:  ' + fmt(t.extras) + ' / ' + fmt(METAS.extras.base) + '\n';
   txt += 'Banho SPA Dermoprotetor:   ' + fmt(t.banho) + ' / ' + fmt(METAS.banho.base) + '\n';
   txt += 'SPA Dermoprotetor Total:   ' + fmt(spa) + ' / R$ 55.032\n';
@@ -4191,7 +3939,7 @@ function exportar(){
   txt += 'Ecossistema: ' + fmt(eco) + ' / ' + fmt(ECO_BASE) + '\n';
   txt += 'Total Zêluz: ' + fmt(total) + ' / ' + fmt(TOTAL_BASE) + '\n';
   var b = new Blob([txt], {type:'text/plain'});
-  var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'relatorio-abril-2026.txt'; a.click();
+  var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'relatorio-'+ACTIVE_MONTH+'.txt'; a.click();
 }
 
 /* ===== JOGOS SAVE/LOAD ===== */
@@ -4318,6 +4066,199 @@ setInterval(function(){
 </script>
 
 <script>
+/* ===== RENDER ETAPA TABLE + CALENDAR GRID ===== */
+function renderEtapaTable(){
+  var mc = getMonthConfig();
+  var ei = mc.etapaInfo;
+  var colors = ['#C0392B','#27AE60','#234D67','#D4850A','#2E7D8A'];
+  var h = '<table style="margin-top:16px"><tr><th style="text-align:left">Etapa</th><th>Período</th><th>Dias Úteis</th><th>Observação</th><th>Peso</th></tr>';
+  for(var i=0;i<ei.length;i++){
+    h += '<tr><td><span style="display:inline-block;width:10px;height:10px;background:'+colors[i]+';border-radius:50%;margin-right:6px"></span>Etapa '+(i+1)+'</td>';
+    h += '<td>'+ei[i].periodo+'</td><td>'+ei[i].dias+'</td><td>'+ei[i].nota+'</td><td><strong>'+ei[i].peso+'</strong></td></tr>';
+  }
+  h += '</table>';
+  var el = document.getElementById('etapa-table-container');
+  if(el) el.innerHTML = h;
+}
+
+function renderCalendarGrid(){
+  var mc = getMonthConfig();
+  var y = mc.year, m = mc.month;
+  var firstDay = new Date(y,m,1).getDay(); // 0=dom
+  var daysInMonth = new Date(y,m+1,0).getDate();
+  var today = new Date();
+  var todayDay = (today.getFullYear()===y && today.getMonth()===m) ? today.getDate() : -1;
+  var ed = mc.etapaDays;
+
+  function getEtapa(day){
+    for(var i=0;i<ed.length;i++){ if(ed[i].indexOf(day)>=0) return i+1; }
+    return 0;
+  }
+
+  // Shift to Mon-start: 0=Mon...6=Sun
+  var startCol = (firstDay + 6) % 7;
+  var h = '<div class="cal-hd">Seg</div><div class="cal-hd">Ter</div><div class="cal-hd">Qua</div><div class="cal-hd">Qui</div><div class="cal-hd">Sex</div><div class="cal-hd">Sáb</div><div class="cal-hd">Dom</div>';
+  for(var i=0;i<startCol;i++) h += '<div class="cal-d" style="opacity:.15"></div>';
+  for(var d=1;d<=daysInMonth;d++){
+    var dow = new Date(y,m,d).getDay();
+    var et = getEtapa(d);
+    var cls = 'cal-d';
+    if(et>0) cls += ' e'+et;
+    if(dow===0) cls += ' dom';
+    if(mc.feriadosCal.indexOf(d)>=0) cls += ' fer';
+    if(d===todayDay) cls += ' hj';
+    h += '<div class="'+cls+'">'+d+'</div>';
+  }
+  var totalCells = startCol + daysInMonth;
+  var remaining = (7 - totalCells%7) % 7;
+  for(var i=0;i<remaining;i++) h += '<div class="cal-d" style="opacity:.15"></div>';
+
+  var grid = document.getElementById('cal-etapas-grid');
+  if(grid) grid.innerHTML = h;
+}
+
+/* ===== RENDER METAS MES (dinâmico) ===== */
+function renderMetasMes(){
+  var mc = getMonthConfig();
+  var M = mc.metas;
+  var P = mc.poupanca;
+  var EM = mc.etapaMetas;
+  var EL = mc.etapaLabels;
+  var EP = mc.etapaPesos;
+  function f(n){ return 'R$ '+Math.round(n).toLocaleString('pt-BR'); }
+  function zelo(c){ return Math.round(c*12/11); }
+  function encanto(c){ return Math.round(c*13/11); }
+
+  // Subtitle
+  var subEl = document.getElementById('metas-mes-subtitle');
+  if(subEl) subEl.textContent = 'Metas, premiação e remuneração — '+mc.label;
+  var calT = document.getElementById('cal-title');
+  if(calT) calT.textContent = 'Calendário '+mc.label+' — 5 Etapas';
+  var acumT = document.getElementById('acum-title');
+  if(acumT) acumT.textContent = 'Acumulado '+mc.label;
+
+  var ecoBase=M.extras.base+M.banho.base+M.emporio.base+M.vet.base;
+  var ecoAlvo=M.extras.alvo+M.banho.alvo+M.emporio.alvo+M.vet.alvo;
+  var ecoOuro=M.extras.ouro+M.banho.ouro+M.emporio.ouro+M.vet.ouro;
+  var totBase=ecoBase+M.hosp.base+M.daycare.base;
+  var totAlvo=ecoAlvo+M.hosp.alvo+M.daycare.alvo;
+  var totOuro=ecoOuro+M.hosp.ouro+M.daycare.ouro;
+
+  var h = '';
+
+  // 1. Cards 3 níveis
+  h += '<h2 class="sec"><i class="bi bi-trophy"></i> Metas — '+mc.label+'</h2>';
+  h += '<div class="card"><p style="font-size:13px">Três níveis de meta. Cada nível paga mais. As premiações são <strong>cumulativas</strong>.</p>';
+  h += '<div class="meta-grid"><div class="meta-box" style="border-color:var(--z-meta-cuidado)"><div class="nivel" style="color:var(--z-meta-cuidado-text)">Nível 1</div><div class="alvo" style="color:var(--z-meta-cuidado-text)">Meta CUIDADO</div><div class="ref">O cuidado mínimo</div></div>';
+  h += '<div class="meta-box" style="border-color:var(--z-blue)"><div class="nivel" style="color:var(--z-blue)">Nível 2</div><div class="alvo" style="color:var(--z-blue)">Meta ZÊLO</div><div class="ref">O zelo que faz a diferença</div></div>';
+  h += '<div class="meta-box" style="border-color:var(--z-gold)"><div class="nivel" style="color:var(--z-gold)">Nível 3</div><div class="alvo" style="color:var(--z-gold)">Meta ENCANTO</div><div class="ref">Onde o encanto acontece!</div></div></div></div>';
+
+  // 2. Tabela resumo
+  h += '<div class="card"><table>';
+  h += '<tr><th style="text-align:left">Área</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>';
+  var areas = [
+    {k:'extras',name:'Extras SPA Dermoprotetor',color:'var(--z-spa)',dim:false},
+    {k:'banho',name:'Banho SPA Dermoprotetor',color:'var(--z-spa)',dim:false},
+    {k:'emporio',name:'Empório',color:'var(--z-emporio)',dim:false},
+    {k:'vet',name:'Veterinária',color:'var(--z-vetcare)',dim:false}
+  ];
+  areas.forEach(function(a){ h += '<tr style="border-left:3px solid '+a.color+'"><td>'+a.name+'</td><td>'+f(M[a.k].base)+'</td><td>'+f(M[a.k].alvo)+'</td><td>'+f(M[a.k].ouro)+'</td></tr>'; });
+  h += '<tr style="font-weight:700;background:rgba(222,180,40,.06);border-left:3px solid var(--z-gold)"><td>Ecossistema</td><td>'+f(ecoBase)+'</td><td>'+f(ecoAlvo)+'</td><td>'+f(ecoOuro)+'</td></tr>';
+  h += '<tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-gray-500)">Hospedagem</td><td style="color:var(--z-gray-500)">'+f(M.hosp.base)+'</td><td style="color:var(--z-gray-500)">'+f(M.hosp.alvo)+'</td><td style="color:var(--z-gray-500)">'+f(M.hosp.ouro)+'</td></tr>';
+  h += '<tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-gray-500)">Daycare</td><td style="color:var(--z-gray-500)">'+f(M.daycare.base)+'</td><td style="color:var(--z-gray-500)">'+f(M.daycare.alvo)+'</td><td style="color:var(--z-gray-500)">'+f(M.daycare.ouro)+'</td></tr>';
+  h += '<tr class="tot"><td>Total Zêluz</td><td>'+f(totBase)+'</td><td>'+f(totAlvo)+'</td><td>'+f(totOuro)+'</td></tr>';
+  h += '</table><div class="nota"><strong>Ecossistema</strong> = SPA + Empório + Veterinária — meta do time.<br><strong>Hospedagem e Daycare</strong> = fazem parte do Total Zêluz.</div></div>';
+
+  // 3. Premiação por pessoa
+  h += '<h2 class="sec"><i class="bi bi-gift"></i> Premiação — Quanto cada membro pode FAZER*</h2>';
+  h += '<div class="card" style="border-left:4px solid var(--z-gold);background:rgba(222,180,40,.03);padding:14px 20px;margin-bottom:16px"><p style="font-size:13px;color:rgba(35,77,103,.5);margin-bottom:4px"><strong>Composição*:</strong> Salário + Assiduidade (R$ 300)* + Caju (R$ 380)* + Premiação</p><p style="font-size:11px;color:rgba(35,77,103,.35)">*Condicionados ao cumprimento das regras.</p></div>';
+
+  var pessoas = [
+    {id:'amanda', nome:'Supervisora (Amanda)', color:'var(--z-blue)', badge:'40% do pool', badgeCls:'badge-blue badge'},
+    {id:'fernanda', nome:'Fernanda — Consultora de Bem-Estar', color:'var(--z-spa)', badge:'25% do pool', badgeCls:'badge" style="background:var(--z-spa)'},
+    {id:'joyce', nome:'Joyce — Consultora de Bem-Estar', color:'var(--z-emporio)', badge:'25% do pool', badgeCls:'badge" style="background:var(--z-emporio)'},
+    {id:'suellen', nome:'Suellen — Veterinária', color:'var(--z-vetcare)', badge:'10% do pool', badgeCls:'badge" style="background:var(--z-vetcare)'}
+  ];
+  var areaNames = {extras:'Extras SPA',banho:'Banho SPA',emporio:'Empório',eco:'Ecossistema',total:'Total Zêluz',vet:'Veterinária'};
+  pessoas.forEach(function(p){
+    var pp = P[p.id]; if(!pp) return;
+    h += '<div class="pessoa" style="border-left-color:'+p.color+'"><h3>'+p.nome+' <span class="'+p.badgeCls+'">'+p.badge+'</span></h3><table>';
+    h += '<tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>';
+    pp.gatilhos.forEach(function(g){ h += '<tr><td>'+(areaNames[g.area]||g.area)+'</td><td>'+f(g.premios[0])+'</td><td>'+f(g.premios[1])+'</td><td>'+f(g.premios[2])+'</td></tr>'; });
+    h += '<tr class="tot"><td>Total Premiação</td><td>'+f(pp.totais[0])+'</td><td>'+f(pp.totais[1])+'</td><td>'+f(pp.totais[2])+'</td></tr>';
+    h += '</table></div>';
+  });
+
+  // 4. Remuneração
+  h += '<h2 class="sec"><i class="bi bi-cash-stack"></i> Remuneração Total</h2><div class="card">';
+  h += '<p style="font-size:12px;color:var(--z-gray-500);margin-bottom:10px"><strong>Composição*:</strong> Salário + R$ 300 + R$ 380 + Premiação</p><table>';
+  h += '<tr><th style="text-align:left">Pessoa</th><th>Sem meta</th><th>+ Cuidado</th><th>+ Zêlo</th><th>+ Encanto</th></tr>';
+  ['amanda','fernanda','joyce'].forEach(function(id){
+    var pp = P[id]; if(!pp) return;
+    var nomes = {amanda:'Supervisora (Amanda)',fernanda:'Fernanda',joyce:'Joyce'};
+    h += '<tr><td>'+nomes[id]+'</td><td>Sal. + R$ 680</td><td>Sal. + '+f(680+pp.totais[0])+'</td><td>Sal. + '+f(680+pp.totais[1])+'</td><td style="color:var(--z-green);font-weight:700">Sal. + '+f(680+pp.totais[2])+'</td></tr>';
+  });
+  h += '</table><div class="nota"><strong>Pagamento:</strong> apurada dia 1 do mês seguinte, paga até o 5.° dia útil.</div></div>';
+
+  // 5. Divisão Semanal
+  h += '<h2 class="sec" style="margin-top:32px"><i class="bi bi-calendar-week" style="color:var(--z-gold)"></i> Divisão Semanal das Metas</h2>';
+  h += '<div class="card" style="margin-bottom:12px;padding:12px 16px"><p style="font-size:12px;color:var(--z-gray-500);margin-bottom:0"><strong>Cuidado (+10%)</strong> | <strong>Zêlo (+20%)</strong> | <strong>Encanto (+30%)</strong></p></div>';
+
+  var etapaAreas = [
+    {k:'extras',name:'Extras SPA Dermoprotetor — Fernanda',icon:'bi-stars',color:'var(--z-spa)',style:'border-left:3px solid var(--z-spa)'},
+    {k:'banho',name:'Banho SPA Dermoprotetor — Fernanda',icon:'bi-droplet-half',color:'var(--z-spa)',style:'border-left:3px solid var(--z-spa)'},
+    {k:'emporio',name:'Empório — Joyce',icon:'bi-shop',color:'var(--z-emporio)',style:'border-left:3px solid var(--z-emporio)'},
+    {k:'vet',name:'VetCare — Suellen',icon:'bi-heart-pulse',color:'var(--z-vetcare)',style:'border-left:3px solid var(--z-vetcare)'},
+    {k:'daycare',name:'Daycare — Acompanhamento',icon:'bi-sun',color:'#D4875A',style:'border-left:3px solid #D4875A;opacity:.85',nota:mc.notasDaycare},
+    {k:'hosp',name:'Hospedagem (Auaulândia) — Acompanhamento',icon:'bi-house-heart',color:'#5AABB5',style:'border-left:3px solid #5AABB5;opacity:.85',nota:mc.notasHosp}
+  ];
+
+  etapaAreas.forEach(function(a){
+    h += '<div class="card" style="'+a.style+';margin-bottom:10px;padding:14px 16px">';
+    h += '<h3 style="font-size:14px;font-weight:700;color:'+a.color+';margin-bottom:'+(a.nota?'4':'8')+'px"><i class="bi '+a.icon+'" style="margin-right:6px"></i>'+a.name+'</h3>';
+    if(a.nota) h += '<p style="font-size:10px;color:#C0392B;margin-bottom:8px"><i class="bi bi-exclamation-triangle"></i> '+a.nota+'</p>';
+    h += '<table style="font-size:12px"><tr><th style="text-align:left">Etapa</th><th>Peso</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>';
+    var totC=0,totZ=0,totE=0;
+    for(var i=0;i<5;i++){
+      var c = EM[a.k][i];
+      var z = zelo(c);
+      var e = encanto(c);
+      var peso = EP[a.k][i];
+      totC+=c; totZ+=z; totE+=e;
+      var highlight = (a.k==='daycare'&&peso>=50)||(a.k==='hosp'&&peso>=40) ? ' style="background:rgba('+((a.k==='daycare')?'212,135,90':'90,171,181')+',.06)"' : '';
+      h += '<tr'+highlight+'><td>'+EL[i]+'</td><td>'+(peso>=30?'<strong>'+peso+'%</strong>':peso+'%')+'</td><td>'+f(c)+'</td><td>'+f(z)+'</td><td>'+f(e)+'</td></tr>';
+    }
+    h += '<tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>100%</td><td>'+f(totC)+'</td><td>'+f(totZ)+'</td><td>'+f(totE)+'</td></tr>';
+    h += '</table></div>';
+  });
+
+  // Ecossistema Total
+  h += '<div class="card" style="border:2px solid var(--z-gold);margin-bottom:10px;padding:14px 16px">';
+  h += '<h3 style="font-size:14px;font-weight:700;color:var(--z-gold);margin-bottom:8px"><i class="bi bi-trophy" style="margin-right:6px"></i>Ecossistema Total — Amanda</h3>';
+  h += '<table style="font-size:12px"><tr><th style="text-align:left">Etapa</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>';
+  var ecoTotC=0,ecoTotZ=0,ecoTotE=0;
+  for(var i=0;i<5;i++){
+    var c = EM.extras[i]+EM.banho[i]+EM.emporio[i]+EM.vet[i];
+    var z = zelo(c); var e = encanto(c);
+    ecoTotC+=c; ecoTotZ+=z; ecoTotE+=e;
+    h += '<tr><td>'+EL[i]+'</td><td>'+f(c)+'</td><td>'+f(z)+'</td><td>'+f(e)+'</td></tr>';
+  }
+  h += '<tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total</td><td>'+f(ecoTotC)+'</td><td>'+f(ecoTotZ)+'</td><td>'+f(ecoTotE)+'</td></tr></table></div>';
+
+  // Total Zêluz
+  h += '<div class="card" style="border:2px solid var(--z-blue);background:rgba(35,77,103,.02);padding:14px 16px">';
+  h += '<h3 style="font-size:14px;font-weight:700;color:var(--z-blue);margin-bottom:8px"><i class="bi bi-building" style="margin-right:6px"></i>Total Zêluz — '+mc.label+'</h3>';
+  h += '<table style="font-size:12px"><tr><th style="text-align:left">Etapa</th><th style="color:var(--z-meta-cuidado-text)">Cuidado</th><th style="color:var(--z-blue)">Zêlo</th><th style="color:var(--z-gold)">Encanto</th></tr>';
+  for(var i=0;i<5;i++){
+    var c = EM.extras[i]+EM.banho[i]+EM.emporio[i]+EM.vet[i]+EM.hosp[i]+EM.daycare[i];
+    var z = zelo(c); var e = encanto(c);
+    h += '<tr><td>'+EL[i]+'</td><td>'+f(c)+'</td><td>'+f(z)+'</td><td>'+f(e)+'</td></tr>';
+  }
+  h += '<tr style="font-weight:700;border-top:2px solid var(--z-gray-200)"><td>Total Mês</td><td>'+f(totBase)+'</td><td>'+f(totAlvo)+'</td><td>'+f(totOuro)+'</td></tr></table></div>';
+
+  document.getElementById('metas-mes-content').innerHTML = h;
+}
+
 /* ===== TROCAR MÊS ===== */
 function trocarMes(mes){
   if(!MONTH_DATA[mes]) return;
@@ -4328,6 +4269,9 @@ function trocarMes(mes){
   /* Recarregar dados do novo mês */
   carregar();
   renderCalendar();
+  renderCalendarGrid();
+  renderEtapaTable();
+  renderMetasMes();
   calc();
   /* Recarregar Firestore do novo mês */
   if(currentUser) carregarDadosFirestore();
@@ -4354,6 +4298,9 @@ document.addEventListener('DOMContentLoaded', function(){
   if(currentUser && currentUser.role === 'consultor'){
     if(sel) sel.style.display = 'none';
   }
+  renderMetasMes();
+  renderCalendarGrid();
+  renderEtapaTable();
   calc();
 });
 
