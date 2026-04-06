@@ -1014,6 +1014,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
       <a class="nav-item nav-sub" id="nav-estrategias-jogos" onclick="switchView('estrategias-jogos')"><i class="bi bi-lightning-charge" style="font-size:14px"></i> Estratégias & Jogos</a>
       <a class="nav-item nav-sub" id="nav-metas-mes" onclick="switchView('metas-mes')"><i class="bi bi-trophy" style="font-size:14px"></i> Metas do Mês</a>
       <a class="nav-item nav-sub" id="nav-banco-jogos" onclick="switchView('banco-jogos')"><i class="bi bi-controller" style="font-size:14px"></i> Banco de Jogos</a>
+      <a class="nav-item nav-sub" id="nav-senhas" onclick="switchView('senhas')"><i class="bi bi-key" style="font-size:14px"></i> Senhas</a>
     </div>
 
     <div class="nav-section-label">Gestão</div>
@@ -1309,20 +1310,6 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   <button class="btn btn-red" onclick="limpar()"><i class="bi bi-trash3"></i> Limpar</button>
 </div>
 
-<!-- SENHAS DA EQUIPE -->
-<div id="quadro-senhas" style="display:none">
-<h2 class="sec"><i class="bi bi-key" style="color:var(--z-gold)"></i> Senhas da Equipe</h2>
-<div class="card" style="border-left:4px solid var(--z-gold);max-width:400px">
-  <p style="font-size:11px;color:var(--z-gray-400);margin-bottom:12px">Acesso ao Ágora — compartilhe apenas com a pessoa correspondente.</p>
-  <table style="font-size:13px">
-    <tr><th style="text-align:left">Nome</th><th>Senha</th><th style="text-align:left">Acesso</th></tr>
-    <tr><td><strong>Amanda</strong></td><td style="font-weight:700;letter-spacing:2px">3847</td><td style="font-size:11px;color:var(--z-gray-400)">Tudo</td></tr>
-    <tr><td><strong>Fernanda</strong></td><td style="font-weight:700;letter-spacing:2px">6215</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
-    <tr><td><strong>Joyce</strong></td><td style="font-weight:700;letter-spacing:2px">4783</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
-    <tr><td><strong>Suellen</strong></td><td style="font-weight:700;letter-spacing:2px">9136</td><td style="font-size:11px;color:var(--z-gray-400)">Só sua aba</td></tr>
-  </table>
-</div>
-</div>
 
 <!-- FOOTER -->
 <div class="footer">
@@ -1909,6 +1896,33 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
 
 </div><!-- fim view-banco-jogos -->
+
+<!-- VIEW SENHAS -->
+<div class="person-view" id="view-senhas">
+
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(35,77,103,.06),rgba(222,180,40,.04));border-radius:16px;border-left:4px solid var(--z-blue)">
+    <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),var(--z-blue-deep));display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0"><i class="bi bi-key"></i></div>
+    <div>
+      <h2 style="font-size:22px;font-weight:800;color:var(--z-blue);margin:0;border:none;padding:0">Senhas da Equipe</h2>
+      <p style="font-size:13px;color:rgba(35,77,103,.5);margin:2px 0 0">Acesso ao Ágora — compartilhe apenas com a pessoa correspondente</p>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--z-gold);max-width:500px">
+    <table style="font-size:14px;width:100%">
+      <tr><th style="text-align:left;padding:10px 12px">Nome</th><th style="padding:10px 12px">Senha</th><th style="text-align:left;padding:10px 12px">Acesso</th></tr>
+      <tr style="border-bottom:1px solid rgba(35,77,103,.06)"><td style="padding:10px 12px"><strong>Amanda</strong></td><td style="padding:10px 12px;font-weight:800;letter-spacing:3px;font-size:18px;text-align:center;color:var(--z-gold)">3847</td><td style="padding:10px 12px;font-size:12px;color:var(--z-gray-400)">Tudo (Supervisora)</td></tr>
+      <tr style="border-bottom:1px solid rgba(35,77,103,.06)"><td style="padding:10px 12px"><strong>Fernanda</strong></td><td style="padding:10px 12px;font-weight:800;letter-spacing:3px;font-size:18px;text-align:center;color:var(--z-spa)">6215</td><td style="padding:10px 12px;font-size:12px;color:var(--z-gray-400)">Só sua aba</td></tr>
+      <tr style="border-bottom:1px solid rgba(35,77,103,.06)"><td style="padding:10px 12px"><strong>Joyce</strong></td><td style="padding:10px 12px;font-weight:800;letter-spacing:3px;font-size:18px;text-align:center;color:var(--z-emporio)">4783</td><td style="padding:10px 12px;font-size:12px;color:var(--z-gray-400)">Só sua aba</td></tr>
+      <tr><td style="padding:10px 12px"><strong>Suellen</strong></td><td style="padding:10px 12px;font-weight:800;letter-spacing:3px;font-size:18px;text-align:center;color:var(--z-vetcare)">9136</td><td style="padding:10px 12px;font-size:12px;color:var(--z-gray-400)">Só sua aba</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px;max-width:500px;border-left:4px solid rgba(192,57,43,.3)">
+    <p style="font-size:12px;color:var(--z-gray-500);margin:0"><i class="bi bi-exclamation-triangle" style="color:#C0392B;margin-right:6px"></i><strong>Importante:</strong> Cada Zelosa só tem acesso à sua própria aba. Não compartilhe senhas entre a equipe. Se precisar trocar uma senha, fale com Adriana.</p>
+  </div>
+
+</div><!-- fim view-senhas -->
 
 <!-- ===== VIEW AMANDA ===== -->
 <div class="person-view active" id="view-amanda">
@@ -2862,7 +2876,8 @@ var _viewTitles = {
   'guia-pratico': 'Guia Prático Ágora',
   'estrategias-jogos': 'Estratégias & Jogos',
   'metas-mes': 'Metas do Mês',
-  'banco-jogos': 'Banco de Jogos'
+  'banco-jogos': 'Banco de Jogos',
+  'senhas': 'Senhas'
 };
 
 function toggleSubnav(id){
@@ -3986,10 +4001,10 @@ function aplicarPermissoes() {
     switchView(allowedView);
     // Hide sidebar toggle for simplicity
   }
-  // Show password table only for admin/supervisor
-  var quadroSenhas = document.getElementById('quadro-senhas');
-  if(quadroSenhas) {
-    quadroSenhas.style.display = (currentUser.role === 'admin' || currentUser.role === 'supervisor') ? 'block' : 'none';
+  // Hide Senhas nav for consultors
+  var navSenhas = document.getElementById('nav-senhas');
+  if(navSenhas) {
+    navSenhas.style.display = (currentUser.role === 'admin' || currentUser.role === 'supervisor') ? '' : 'none';
   }
 
   // Update greeting
