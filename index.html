@@ -1022,36 +1022,58 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 .mdz-inputs-grid .mdz-input-card { margin-bottom: 0; }
 .mdz-inputs-grid .mdz-ic-input { font-size: 1.8rem; }
 
-/* Desperdício hero — CENTRALIZADO, PRIMEIRO DA TELA */
+/* Desperdício hero — DESTAQUE MÁXIMO, PRIMEIRO DA TELA */
 .mdz-desp-hero {
-  border-radius: 20px; padding: 28px 24px; margin-bottom: 20px;
-  background: linear-gradient(135deg, rgba(192,57,43,.06), rgba(192,57,43,.02));
-  border: 2px solid rgba(192,57,43,.15);
+  border-radius: 24px; padding: 32px 28px; margin-bottom: 20px;
+  background: linear-gradient(135deg, rgba(192,57,43,.12), rgba(192,57,43,.04));
+  border: 3px solid rgba(192,57,43,.30);
   text-align: center;
   transition: all .3s ease;
+  box-shadow: 0 8px 32px rgba(192,57,43,.12), 0 2px 8px rgba(192,57,43,.08);
+  position: relative;
+  overflow: hidden;
+}
+.mdz-desp-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(192,57,43,.02) 10px, rgba(192,57,43,.02) 20px);
+  pointer-events: none;
 }
 .mdz-desp-hero.zero {
-  background: linear-gradient(135deg, rgba(39,174,96,.06), rgba(39,174,96,.02));
-  border-color: rgba(39,174,96,.20);
+  background: linear-gradient(135deg, rgba(39,174,96,.10), rgba(39,174,96,.03));
+  border-color: rgba(39,174,96,.30);
+  box-shadow: 0 8px 32px rgba(39,174,96,.12), 0 2px 8px rgba(39,174,96,.08);
+}
+.mdz-desp-hero.zero::before {
+  background: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(39,174,96,.02) 10px, rgba(39,174,96,.02) 20px);
 }
 .mdz-desp-hero.empty {
   background: var(--z-gray-100); border-color: var(--z-gray-200);
+  box-shadow: none;
 }
+.mdz-desp-hero.empty::before { display: none; }
 .mdz-desp-chip {
   display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(192,57,43,.10); border: 1px solid rgba(192,57,43,.18);
-  border-radius: 20px; padding: 3px 12px; font-size: .6rem; font-weight: 700;
-  color: #C0392B; letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(192,57,43,.14); border: 1.5px solid rgba(192,57,43,.25);
+  border-radius: 20px; padding: 5px 16px; font-size: .65rem; font-weight: 800;
+  color: #C0392B; letter-spacing: .1em; text-transform: uppercase;
+  position: relative;
 }
-.mdz-desp-chip.zero { background: rgba(39,174,96,.10); border-color: rgba(39,174,96,.18); color: #27AE60; }
+.mdz-desp-chip.zero { background: rgba(39,174,96,.14); border-color: rgba(39,174,96,.25); color: #27AE60; }
 .mdz-desp-chip.empty { background: var(--z-gray-200); border-color: var(--z-gray-300); color: var(--z-gray-500); }
 .mdz-desp-num {
-  font-size: 3.2rem; font-weight: 900; color: #C0392B; line-height: 1;
-  letter-spacing: -.03em; margin: 12px 0 8px;
+  font-size: 4rem; font-weight: 900; color: #C0392B; line-height: 1;
+  letter-spacing: -.03em; margin: 16px 0 10px;
+  position: relative;
+  text-shadow: 0 2px 12px rgba(192,57,43,.15);
 }
-.mdz-desp-num.zero { color: #27AE60; }
-.mdz-desp-num.empty { color: var(--z-gray-300); font-size: 2rem; }
-.mdz-desp-sub { font-size: .72rem; color: var(--z-gray-500); font-weight: 500; line-height: 1.4; }
+.mdz-desp-num.zero { color: #27AE60; text-shadow: 0 2px 12px rgba(39,174,96,.15); }
+.mdz-desp-num.empty { color: var(--z-gray-300); font-size: 1.8rem; text-shadow: none; }
+.mdz-desp-sub {
+  font-size: .78rem; color: rgba(192,57,43,.7); font-weight: 600; line-height: 1.4;
+  position: relative;
+}
+.mdz-desp-hero.zero .mdz-desp-sub { color: rgba(39,174,96,.7); }
+.mdz-desp-hero.empty .mdz-desp-sub { color: var(--z-gray-500); font-weight: 500; }
 
 /* Metrics 3-up */
 .mdz-metrics-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
@@ -1582,14 +1604,14 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 <h3 id="acum-title">Acumulado</h3>
 <table>
   <tr><th style="text-align:left">Área</th><th>Acumulado</th><th>Meta Cuidado</th><th>Falta</th><th>%</th></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Extras SPA Dermoprotetor</td><td id="sum-extras">R$ 0</td><td id="sum-meta-extras" style="color:rgba(255,255,255,.4)">R$ 9.557</td><td id="sumfalta-extras" style="color:var(--z-red)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-spa)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Banho SPA Dermoprotetor</td><td id="sum-banho">R$ 0</td><td id="sum-meta-banho" style="color:rgba(255,255,255,.4)">R$ 45.475</td><td id="sumfalta-banho" style="color:var(--z-red)">R$ 45.475</td><td id="sumpct-banho" style="color:var(--z-spa)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-emporio)"><td style="color:var(--z-emporio-light)">Empório</td><td id="sum-emporio">R$ 0</td><td id="sum-meta-emporio" style="color:rgba(255,255,255,.4)">R$ 40.139</td><td id="sumfalta-emporio" style="color:var(--z-red)">R$ 40.139</td><td id="sumpct-emporio" style="color:var(--z-emporio-light)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-vetcare)"><td style="color:var(--z-vetcare-light)">Veterinária</td><td id="sum-vet">R$ 0</td><td id="sum-meta-vet" style="color:rgba(255,255,255,.4)">R$ 12.018</td><td id="sumfalta-vet" style="color:var(--z-red)">R$ 12.018</td><td id="sumpct-vet" style="color:var(--z-vetcare-light)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-hosp)">Hospedagem</td><td id="sum-hosp">R$ 0</td><td id="sum-meta-hosp" style="color:rgba(255,255,255,.4)">R$ 32.599</td><td id="sumfalta-hosp" style="color:var(--z-red)">R$ 32.599</td><td id="sumpct-hosp" style="color:var(--z-hosp)">0%</td></tr>
-  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-daycare)">Daycare</td><td id="sum-daycare">R$ 0</td><td id="sum-meta-daycare" style="color:rgba(255,255,255,.4)">R$ 46.103</td><td id="sumfalta-daycare" style="color:var(--z-red)">R$ 46.103</td><td id="sumpct-daycare" style="color:var(--z-daycare)">0%</td></tr>
-  <tr style="border-top:2px solid var(--z-gold)"><td style="font-weight:700">Ecossistema</td><td id="sum-eco" style="font-weight:700">R$ 0</td><td id="sum-meta-eco" style="color:rgba(255,255,255,.4)">R$ 107.188</td><td id="sumfalta-eco" style="color:var(--z-gold);font-weight:700">R$ 107.188</td><td id="sumpct-eco" style="color:var(--z-gold);font-weight:700">0%</td></tr>
-  <tr><td style="font-weight:700">Total Zêluz</td><td id="sum-total" style="font-weight:700">R$ 0</td><td id="sum-meta-total" style="color:rgba(255,255,255,.4)">R$ 185.890</td><td id="sumfalta-total" style="color:var(--z-gold);font-weight:700">R$ 185.890</td><td id="sumpct-total" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Extras SPA Dermoprotetor</td><td id="sum-extras">R$ 0</td><td id="sum-meta-extras" style="color:var(--z-gray-400)">R$ 9.557</td><td id="sumfalta-extras" style="color:var(--z-red)">R$ 9.557</td><td id="sumpct-extras" style="color:var(--z-spa)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-spa)"><td style="color:var(--z-spa)">Banho SPA Dermoprotetor</td><td id="sum-banho">R$ 0</td><td id="sum-meta-banho" style="color:var(--z-gray-400)">R$ 45.475</td><td id="sumfalta-banho" style="color:var(--z-red)">R$ 45.475</td><td id="sumpct-banho" style="color:var(--z-spa)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-emporio)"><td style="color:var(--z-emporio-light)">Empório</td><td id="sum-emporio">R$ 0</td><td id="sum-meta-emporio" style="color:var(--z-gray-400)">R$ 40.139</td><td id="sumfalta-emporio" style="color:var(--z-red)">R$ 40.139</td><td id="sumpct-emporio" style="color:var(--z-emporio-light)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-vetcare)"><td style="color:var(--z-vetcare-light)">Veterinária</td><td id="sum-vet">R$ 0</td><td id="sum-meta-vet" style="color:var(--z-gray-400)">R$ 12.018</td><td id="sumfalta-vet" style="color:var(--z-red)">R$ 12.018</td><td id="sumpct-vet" style="color:var(--z-vetcare-light)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-hosp)"><td style="color:var(--z-hosp)">Hospedagem</td><td id="sum-hosp">R$ 0</td><td id="sum-meta-hosp" style="color:var(--z-gray-400)">R$ 32.599</td><td id="sumfalta-hosp" style="color:var(--z-red)">R$ 32.599</td><td id="sumpct-hosp" style="color:var(--z-hosp)">0%</td></tr>
+  <tr style="border-left:3px solid var(--z-daycare)"><td style="color:var(--z-daycare)">Daycare</td><td id="sum-daycare">R$ 0</td><td id="sum-meta-daycare" style="color:var(--z-gray-400)">R$ 46.103</td><td id="sumfalta-daycare" style="color:var(--z-red)">R$ 46.103</td><td id="sumpct-daycare" style="color:var(--z-daycare)">0%</td></tr>
+  <tr style="border-top:2px solid var(--z-gold)"><td style="font-weight:700">Ecossistema</td><td id="sum-eco" style="font-weight:700">R$ 0</td><td id="sum-meta-eco" style="color:var(--z-gray-400)">R$ 107.188</td><td id="sumfalta-eco" style="color:var(--z-gold);font-weight:700">R$ 107.188</td><td id="sumpct-eco" style="color:var(--z-gold);font-weight:700">0%</td></tr>
+  <tr><td style="font-weight:700">Total Zêluz</td><td id="sum-total" style="font-weight:700">R$ 0</td><td id="sum-meta-total" style="color:var(--z-gray-400)">R$ 185.890</td><td id="sumfalta-total" style="color:var(--z-gold);font-weight:700">R$ 185.890</td><td id="sumpct-total" style="color:var(--z-gold);font-weight:700">0%</td></tr>
 </table>
 </div>
 
@@ -2032,61 +2054,8 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
   </div>
 
-  <!-- METAS AMANDA -->
-  <h2 class="sec"><i class="bi bi-trophy" style="color:var(--z-gold)"></i> Minhas Metas — Ecossistema*</h2>
-  <div class="card">
-    <p style="font-size:13px;margin-bottom:12px">Como supervisora, suas metas são baseadas no <strong>Ecossistema</strong> (SPA + Empório + VetCare) e no <strong>Total Zêluz</strong>.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0">
-      <div style="border:2px solid var(--z-meta-cuidado);border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:var(--z-meta-cuidado-text)">Nível 1</div>
-        <div style="font-size:20px;font-weight:800;color:var(--z-meta-cuidado-text);margin:4px 0">Meta CUIDADO*</div>
-        <div style="font-size:24px;font-weight:900;color:var(--z-meta-cuidado-text);margin:8px 0">R$ 107.188</div>
-        <div style="font-size:12px;color:rgba(35,77,103,.4)">O mínimo que mantém a operação</div>
-      </div>
-      <div style="border:2px solid var(--z-blue);border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:var(--z-blue)">Nível 2</div>
-        <div style="font-size:20px;font-weight:800;color:var(--z-blue);margin:4px 0">Meta ZÊLO*</div>
-        <div style="font-size:24px;font-weight:900;color:var(--z-blue);margin:8px 0">R$ 116.933</div>
-        <div style="font-size:12px;color:rgba(35,77,103,.4)">O zelo que faz a diferença</div>
-      </div>
-      <div style="border:2px solid var(--z-gold);border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:var(--z-gold)">Nível 3</div>
-        <div style="font-size:20px;font-weight:800;color:var(--z-gold);margin:4px 0">Meta ENCANTO*</div>
-        <div style="font-size:24px;font-weight:900;color:var(--z-gold);margin:8px 0">R$ 126.677</div>
-        <div style="font-size:12px;color:rgba(35,77,103,.4)">Onde o encanto acontece!</div>
-      </div>
-    </div>
-    <div style="margin-top:16px;padding:16px;background:rgba(35,77,103,.03);border-radius:12px;border:1px solid rgba(35,77,103,.08)">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:var(--z-blue);margin-bottom:8px"><i class="bi bi-building" style="margin-right:4px"></i> Total Zêluz (Ecossistema + Hospedagem + Daycare)</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">
-        <div>
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-meta-cuidado-text);font-weight:600">Cuidado</div>
-          <div style="font-size:18px;font-weight:800;color:var(--z-meta-cuidado-text)">R$ 185.890</div>
-        </div>
-        <div>
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-blue);font-weight:600">Zêlo</div>
-          <div style="font-size:18px;font-weight:800;color:var(--z-blue)">R$ 202.789</div>
-        </div>
-        <div>
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-gold);font-weight:600">Encanto</div>
-          <div style="font-size:18px;font-weight:800;color:var(--z-gold)">R$ 219.688</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PREMIAÇÃO AMANDA -->
-  <h2 class="sec"><i class="bi bi-gift" style="color:var(--z-gold)"></i> Minha Premiação</h2>
-  <div class="card" style="border-left:4px solid var(--z-gold)">
-    <h3 style="margin:0 0 4px;font-size:15px;font-weight:700;color:var(--z-blue)">Supervisora (Amanda) <span style="font-size:10px;background:var(--z-gold);color:white;padding:2px 8px;border-radius:10px;margin-left:8px">40% do pool</span></h3>
-    <p style="font-size:12px;color:rgba(35,77,103,.5);margin-bottom:10px">Gatilhos: 70% Ecossistema + 30% Total Zêluz</p>
-    <table>
-      <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-      <tr><td>Ecossistema</td><td>R$ 850</td><td>R$ 1.200</td><td>R$ 1.650</td></tr>
-      <tr><td>Total Zêluz</td><td>R$ 350</td><td>R$ 550</td><td>R$ 700</td></tr>
-      <tr style="font-weight:700;background:rgba(222,180,40,.06);border-top:2px solid var(--z-gold)"><td>Total Premiação</td><td>R$ 1.200</td><td>R$ 1.750</td><td>R$ 2.350</td></tr>
-    </table>
-  </div>
+  <!-- METAS + PREMIAÇÃO AMANDA (dinâmico por mês) -->
+  <div id="metas-amanda"></div>
 
 
   <!-- FOOTER AMANDA -->
@@ -2561,7 +2530,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 
   <!-- Extras SPA Dermoprotetor -->
   <div class="tracker" style="border-left:3px solid var(--z-spa)">
-    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Extras SPA Dermoprotetor</span><span style="font-size:10px;background:var(--z-spa);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 9.557</span></h3>
+    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Extras SPA Dermoprotetor</span><span id="f-badge-extras" style="font-size:10px;background:var(--z-spa);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 9.557</span></h3>
     <div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
     <div class="lbl">R$ vendido</div><input data-area="extras" data-sem="1" oninput="calc()"><input data-area="extras" data-sem="2" oninput="calc()"><input data-area="extras" data-sem="3" oninput="calc()"><input data-area="extras" data-sem="4" oninput="calc()"><input data-area="extras" data-sem="5" oninput="calc()"><div class="total-cell" id="f-total-extras">R$ 0</div></div>
   </div>
@@ -2580,16 +2549,16 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
     <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(35,77,103,.4)">
       <span>R$ 0</span>
-      <span style="color:var(--z-meta-cuidado-text)">Cuidado R$ 9.557</span>
-      <span style="color:var(--z-blue)">Zêlo R$ 10.426</span>
-      <span style="color:var(--z-gold)">Encanto R$ 11.294</span>
+      <span id="f-leg-extras-c" style="color:var(--z-meta-cuidado-text)">Cuidado R$ 9.557</span>
+      <span id="f-leg-extras-z" style="color:var(--z-blue)">Zêlo R$ 10.426</span>
+      <span id="f-leg-extras-e" style="color:var(--z-gold)">Encanto R$ 11.294</span>
     </div>
     <div id="f-therm-extras-msg" style="text-align:center;margin-top:8px;font-size:13px;font-weight:700;color:rgba(35,77,103,.3)">Comece a preencher os valores!</div>
   </div>
 
   <!-- Banho SPA Dermoprotetor -->
   <div class="tracker" style="border-left:3px solid var(--z-spa)">
-    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Banho SPA Dermoprotetor</span><span style="font-size:10px;background:var(--z-spa);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 45.475</span></h3>
+    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Banho SPA Dermoprotetor</span><span id="f-badge-banho" style="font-size:10px;background:var(--z-spa);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 45.475</span></h3>
     <div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
     <div class="lbl">R$ vendido</div><input data-area="banho" data-sem="1" oninput="calc()"><input data-area="banho" data-sem="2" oninput="calc()"><input data-area="banho" data-sem="3" oninput="calc()"><input data-area="banho" data-sem="4" oninput="calc()"><input data-area="banho" data-sem="5" oninput="calc()"><div class="total-cell" id="f-total-banho">R$ 0</div></div>
   </div>
@@ -2608,14 +2577,14 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
     <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(35,77,103,.4)">
       <span>R$ 0</span>
-      <span style="color:var(--z-meta-cuidado-text)">Cuidado R$ 45.475</span>
-      <span style="color:var(--z-blue)">Zêlo R$ 49.609</span>
-      <span style="color:var(--z-gold)">Encanto R$ 53.743</span>
+      <span id="f-leg-banho-c" style="color:var(--z-meta-cuidado-text)">Cuidado R$ 45.475</span>
+      <span id="f-leg-banho-z" style="color:var(--z-blue)">Zêlo R$ 49.609</span>
+      <span id="f-leg-banho-e" style="color:var(--z-gold)">Encanto R$ 53.743</span>
     </div>
     <div id="f-therm-banho-msg" style="text-align:center;margin-top:8px;font-size:13px;font-weight:700;color:rgba(35,77,103,.3)">Comece a preencher os valores!</div>
   </div>
 
-</div>
+</div><!-- fim view-fernanda -->
 
 
 <!-- VIEW MEU DIA ZELOSO — FERNANDA -->
@@ -2714,30 +2683,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   </div>
 
 
-  <!-- POUPANCA JOYCE -->
-  <h2 class="sec"><i class="bi bi-piggy-bank" style="color:var(--z-gold)"></i> Poupança do Mês</h2>
-  <div class="card" style="border-left:4px solid var(--z-emporio);margin-bottom:20px">
-    <div style="text-align:center;margin-bottom:12px">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--z-gray-400);font-weight:600">Conquistou até agora</div>
-      <div id="poup-ind-joyce-conquistou" style="font-size:32px;font-weight:900;color:var(--z-blue);margin:8px 0">R$ 0</div>
-      <div id="poup-ind-joyce-nivel" style="font-size:12px;color:var(--z-gray-400)">Nenhuma meta batida ainda</div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
-      <div style="padding:10px;border-radius:8px;border:1px solid var(--z-meta-cuidado);background:rgba(232,224,208,.08)">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-meta-cuidado-text);font-weight:600">Cuidado</div>
-        <div style="font-size:16px;font-weight:800;color:var(--z-meta-cuidado-text);margin-top:4px">R$ 750</div>
-      </div>
-      <div style="padding:10px;border-radius:8px;border:1px solid rgba(35,77,103,.12);background:rgba(35,77,103,.02)">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-blue);font-weight:600">Zêlo</div>
-        <div style="font-size:16px;font-weight:800;color:var(--z-blue);margin-top:4px">R$ 1.050</div>
-      </div>
-      <div style="padding:10px;border-radius:8px;border:2px solid var(--z-gold);background:rgba(222,180,40,.04)">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--z-gold);font-weight:700">Encanto</div>
-        <div style="font-size:16px;font-weight:900;color:var(--z-gold);margin-top:4px">R$ 1.450</div>
-      </div>
-    </div>
-    <div style="font-size:11px;color:var(--z-gray-400);text-align:center;margin-top:10px">Empório + Ecossistema + Total — Pagamento no 5º dia útil do mês seguinte</div>
-  </div>
+  <!-- Poupança Joyce gerada dinamicamente via qpf-joyce -->
   <h2 class="sec"><i class="bi bi-star" style="color:var(--z-gold)"></i> Prêmios do Mês</h2>
   <div class="editable-area">
     <h3>Prêmios Ganhos — Joyce <span style="font-size:9px;background:var(--z-green);color:white;padding:2px 8px;border-radius:10px;margin-left:6px">Editável</span></h3>
@@ -2767,27 +2713,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
   </div>
 
-  <h2 class="sec"><i class="bi bi-trophy" style="color:var(--z-gold)"></i> Minhas Metas — Empório</h2>
-  <div class="card">
-    <table>
-      <tr><th style="text-align:left">Área</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-      <tr style="border-left:3px solid var(--z-emporio)"><td>Empório</td><td>R$ 40.139</td><td>R$ 43.788</td><td>R$ 47.437</td></tr>
-    </table>
-  </div>
-
-  <h2 class="sec"><i class="bi bi-gift" style="color:var(--z-gold)"></i> Premiações/Meta</h2>
-  <div class="card" style="border-left:4px solid var(--z-emporio)">
-    <h3 style="margin:0 0 4px;font-size:15px;font-weight:700;color:var(--z-blue)">Joyce — Consultora de Bem-Estar</h3>
-    <p style="font-size:12px;color:rgba(35,77,103,.5);margin-bottom:10px">Gatilhos: 50% Empório + 30% Eco + 20% Total</p>
-    <table>
-      <tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>
-      <tr><td>Empório</td><td>R$ 350</td><td>R$ 500</td><td>R$ 700</td></tr>
-      <tr><td>Ecossistema</td><td>R$ 250</td><td>R$ 350</td><td>R$ 450</td></tr>
-      <tr><td>Total Zêluz</td><td>R$ 150</td><td>R$ 200</td><td>R$ 300</td></tr>
-      <tr style="font-weight:700;background:rgba(222,180,40,.06);border-top:2px solid var(--z-gold)"><td>Total Premiação</td><td>R$ 750</td><td>R$ 1.050</td><td>R$ 1.450</td></tr>
-    </table>
-  </div>
-  </div><!-- /display:none — conteúdo Joyce gerado via JS -->
+  <!-- Metas + Premiações Joyce geradas dinamicamente via metas-joyce -->
 
   <!-- TRACKER JOYCE -->
   <h2 class="sec"><i class="bi bi-graph-up-arrow" style="color:var(--z-gold)"></i> Acompanhamento Semanal</h2>
@@ -2795,7 +2721,7 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 
   <!-- Empório -->
   <div class="tracker" style="border-left:3px solid var(--z-emporio)">
-    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Empório</span><span style="font-size:10px;background:var(--z-emporio);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 40.139</span></h3>
+    <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><span>Empório</span><span id="j-badge-emporio" style="font-size:10px;background:var(--z-emporio);color:white;padding:2px 8px;border-radius:10px">Meta Cuidado: R$ 40.139</span></h3>
     <div class="tracker-grid"><div class="hd"></div><div class="hd">Sem 1</div><div class="hd">Sem 2</div><div class="hd">Sem 3</div><div class="hd">Sem 4</div><div class="hd">Sem 5</div><div class="hd">Total</div>
     <div class="lbl">R$ vendido</div><input data-area="emporio" data-sem="1" oninput="calc()"><input data-area="emporio" data-sem="2" oninput="calc()"><input data-area="emporio" data-sem="3" oninput="calc()"><input data-area="emporio" data-sem="4" oninput="calc()"><input data-area="emporio" data-sem="5" oninput="calc()"><div class="total-cell" id="j-total-emporio">R$ 0</div></div>
   </div>
@@ -2814,14 +2740,14 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
     </div>
     <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(35,77,103,.4)">
       <span>R$ 0</span>
-      <span style="color:var(--z-meta-cuidado-text)">Cuidado R$ 40.139</span>
-      <span style="color:var(--z-blue)">Zêlo R$ 43.788</span>
-      <span style="color:var(--z-gold)">Encanto R$ 47.437</span>
+      <span id="j-leg-emporio-c" style="color:var(--z-meta-cuidado-text)">Cuidado R$ 40.139</span>
+      <span id="j-leg-emporio-z" style="color:var(--z-blue)">Zêlo R$ 43.788</span>
+      <span id="j-leg-emporio-e" style="color:var(--z-gold)">Encanto R$ 47.437</span>
     </div>
     <div id="j-therm-emporio-msg" style="text-align:center;margin-top:8px;font-size:13px;font-weight:700;color:rgba(35,77,103,.3)">Comece a preencher os valores!</div>
   </div>
 
-</div>
+</div><!-- fim view-joyce -->
 
 
 <!-- VIEW MEU DIA ZELOSO — JOYCE -->
@@ -4113,6 +4039,51 @@ function renderPersonFinance(){
   // Amanda
   renderQPF('amanda', 'qpf-amanda', 'var(--z-gold)');
 
+  // Amanda Metas + Premiação (dinâmico)
+  (function renderAmandaMetas(){
+    var pp = P.amanda; if(!pp) return;
+    var eco = pp.gatilhos.find(function(g){return g.area==='eco';});
+    var tot = pp.gatilhos.find(function(g){return g.area==='total';});
+    if(!eco||!tot) return;
+    var h = '';
+    h += '<h2 class="sec"><i class="bi bi-trophy" style="color:var(--z-gold)"></i> Minhas Metas — Ecossistema*</h2>';
+    h += '<div class="card"><p style="font-size:13px;margin-bottom:12px">Como supervisora, suas metas são baseadas no <strong>Ecossistema</strong> (SPA + Empório + VetCare) e no <strong>Total Zêluz</strong>.</p>';
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0">';
+    var niveis = [{lbl:'Nível 1',nome:'Meta CUIDADO*',cor:'var(--z-meta-cuidado)',corT:'var(--z-meta-cuidado-text)',sub:'O mínimo que mantém a operação'},{lbl:'Nível 2',nome:'Meta ZÊLO*',cor:'var(--z-blue)',corT:'var(--z-blue)',sub:'O zelo que faz a diferença'},{lbl:'Nível 3',nome:'Meta ENCANTO*',cor:'var(--z-gold)',corT:'var(--z-gold)',sub:'Onde o encanto acontece!'}];
+    niveis.forEach(function(n,i){
+      var bw = i===2?'2px':'2px';
+      h += '<div style="border:'+bw+' solid '+n.cor+';border-radius:12px;padding:16px;text-align:center">';
+      h += '<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:'+n.corT+'">'+n.lbl+'</div>';
+      h += '<div style="font-size:20px;font-weight:800;color:'+n.corT+';margin:4px 0">'+n.nome+'</div>';
+      h += '<div style="font-size:24px;font-weight:900;color:'+n.corT+';margin:8px 0">'+f(eco.metas[i])+'</div>';
+      h += '<div style="font-size:12px;color:rgba(35,77,103,.4)">'+n.sub+'</div></div>';
+    });
+    h += '</div>';
+    h += '<div style="margin-top:16px;padding:16px;background:rgba(35,77,103,.03);border-radius:12px;border:1px solid rgba(35,77,103,.08)">';
+    h += '<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;color:var(--z-blue);margin-bottom:8px"><i class="bi bi-building" style="margin-right:4px"></i> Total Zêluz (Ecossistema + Hospedagem + Daycare)</div>';
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">';
+    var totCores = [{cor:'var(--z-meta-cuidado-text)',lbl:'Cuidado'},{cor:'var(--z-blue)',lbl:'Zêlo'},{cor:'var(--z-gold)',lbl:'Encanto'}];
+    totCores.forEach(function(tc,i){
+      h += '<div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:'+tc.cor+';font-weight:600">'+tc.lbl+'</div>';
+      h += '<div style="font-size:18px;font-weight:800;color:'+tc.cor+'">'+f(tot.metas[i])+'</div></div>';
+    });
+    h += '</div></div></div>';
+    // Premiação
+    h += '<h2 class="sec"><i class="bi bi-gift" style="color:var(--z-gold)"></i> Minha Premiação</h2>';
+    h += '<div class="card" style="border-left:4px solid var(--z-gold)">';
+    h += '<h3 style="margin:0 0 4px;font-size:15px;font-weight:700;color:var(--z-blue)">Supervisora (Amanda) <span style="font-size:10px;background:var(--z-gold);color:white;padding:2px 8px;border-radius:10px;margin-left:8px">40% do pool</span></h3>';
+    h += '<p style="font-size:12px;color:rgba(35,77,103,.5);margin-bottom:10px">Gatilhos: 70% Ecossistema + 30% Total Zêluz</p>';
+    h += '<table><tr><th style="text-align:left">Gatilho</th><th>Cuidado</th><th>Zêlo</th><th>Encanto</th></tr>';
+    pp.gatilhos.forEach(function(g){
+      var nm = g.area==='eco'?'Ecossistema':'Total Zêluz';
+      h += '<tr><td>'+nm+'</td><td>'+f(g.premios[0])+'</td><td>'+f(g.premios[1])+'</td><td>'+f(g.premios[2])+'</td></tr>';
+    });
+    h += '<tr style="font-weight:700;background:rgba(222,180,40,.06);border-top:2px solid var(--z-gold)"><td>Total Premiação</td><td>'+f(pp.totais[0])+'</td><td>'+f(pp.totais[1])+'</td><td>'+f(pp.totais[2])+'</td></tr>';
+    h += '</table></div>';
+    var el = document.getElementById('metas-amanda');
+    if(el) el.innerHTML = h;
+  })();
+
   // Fernanda
   renderQPF('fernanda', 'qpf-fernanda', 'var(--z-spa)');
   renderMetasPessoa('fernanda', 'metas-fernanda',
@@ -4132,6 +4103,27 @@ function renderPersonFinance(){
     elSet('poup-tbl-'+p+'-z', f(pp.totais[1]));
     elSet('poup-tbl-'+p+'-e', f(pp.totais[2]));
   });
+}
+
+/* ===== UPDATE PERSON TRACKER LABELS (badges + thermometer legends) ===== */
+function updatePersonTrackerLabels(){
+  var M = getMonthConfig().metas;
+  function f(n){ return 'R$ '+Math.round(n).toLocaleString('pt-BR'); }
+  // Fernanda — Extras
+  elSet('f-badge-extras','Meta Cuidado: '+f(M.extras.base));
+  elSet('f-leg-extras-c','Cuidado '+f(M.extras.base));
+  elSet('f-leg-extras-z','Zêlo '+f(M.extras.alvo));
+  elSet('f-leg-extras-e','Encanto '+f(M.extras.ouro));
+  // Fernanda — Banho
+  elSet('f-badge-banho','Meta Cuidado: '+f(M.banho.base));
+  elSet('f-leg-banho-c','Cuidado '+f(M.banho.base));
+  elSet('f-leg-banho-z','Zêlo '+f(M.banho.alvo));
+  elSet('f-leg-banho-e','Encanto '+f(M.banho.ouro));
+  // Joyce — Empório
+  elSet('j-badge-emporio','Meta Cuidado: '+f(M.emporio.base));
+  elSet('j-leg-emporio-c','Cuidado '+f(M.emporio.base));
+  elSet('j-leg-emporio-z','Zêlo '+f(M.emporio.alvo));
+  elSet('j-leg-emporio-e','Encanto '+f(M.emporio.ouro));
 }
 
 /* ===== RENDER TRACKERS (dinâmico por mês) ===== */
@@ -4432,6 +4424,7 @@ function trocarMes(mes){
   renderEtapaTable();
   renderTrackers();
   renderPersonFinance();
+  updatePersonTrackerLabels();
   updateMetaLabels();
   renderMetasMes();
   carregar();
@@ -4463,6 +4456,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   renderTrackers();
   renderPersonFinance();
+  updatePersonTrackerLabels();
   updateMetaLabels();
   renderMetasMes();
   renderCalendarGrid();
