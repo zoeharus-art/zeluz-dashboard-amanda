@@ -1149,6 +1149,66 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 }
 .mdz-tab.active { background: var(--z-white); color: var(--z-blue); box-shadow: var(--shadow-sm); }
 
+/* ===== GAMIFICAÇÃO — POUPANÇA CONQUISTOU ===== */
+@keyframes poup-glow {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 20px 4px var(--poup-glow-color, rgba(222,180,40,.25)); }
+}
+@keyframes poup-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Row levels — applied to <tr> */
+.poup-row-cuidado {
+  background: linear-gradient(90deg, rgba(232,224,208,.20), rgba(232,224,208,.06)) !important;
+  --poup-glow-color: rgba(139,115,85,.15);
+}
+.poup-row-zelo {
+  background: linear-gradient(90deg, rgba(35,77,103,.12), rgba(35,77,103,.04)) !important;
+  --poup-glow-color: rgba(35,77,103,.20);
+}
+.poup-row-encanto {
+  background: linear-gradient(90deg, rgba(222,180,40,.15), rgba(222,180,40,.05)) !important;
+  --poup-glow-color: rgba(222,180,40,.25);
+  animation: poup-glow 2.5s ease-in-out infinite;
+}
+
+/* Conquistou badge */
+.poup-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.poup-badge-cuidado { background: rgba(232,224,208,.40); color: #8B7355; border: 1px solid rgba(139,115,85,.20); }
+.poup-badge-zelo { background: rgba(35,77,103,.12); color: var(--z-blue); border: 1px solid rgba(35,77,103,.15); }
+.poup-badge-encanto { background: rgba(222,180,40,.18); color: #96840A; border: 1.5px solid var(--z-gold); }
+.poup-badge-parcial { background: var(--z-gray-100); color: var(--z-gray-500); border: 1px solid var(--z-gray-200); }
+
+/* Valor conquistado — grande e impactante */
+.poup-valor {
+  font-size: 17px; font-weight: 900; line-height: 1.1; margin-bottom: 2px;
+}
+.poup-valor-cuidado { color: #8B7355; }
+.poup-valor-zelo { color: var(--z-blue); }
+.poup-valor-encanto { color: var(--z-gold); text-shadow: 0 1px 6px rgba(222,180,40,.20); }
+
+/* Individual poupança card enhanced */
+.poup-ind-card {
+  transition: all .4s ease;
+  position: relative; overflow: hidden;
+}
+.poup-ind-card.nivel-cuidado { border-color: #8B7355 !important; background: linear-gradient(135deg, rgba(232,224,208,.15), white) !important; }
+.poup-ind-card.nivel-zelo { border-color: var(--z-blue) !important; background: linear-gradient(135deg, rgba(35,77,103,.08), white) !important; }
+.poup-ind-card.nivel-encanto {
+  border-color: var(--z-gold) !important; border-width: 2px !important;
+  background: linear-gradient(135deg, rgba(222,180,40,.10), rgba(222,180,40,.02)) !important;
+  animation: poup-glow 2.5s ease-in-out infinite;
+  --poup-glow-color: rgba(222,180,40,.20);
+}
+
 </style>
 
 <!-- Firebase SDK -->
@@ -3313,46 +3373,61 @@ function calc(){
 
   ['amanda','fernanda','joyce','suellen'].forEach(function(pessoa) {
     var r = calcPoupanca(pessoa);
-    // Visao Geral
-    elSet('poup-'+pessoa+'-acum', fmt(eco)); // will be overridden below
     var statusEl = document.getElementById('poup-'+pessoa+'-status');
     var acumEl = document.getElementById('poup-'+pessoa+'-acum');
-    if(statusEl) {
-      if(r.conquistou === 0) {
-        statusEl.textContent = '\u2014';
-        statusEl.style.color = 'var(--z-gray-300)';
-      } else {
-        statusEl.textContent = fmt(r.conquistou);
-        if(r.nivel === 'Encanto') statusEl.style.color = 'var(--z-gold)';
-        else if(r.nivel === 'Z\u00ealo') statusEl.style.color = 'var(--z-blue)';
-        else if(r.nivel === 'Cuidado') statusEl.style.color = 'var(--z-meta-cuidado-text)';
-        else statusEl.style.color = 'var(--z-gray-400)';
-      }
-    }
-    // Acumulado column — show the person's main metric
+    var row = statusEl ? statusEl.closest('tr') : null;
+
+    // Acumulado column
     if(acumEl) {
       if(pessoa === 'amanda') acumEl.textContent = fmt(eco);
       else if(pessoa === 'fernanda') acumEl.textContent = fmt(t.extras + t.banho);
       else if(pessoa === 'joyce') acumEl.textContent = fmt(t.emporio);
       else if(pessoa === 'suellen') acumEl.textContent = fmt(t.vet);
     }
-    // Individual card
+
+    // Row class + Conquistou badge (Visão Geral table)
+    if(row) {
+      row.className = row.className.replace(/poup-row-\w+/g, '').trim();
+      if(r.nivel === 'Encanto') row.classList.add('poup-row-encanto');
+      else if(r.nivel === 'Z\u00ealo') row.classList.add('poup-row-zelo');
+      else if(r.nivel === 'Cuidado') row.classList.add('poup-row-cuidado');
+    }
+    if(statusEl) {
+      if(r.conquistou === 0) {
+        statusEl.innerHTML = '<span style="color:var(--z-gray-300)">\u2014</span>';
+      } else {
+        var badgeCls = r.nivel === 'Encanto' ? 'encanto' : r.nivel === 'Z\u00ealo' ? 'zelo' : r.nivel === 'Cuidado' ? 'cuidado' : 'parcial';
+        var valorCls = 'poup-valor poup-valor-' + badgeCls;
+        var badgeLabel = r.nivel === 'Encanto' ? 'Enc\u00e3otadora' : r.nivel === 'Z\u00ealo' ? 'Super Zelosa' : r.nivel === 'Cuidado' ? 'Zelosa' : 'Parcial';
+        var icon = r.nivel === 'Encanto' ? '<i class="bi bi-trophy-fill"></i> ' : r.nivel === 'Z\u00ealo' ? '<i class="bi bi-star-fill"></i> ' : r.nivel === 'Cuidado' ? '<i class="bi bi-check-circle-fill"></i> ' : '';
+        statusEl.innerHTML = '<div class="'+valorCls+'">'+fmt(r.conquistou)+'</div><span class="poup-badge poup-badge-'+badgeCls+'">'+icon+badgeLabel+'</span>';
+      }
+    }
+
+    // Individual poupança card (person pages)
     var indConq = document.getElementById('poup-ind-'+pessoa+'-conquistou');
     var indNivel = document.getElementById('poup-ind-'+pessoa+'-nivel');
+    var indCard = indConq ? indConq.closest('.card') : null;
+    if(indCard) {
+      indCard.className = indCard.className.replace(/nivel-\w+/g, '').replace(/poup-ind-card/g, '').trim();
+      indCard.classList.add('poup-ind-card');
+      if(r.nivel === 'Encanto') indCard.classList.add('nivel-encanto');
+      else if(r.nivel === 'Z\u00ealo') indCard.classList.add('nivel-zelo');
+      else if(r.nivel === 'Cuidado') indCard.classList.add('nivel-cuidado');
+    }
     if(indConq) {
       indConq.textContent = fmt(r.conquistou);
-      if(r.nivel === 'Encanto') { indConq.style.color = 'var(--z-gold)'; }
-      else if(r.nivel === 'Z\u00ealo') { indConq.style.color = 'var(--z-blue)'; }
-      else if(r.nivel === 'Cuidado') { indConq.style.color = 'var(--z-meta-cuidado-text)'; }
-      else { indConq.style.color = 'var(--z-gray-300)'; }
+      if(r.nivel === 'Encanto') indConq.style.color = 'var(--z-gold)';
+      else if(r.nivel === 'Z\u00ealo') indConq.style.color = 'var(--z-blue)';
+      else if(r.nivel === 'Cuidado') indConq.style.color = 'var(--z-meta-cuidado-text)';
+      else indConq.style.color = 'var(--z-gray-300)';
     }
     if(indNivel) {
-      if(r.conquistou === 0) indNivel.textContent = 'Nenhuma meta batida ainda';
-      else if(r.nivel === 'Encanto') indNivel.textContent = '\u2b50 Meta ENCANTO batida!';
-      else if(r.nivel === 'Z\u00ealo') indNivel.textContent = 'Meta Z\u00caLO batida — falta pouco pro Encanto!';
-      else if(r.nivel === 'Cuidado') indNivel.textContent = 'Meta CUIDADO batida — bora pro Z\u00ealo!';
-      else indNivel.textContent = 'Alguns gatilhos batidos — continue!';
-      indNivel.style.color = r.nivel === 'Encanto' ? 'var(--z-gold)' : r.nivel === 'Z\u00ealo' ? 'var(--z-blue)' : r.nivel === 'Cuidado' ? 'var(--z-meta-cuidado-text)' : 'var(--z-gray-400)';
+      if(r.conquistou === 0) { indNivel.textContent = 'Nenhuma meta batida ainda'; indNivel.style.color = 'var(--z-gray-400)'; }
+      else if(r.nivel === 'Encanto') { indNivel.innerHTML = '<i class="bi bi-trophy-fill" style="margin-right:4px"></i> Meta ENCANTO batida — Enc\u00e3otadora do M\u00eas!'; indNivel.style.color = 'var(--z-gold)'; }
+      else if(r.nivel === 'Z\u00ealo') { indNivel.innerHTML = '<i class="bi bi-star-fill" style="margin-right:4px"></i> Meta Z\u00caLO batida — falta pouco pro Encanto!'; indNivel.style.color = 'var(--z-blue)'; }
+      else if(r.nivel === 'Cuidado') { indNivel.innerHTML = '<i class="bi bi-check-circle-fill" style="margin-right:4px"></i> Meta CUIDADO batida — bora pro Z\u00ealo!'; indNivel.style.color = 'var(--z-meta-cuidado-text)'; }
+      else { indNivel.textContent = 'Alguns gatilhos batidos — continue!'; indNivel.style.color = 'var(--z-gray-400)'; }
     }
   });
 
