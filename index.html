@@ -1140,6 +1140,8 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
 .mdz-rank-val { font-size: .85rem; font-weight: 800; }
 .mdz-rank-val.good { color: var(--z-green); }
 .mdz-rank-val.gold { color: var(--z-gold); }
+.mdz-rank-val.warn { color: #E67E22; }
+.mdz-rank-val.bad { color: #C0392B; }
 
 /* MDZ Sub-tabs (Amanda: Meu Dia / Gerenciamento) */
 .mdz-tabs { display: flex; gap: 0; margin-bottom: 20px; background: var(--z-gray-100); border-radius: 10px; padding: 3px; }
@@ -2537,6 +2539,9 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
   <!-- Tab: Gerenciamento Amanda -->
   <div id="mdz-amanda-gerenciamento" style="display:none">
     <div id="mdz-visao-date" style="font-size:.75rem;font-weight:600;color:var(--z-gray-400);text-align:center;margin-bottom:16px"></div>
+
+    <!-- KPIs do DIA -->
+    <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z-gray-400);margin-bottom:8px"><i class="bi bi-sun" style="margin-right:4px"></i> Hoje</div>
     <div class="mdz-kpi-grid">
       <div class="mdz-kpi"><div class="mdz-kpi-label">Tutores</div><div class="mdz-kpi-value" id="mdz-v-tutores">—</div></div>
       <div class="mdz-kpi"><div class="mdz-kpi-label">Extras vendidos</div><div class="mdz-kpi-value" id="mdz-v-extras">—</div></div>
@@ -2544,9 +2549,24 @@ tr.tot td { font-weight: 700; background: rgba(222,180,40,.06); border-top: 2px 
       <div class="mdz-kpi"><div class="mdz-kpi-label">Ticket Médio</div><div class="mdz-kpi-value" id="mdz-v-ticket">—</div></div>
       <div class="mdz-kpi full"><div class="mdz-kpi-label">Faturamento total do dia</div><div class="mdz-kpi-value gold" id="mdz-v-fat">—</div></div>
     </div>
-    <div class="mdz-rank"><div class="mdz-rank-title">Ranking — Aproveitamento</div><div id="mdz-rank-conv"></div></div>
-    <div class="mdz-rank"><div class="mdz-rank-title">Ranking — Ticket Médio</div><div id="mdz-rank-ticket"></div></div>
-    <div class="mdz-rank"><div class="mdz-rank-title">Dedicação — Dias Preenchidos</div><div id="mdz-rank-streak"></div></div>
+
+    <!-- KPIs do MÊS (acumulado) -->
+    <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z-blue);margin:20px 0 8px"><i class="bi bi-calendar-check" style="margin-right:4px"></i> Acumulado do Mês</div>
+    <div class="mdz-kpi-grid">
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Tutores no mês</div><div class="mdz-kpi-value" id="mdz-vm-tutores">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Extras no mês</div><div class="mdz-kpi-value" id="mdz-vm-extras">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Aproveitamento médio</div><div class="mdz-kpi-value" id="mdz-vm-conv">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Ticket Médio mensal</div><div class="mdz-kpi-value" id="mdz-vm-ticket">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label">Faturamento extras mês</div><div class="mdz-kpi-value gold" id="mdz-vm-fatextras">—</div></div>
+      <div class="mdz-kpi"><div class="mdz-kpi-label" style="color:#C0392B">Desperdício total mês</div><div class="mdz-kpi-value" style="color:#C0392B" id="mdz-vm-desp">—</div></div>
+    </div>
+
+    <!-- Rankings -->
+    <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z-gold);margin:20px 0 8px"><i class="bi bi-trophy" style="margin-right:4px"></i> Rankings do Mês</div>
+    <div class="mdz-rank"><div class="mdz-rank-title"><i class="bi bi-percent" style="margin-right:4px;color:var(--z-green)"></i> Aproveitamento (quem converte mais)</div><div id="mdz-rank-conv"></div></div>
+    <div class="mdz-rank"><div class="mdz-rank-title"><i class="bi bi-cash-coin" style="margin-right:4px;color:var(--z-gold)"></i> Ticket Médio (quem vende mais por tutor)</div><div id="mdz-rank-ticket"></div></div>
+    <div class="mdz-rank"><div class="mdz-rank-title"><i class="bi bi-exclamation-triangle" style="margin-right:4px;color:#C0392B"></i> Desperdício (quem perde mais oportunidade)</div><div id="mdz-rank-desp"></div></div>
+    <div class="mdz-rank"><div class="mdz-rank-title"><i class="bi bi-fire" style="margin-right:4px;color:#E67E22"></i> Dedicação — Dias Preenchidos</div><div id="mdz-rank-streak"></div></div>
   </div>
 </div><!-- fim view-meu-dia-amanda -->
 
@@ -5250,57 +5270,107 @@ function mdzAmandaTab(tab){
 /* VISÃO (Gerenciamento Amanda) */
 function mdzUpdateVisao(){
   var today = new Date();
+  var mc = getMonthConfig();
   var viEl = document.getElementById('mdz-visao-date');
-  if(viEl) viEl.textContent = mdzFmtDate(today)+' — '+MDZ_DOWS[today.getDay()]+' — '+getMonthConfig().label;
+  if(viEl) viEl.textContent = mdzFmtDate(today)+' \u2014 '+MDZ_DOWS[today.getDay()]+' \u2014 '+mc.label;
 
+  /* --- KPIs do DIA --- */
   var totAtendi=0, totExtra=0, totVal=0;
-  var pData = [];
-
+  var pDay = [];
   MDZ_PEOPLE.forEach(function(p){
     var d = mdzLoadData(p, today);
     var at = d ? (parseInt(d.atendi)||0) : 0;
     var ex = d ? (parseInt(d.extra)||0) : 0;
     var va = d ? (parseFloat(d.valor)||0) : 0;
     totAtendi+=at; totExtra+=ex; totVal+=va;
-    var aprov = at>0 ? ex/at*100 : 0;
-    var ticket = at>0 ? va/at : 0;
-    var streak = mdzCountFilled(p);
-    pData.push({name:MDZ_NAMES[p], person:p, at:at, ex:ex, va:va, aprov:aprov, ticket:ticket, streak:streak});
+    pDay.push({name:MDZ_NAMES[p], person:p, at:at, ex:ex, va:va});
   });
-
+  function mdzSet(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  mdzSet('mdz-v-tutores', totAtendi||'\u2014');
+  mdzSet('mdz-v-extras', totExtra||'\u2014');
   var aprovTot = totAtendi>0 ? (totExtra/totAtendi*100) : 0;
   var tickTot = totAtendi>0 ? (totVal/totAtendi) : 0;
+  mdzSet('mdz-v-conv', aprovTot>0 ? aprovTot.toFixed(0)+'%' : '\u2014');
+  mdzSet('mdz-v-ticket', tickTot>0 ? 'R$'+tickTot.toFixed(0) : '\u2014');
+  mdzSet('mdz-v-fat', totVal>0 ? 'R$ '+totVal.toLocaleString('pt-BR',{minimumFractionDigits:2}) : '\u2014');
 
-  function mdzSet(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
-  mdzSet('mdz-v-tutores', totAtendi||'—');
-  mdzSet('mdz-v-extras', totExtra||'—');
-  mdzSet('mdz-v-conv', aprovTot>0 ? aprovTot.toFixed(0)+'%' : '—');
-  mdzSet('mdz-v-ticket', tickTot>0 ? 'R$'+tickTot.toFixed(0) : '—');
-  mdzSet('mdz-v-fat', totVal>0 ? 'R$ '+totVal.toLocaleString('pt-BR',{minimumFractionDigits:2}) : '—');
+  /* --- ACUMULADOS DO MÊS --- */
+  var y = mc.year, m = mc.month;
+  var daysInMonth = new Date(y, m+1, 0).getDate();
+  var pMonth = {};
+  MDZ_PEOPLE.forEach(function(p){ pMonth[p] = {at:0, ex:0, val:0, valextra:0, desp:0, streak:0}; });
+  for(var day=1; day<=daysInMonth; day++){
+    var dd = new Date(y, m, day);
+    if(!mdzIsWorkDay(dd)) continue;
+    MDZ_PEOPLE.forEach(function(p){
+      var d = mdzLoadData(p, dd);
+      if(!d) return;
+      var at = parseInt(d.atendi)||0;
+      var ex = parseInt(d.extra)||0;
+      var va = parseFloat(d.valor)||0;
+      var ve = parseFloat(d.valextra)||0;
+      pMonth[p].at += at;
+      pMonth[p].ex += ex;
+      pMonth[p].val += va;
+      pMonth[p].valextra += ve;
+      pMonth[p].streak++;
+      /* desperdício: (ve/ex) × (at - ex) */
+      if(ex > 0 && at > ex) pMonth[p].desp += (ve/ex) * (at - ex);
+    });
+  }
 
+  var mTut=0, mEx=0, mVe=0, mDesp=0;
+  var pData = [];
+  MDZ_PEOPLE.forEach(function(p){
+    var pm = pMonth[p];
+    mTut+=pm.at; mEx+=pm.ex; mVe+=pm.valextra; mDesp+=pm.desp;
+    var aprov = pm.at>0 ? pm.ex/pm.at*100 : 0;
+    var ticket = pm.at>0 ? pm.val/pm.at : 0;
+    pData.push({name:MDZ_NAMES[p], person:p, at:pm.at, ex:pm.ex, val:pm.val, valextra:pm.valextra, aprov:aprov, ticket:ticket, streak:pm.streak, desp:pm.desp});
+  });
+
+  var mAprov = mTut>0 ? (mEx/mTut*100) : 0;
+  var mTick = mTut>0 ? (mVe/mTut) : 0;
+  mdzSet('mdz-vm-tutores', mTut||'\u2014');
+  mdzSet('mdz-vm-extras', mEx||'\u2014');
+  mdzSet('mdz-vm-conv', mAprov>0 ? mAprov.toFixed(0)+'%' : '\u2014');
+  mdzSet('mdz-vm-ticket', mTick>0 ? 'R$'+mTick.toFixed(0) : '\u2014');
+  mdzSet('mdz-vm-fatextras', mVe>0 ? 'R$ '+mVe.toLocaleString('pt-BR',{minimumFractionDigits:2}) : '\u2014');
+  mdzSet('mdz-vm-desp', mDesp>0 ? 'R$ '+mDesp.toLocaleString('pt-BR',{minimumFractionDigits:2}) : '\u2014');
+
+  /* --- RANKINGS DO MÊS --- */
   var sortedConv = pData.slice().sort(function(a,b){return b.aprov-a.aprov;});
   var sortedTicket = pData.slice().sort(function(a,b){return b.ticket-a.ticket;});
+  var sortedDesp = pData.slice().sort(function(a,b){return a.desp-b.desp;}); /* menos desperdício = melhor */
   var sortedStreak = pData.slice().sort(function(a,b){return b.streak-a.streak;});
 
-  function buildRank(arr, valFn){
+  function posIcon(i){ return i===0?'<i class="bi bi-trophy-fill" style="color:var(--z-gold);margin-right:3px"></i>':i===1?'<i class="bi bi-star-fill" style="color:var(--z-blue);margin-right:3px"></i>':''; }
+
+  function buildRank(arr, valFn, reverse){
+    var maxVal = 0;
+    arr.forEach(function(p){ var v = valFn(p).num||0; if(v>maxVal) maxVal=v; });
     return arr.map(function(p,i){
       var r = valFn(p);
       var posClass = i===0?'p1':i===1?'p2':'';
-      return '<div class="mdz-rank-row"><div class="mdz-rank-pos '+posClass+'">'+(i+1)+'</div><div class="mdz-rank-name">'+p.name+'</div><div class="mdz-rank-val '+r.cls+'">'+r.val+'</div></div>';
+      var barPct = maxVal>0 ? Math.round((r.num||0)/maxVal*100) : 0;
+      var barColor = i===0?'var(--z-gold)':i===1?'var(--z-blue)':'var(--z-gray-300)';
+      if(reverse) barColor = i===0?'var(--z-green)':'rgba(192,57,43,.4)';
+      var bar = '<div style="height:3px;background:var(--z-gray-100);border-radius:2px;margin-top:4px;overflow:hidden"><div style="height:100%;width:'+barPct+'%;background:'+barColor+';border-radius:2px;transition:width .4s ease"></div></div>';
+      return '<div class="mdz-rank-row" style="flex-wrap:wrap"><div class="mdz-rank-pos '+posClass+'">'+(i+1)+'</div><div class="mdz-rank-name">'+posIcon(i)+p.name+'</div><div class="mdz-rank-val '+r.cls+'">'+r.val+'</div><div style="width:100%;padding-left:34px">'+bar+'</div></div>';
     }).join('');
   }
 
-  var convList = document.getElementById('mdz-rank-conv');
-  if(convList) convList.innerHTML = buildRank(sortedConv, function(p){ return {val:p.aprov>0?p.aprov.toFixed(0)+'%':'—', cls:p.aprov>=40?'good':p.aprov>0?'warn':''}; });
+  var convEl = document.getElementById('mdz-rank-conv');
+  if(convEl) convEl.innerHTML = buildRank(sortedConv, function(p){ return {val:p.aprov>0?p.aprov.toFixed(0)+'%':'\u2014', num:p.aprov, cls:p.aprov>=40?'good':p.aprov>0?'':''}; });
 
-  var tickList = document.getElementById('mdz-rank-ticket');
-  if(tickList) tickList.innerHTML = buildRank(sortedTicket, function(p){ return {val:p.ticket>0?'R$'+p.ticket.toFixed(0):'—', cls:p.ticket>=100?'good':''}; });
+  var tickEl = document.getElementById('mdz-rank-ticket');
+  if(tickEl) tickEl.innerHTML = buildRank(sortedTicket, function(p){ return {val:p.ticket>0?'R$'+p.ticket.toFixed(0):'\u2014', num:p.ticket, cls:p.ticket>=100?'gold':''}; });
 
-  var strList = document.getElementById('mdz-rank-streak');
-  if(strList) strList.innerHTML = buildRank(sortedStreak, function(p){
-    var mc = getMonthConfig();
-    return {val:p.streak+'/'+mc.diasUteis, cls:p.streak>=mc.voucherMin?'gold':''};
-  });
+  var despEl = document.getElementById('mdz-rank-desp');
+  if(despEl) despEl.innerHTML = buildRank(sortedDesp, function(p){ return {val:p.desp>0?'R$ '+p.desp.toLocaleString('pt-BR',{minimumFractionDigits:0}):'\u2014', num:p.desp>0?(1/p.desp*10000):0, cls:p.desp===0?'good':p.desp>500?'bad':''}; }, true);
+
+  var strEl = document.getElementById('mdz-rank-streak');
+  if(strEl) strEl.innerHTML = buildRank(sortedStreak, function(p){ return {val:p.streak+'/'+mc.diasUteis, num:p.streak, cls:p.streak>=mc.voucherMin?'gold':''}; });
 }
 
 /* FIREBASE LISTENER MDZ */
